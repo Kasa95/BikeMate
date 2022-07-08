@@ -11,6 +11,9 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
+import bcrypt
+from bcrypt import hashpw
+from flask_jwt_extended import JWTManager #falta esto
 
 #from models import Person
 
@@ -32,6 +35,9 @@ db.init_app(app)
 
 # Allow CORS requests to this API
 CORS(app)
+
+jwt = JWTManager(app) # Y esto
+
 
 # add the admin
 setup_admin(app)
