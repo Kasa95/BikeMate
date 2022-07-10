@@ -2,73 +2,90 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-
 import { Context } from "../store/appContext";
 
 export const Register = () => {
+  const { store, actions } = useContext(Context);
   return (
-    <div className="form-signin w-50 m-auto">
-      <div className="text-center">
-        <h1 className="h3 mb-3 fw-normal"> Sign Up </h1>
-        <Formik
-          initialValues={{
-            name: "",
-            email: "",
-            password: "",
-            passwordRepeat: "",
-          }}
-          onSubmit={async (values) => {
-            values.password === values.passwordRepeat
-              ? // await new Promise((r) => setTimeout(r, 500));
-                alert(JSON.stringify(values, null, 2))
-              : alert("Passwords do not match");
-          }}
-        >
-          <Form>
-            <div className="form-floating">
-              <Field
-                className="form-control"
-                id="name"
-                name="name"
-                placeholder="Jane"
-              />
-              <label htmlFor="name"> Name </label>
+    <div className="container py-5 h-100">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div className="card shadow-2-strong rounded-3">
+            <div className="card-body p-5 text-center">
+              <h1 className="mb-5"> Sign Up </h1>
+              <Formik
+                initialValues={{
+                  name: "",
+                  email: "",
+                  password: "",
+                  acceptTerms: false,
+                }}
+                onSubmit={(values) => {
+                  values.acceptTerms === true
+                    ? // actions.registerUser(values);
+                      console.log(values)
+                    : console.log("YoU should agree to terms and conditions");
+                  // Endpoint funcionando, falta gestionar errores
+                }}
+              >
+                <Form>
+                  <div className="form-outline mb-4">
+                    <Field
+                      className="form-control form-control-lg"
+                      id="name"
+                      name="name"
+                    />
+                    <label htmlFor="name" className="form-label">
+                      Name
+                    </label>
+                  </div>
+                  <div className="form-outline mb-4">
+                    <Field
+                      className="form-control form-control-lg"
+                      id="email"
+                      name="email"
+                      type="email"
+                    />
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                  </div>
+                  <div className="form-outline mb-4">
+                    <Field
+                      className="form-control form-control-lg"
+                      id="password"
+                      name="password"
+                      type="password"
+                    />
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                  </div>
+                  <div className="form-check d-flex justify-content-start mb-4">
+                    <Field
+                      name="acceptTerms"
+                      className="me-1"
+                      type="checkbox"
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexCheckDefault"
+                    >
+                      I agree to the <Link to="#">Terms & Conditions</Link>
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg btn-block"
+                  >
+                    REGISTER
+                  </button>
+                </Form>
+              </Formik>
             </div>
-            <div className="form-floating">
-              <Field
-                className="form-control"
-                id="email"
-                name="email"
-                placeholder="jane@acme.com"
-                type="email"
-              />
-              <label htmlFor="email"> Email </label>
-            </div>
-            <div className="form-floating">
-              <Field
-                className="form-control"
-                id="password"
-                name="password"
-                placeholder="Use a strong one!"
-                type="password"
-              />
-              <label htmlFor="password"> Password </label>
-            </div>
-            <div className="form-floating">
-              <Field
-                className="form-control"
-                id="passwordRepeat"
-                name="passwordRepeat"
-                placeholder="Use a strong one!"
-                type="password"
-              />
-              <label htmlFor="passwordRepeat"> Confirm Password </label>
-            </div>
-            <button type="submit" className="w-100 btn btn-lg btn-primary">
-              Register
-            </button>
-          </Form>
-        </Formik>
+          </div>
+        </div>
       </div>
     </div>
   );

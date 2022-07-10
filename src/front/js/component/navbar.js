@@ -19,7 +19,9 @@ export const Navbar = () => {
             </li>
           </ul>
           <div className="text-center">
-            <h1>BikeMate</h1>
+            <Link to="/" className="text-decoration-none text-light display-5">
+              BikeMate
+            </Link>
           </div>
           <div className="text-end">
             <Link
