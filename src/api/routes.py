@@ -77,8 +77,8 @@ def login():
     return jsonify(access_token=access_token)   
 
 
-#search
-@api.route('/search', methods=['POST'])
+#group search
+@api.route('/group_search', methods=['POST'])
 def search_groups():
     request_data = request.get_json()
     print(request_data)
@@ -100,8 +100,39 @@ def search_groups():
     print(group_results)
     NewDict = []
 
+    if not group_results :
+        return jsonify("msg: Grupo no encontrado"), 400
+
     for i in group_results:
         NewDict += [{"name":i.name , "city":i.city , "speed":i.speed , "distance":i.distance}]
 
     return jsonify(NewDict), 200
 
+
+#user search
+@api.route('/user_search', methods=['POST'])
+def search_user():
+    request_data = request.get_json()
+    print(request_data)
+    searched = (request_data["busqueda"])
+    
+    if type(searched) is str:
+        result1 = User.query.filter(User.name.contains(searched)).all()
+        result2= User.query.filter(User.city.contains(searched)).all()
+        result3 = User.query.filter_by(email=searched).all()
+        user_results = result1 + result2 + result3
+    else:
+        result4 = User.query.filter_by(speed=searched).all()
+        result5 = User.query.filter_by(distance=searched).all()
+        user_results = result4 + result5
+
+    print(user_results)
+    UserSearchDict = []
+
+    if not user_results :
+        return jsonify("msg: Usuario no encontrado"), 400
+
+    for g in user_results:
+        UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email}]
+
+    return jsonify(UserSearchDict), 200
