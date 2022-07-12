@@ -11,7 +11,7 @@ export const Home = () => {
 
   return (
     <>
-      <div className="px-4 pt-5 my-5 text-center border-bottom" id="main-hero">
+      {/* <div className="px-4 pt-5 my-5 text-center border-bottom" id="main-hero">
         <h1 className="display-4 fowe-bold"> You've got the Bike...</h1>
         <h1 className="display-2 fowe-bold"> You need the Mates! </h1>
         <div className="col-lg-6 mx-auto">
@@ -125,6 +125,26 @@ export const Home = () => {
                 <use xlinkHref="#chevron-right"> </use>
               </svg>
             </a>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="container my-5">
+        <div className="row">
+          <div className="col-6">
+            <h1>You've got the bike, you need the mates</h1>
+          </div>
+          <div className="col-6">
+            <h3 className="orange-text">
+              Try it now for <b>FREE</b>
+            </h3>
+            <Link
+              to={"/register"}
+              type="button"
+              className="btn btn-primary btn-lg px-4 me-sm-3 my-4"
+            >
+              GET STARTED
+            </Link>
           </div>
         </div>
       </div>

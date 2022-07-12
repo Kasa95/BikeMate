@@ -14,3 +14,7 @@ h1 {
 .fowe-bold {
     font-weight: 900 !important;
 }
+
+.orange-text {
+    color: #fa6400;
+}
