@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import bmLogoOrange from "../../img/bmLogoOrange.png";
 import bmLogoWhite from "../../img/bmLogoWhite.png";
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+  const { store, actions } = useContext(Context);
   return (
     <nav className="p-3 bg-white text-white navbar-static-top">
       <div className="container">
@@ -32,13 +34,22 @@ export const Navbar = () => {
             </Link>
           </div>
           <div className="text-end">
-            <Link
-              to={"/login"}
-              type="button"
-              className="btn btn-outline-warning me-2"
-            >
-              Login
-            </Link>
+            {store.auth === true ? (
+              <button
+                className="btn btn-outline-warning me-2"
+                onClick={() => actions.logout()}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                to={"/login"}
+                type="button"
+                className="btn btn-outline-warning me-2"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>

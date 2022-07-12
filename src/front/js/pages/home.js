@@ -129,7 +129,7 @@ export const Home = () => {
         </div>
       </div> */}
 
-      <div className="container my-5">
+      <div className="container my-5" id="main-hero">
         <div className="row">
           <div className="col-6">
             <h1>You've got the bike, you need the mates</h1>
