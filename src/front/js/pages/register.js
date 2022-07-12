@@ -22,10 +22,8 @@ export const Register = () => {
                 }}
                 onSubmit={(values) => {
                   values.acceptTerms === true
-                    ? // actions.registerUser(values);
-                      console.log(values)
-                    : console.log("YoU should agree to terms and conditions");
-                  // Endpoint funcionando, falta gestionar errores
+                    ? actions.registerUser(values) // console.log(values)
+                    : console.log("You should agree to terms and conditions");
                 }}
               >
                 <Form>
@@ -71,10 +69,9 @@ export const Register = () => {
                       className="form-check-label"
                       htmlFor="flexCheckDefault"
                     >
-                      I agree to the <Link to="#">Terms & Conditions</Link>
+                      I agree to the <Link to="#"> Terms & Conditions </Link>
                     </label>
                   </div>
-
                   <button
                     type="submit"
                     className="btn btn-primary btn-lg btn-block"

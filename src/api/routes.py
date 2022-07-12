@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Group
+from api.models import db, User, Group, Comment
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 import json
@@ -75,3 +75,33 @@ def login():
     
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)   
+
+
+#search
+@api.route('/search', methods=['POST'])
+def search_groups():
+    request_data = request.get_json()
+    print(request_data)
+    searched = (request_data["busqueda"])
+    
+    # El primer query lo hice asi pero fallaba y si encontraba el dato en name, ya no continuaba buscando grupos en city
+    # asi que he tenido que hacer los querys por separado 
+    # grupo1 = Group.query.filter(Group.name.contains(searched)).all() or Group.query.filter(Group.city.contains(searched)).all() or Group.query.filter_by(speed=searched).all() or Group.query.filter_by(distance=searched).all()
+    
+    if type(searched) is str:
+        result1 = Group.query.filter(Group.name.contains(searched)).all()
+        result2= Group.query.filter(Group.city.contains(searched)).all()
+        group_results = result1 + result2
+    else:
+        result3 = Group.query.filter_by(speed=searched).all()
+        result4 = Group.query.filter_by(distance=searched).all()
+        group_results = result3 + result4
+
+    print(group_results)
+    NewDict = []
+
+    for i in group_results:
+        NewDict += [{"name":i.name , "city":i.city , "speed":i.speed , "distance":i.distance}]
+
+    return jsonify(NewDict), 200
+
