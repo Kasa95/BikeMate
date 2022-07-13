@@ -15,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       auth: false,
+      userDetails: [{ name: "", city: "", speed: "", distance: "" }],
     },
     actions: {
       // Use getActions to call a function within a fuction

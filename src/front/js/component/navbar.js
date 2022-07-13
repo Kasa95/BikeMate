@@ -8,40 +8,114 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
     <nav className="p-3 bg-white text-white navbar-static-top">
-      <div className="container">
-        <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-          <ul className="nav col-12 col-lg-auto  mb-2 justify-content-center mb-md-0">
-            <li>
-              <a href="#main-hero" className="nav-link px-2 text-secondary">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#featured-3" className="nav-link px-2 text-secondary">
-                Features
-              </a>
-            </li>
-          </ul>
-          <div className="text-center">
-            <Link to="/" className="text-decoration-none text-light display-5">
-              <img
-                src={bmLogoOrange}
-                className=""
-                alt="Example image"
-                height="55"
-                loading="lazy"
-              />
-            </Link>
-          </div>
-          <div className="text-end">
-            {store.auth === true ? (
-              <button
-                className="btn btn-outline-warning me-2"
-                onClick={() => actions.logout()}
+      {store.auth === true ? ( // aquí la barra de navegación cuando estamos logueados
+        <div className="container">
+          <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
+            <ul className="nav col-12 col-lg-auto  mb-2 justify-content-center mb-md-0">
+              <li>
+                <a href="#main-hero" className="nav-link px-2 text-secondary">
+                  Dashboard
+                </a>
+              </li>
+              <li>
+                <a href="#featured-3" className="nav-link px-2 text-secondary">
+                  My Groups
+                </a>
+              </li>
+              <li>
+                <a href="#featured-3" className="nav-link px-2 text-secondary">
+                  Search
+                </a>
+              </li>
+            </ul>
+            <div className="text-center">
+              <Link
+                to="/"
+                className="text-decoration-none text-light display-5"
               >
-                Logout
-              </button>
-            ) : (
+                <img
+                  src={bmLogoOrange}
+                  className=""
+                  alt="Example image"
+                  height="55"
+                  loading="lazy"
+                />
+              </Link>
+            </div>
+            <div className="text-end">
+              <div class="dropdown">
+                <button
+                  class="btn btn-orange dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton1"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  User
+                </button>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="dropdownMenuButton1"
+                >
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      My Profile
+                    </a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item orange-text"
+                      href="#"
+                      onClick={() => actions.logout()}
+                    >
+                      Log Out
+                    </a>
+                  </li>
+                  {/* <button
+                    className="btn btn-outline-warning me-2"
+                    
+                  >
+                    Logout
+                  </button> */}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        // aquí la barra de navegación cuando NO estamos logueados
+        <div className="container">
+          <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
+            <ul className="nav col-12 col-lg-auto  mb-2 justify-content-center mb-md-0">
+              <li>
+                <a href="#main-hero" className="nav-link px-2 text-secondary">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#featured-3" className="nav-link px-2 text-secondary">
+                  Features
+                </a>
+              </li>
+            </ul>
+            <div className="text-center">
+              <Link
+                to="/"
+                className="text-decoration-none text-light display-5"
+              >
+                <img
+                  src={bmLogoOrange}
+                  className=""
+                  alt="Example image"
+                  height="55"
+                  loading="lazy"
+                />
+              </Link>
+            </div>
+            <div className="text-end">
               <Link
                 to={"/login"}
                 type="button"
@@ -49,10 +123,10 @@ export const Navbar = () => {
               >
                 Login
               </Link>
-            )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };
