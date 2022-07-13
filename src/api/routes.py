@@ -74,7 +74,9 @@ def login():
     #     return jsonify ("datos incorrectos"), 401    
     
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)   
+    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "access_token":access_token}
+    # return jsonify(access_token=access_token)   
+    return jsonify(info_user)   
 
 
 #group search
