@@ -25,6 +25,15 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
+#ruta protegida
+@api.route("/profile", methods=["GET"])
+@jwt_required() 
+def protected():
+        current_user = get_jwt_identity()
+        user = User.query.filter_by(email=current_user).first()
+        return jsonify(user.serialize()) , 200
+
+
 #crear usuario
 @api.route("/register", methods=["POST"])
 def create_user():
@@ -138,3 +147,16 @@ def search_user():
         UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email}]
 
     return jsonify(UserSearchDict), 200
+
+
+#dashboard info grupos
+@api.route('/dashboard_info', methods=['GET'])
+def dashboard_info():
+    
+    info_groups = Group.query.all()
+    dash_info = []
+
+    for x in info_groups:
+        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance }]
+   
+    return jsonify(dash_info), 200
