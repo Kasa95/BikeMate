@@ -2,6 +2,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+user_groups = db.Table('user_groups',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('group_id', db.Integer, db.ForeignKey('group.id'), primary_key=True)
+)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -10,8 +15,9 @@ class User(db.Model):
     city = db.Column(db.String(120), unique=False, nullable=True)
     speed = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
     distance = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
-    groups = db.relationship('Group', backref='user', lazy=True)
     comments = db.relationship('Comment', backref='user', lazy=True)
+    groups = db.relationship('Group', secondary=user_groups, lazy='subquery',
+        backref=db.backref('users', lazy=True))
 
 
     # username = db.Column(db.String(80), unique=False, nullable=False)
@@ -39,8 +45,7 @@ class Group(db.Model):
     speed = db.Column(db.Integer, nullable=False) 
     distance = db.Column(db.Integer, nullable=False) #Aqui distancia y velocidad no deberian poder dejarse en blanco porque la idea es que el usuario busque grupos del nivel que quiera
     comments = db.relationship('Comment', backref='group', lazy=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
-        nullable=False)
+    
 
     def __repr__(self):
         return f'<Group {self.name}>'
