@@ -14,6 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      auth: false,
+      userDetails: [{ name: "", city: "", speed: "", distance: "" }],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -38,7 +40,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             (response) => {
               if (response.ok) {
                 {
-                  response.json().then((response) => console.log(response));
+                  response
+                    .json()
+                    .then((response) =>
+                      localStorage.setItem("token", response.access_token)
+                    );
+                  setStore({
+                    auth: true,
+                  });
+                  console.log(getStore().auth);
                 }
               } else {
                 //lo que ocurre cuando la respuesta del endpoint no es OK
@@ -69,7 +79,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             (response) => {
               if (response.ok) {
                 {
-                  response.json().then((response) => console.log(response));
+                  response
+                    .json()
+                    .then((response) =>
+                      localStorage.setItem("token", response.access_token)
+                    );
+                  setStore({
+                    auth: true,
+                  });
+                  console.log(getStore().auth);
                 }
               } else {
                 //lo que ocurre cuando la respuesta del endpoint no es OK
@@ -82,6 +100,13 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log("There is an error with the server", error);
         }
+      },
+
+      logout: () => {
+        localStorage.removeItem("token");
+        setStore({
+          auth: false,
+        });
       },
 
       getMessage: async () => {
