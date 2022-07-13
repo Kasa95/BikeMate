@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import bmLogoOrange from "../../img/bmLogoOrange.png";
 import bmLogoWhite from "../../img/bmLogoWhite.png";
 import { Context } from "../store/appContext";
@@ -8,7 +8,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
     <nav className="p-3 bg-white text-white navbar-static-top">
-      {store.auth === true ? ( // aquí la barra de navegación cuando estamos logueados
+      {localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
             <ul className="nav col-12 col-lg-auto  mb-2 justify-content-center mb-md-0">
@@ -43,9 +43,9 @@ export const Navbar = () => {
               </Link>
             </div>
             <div className="text-end">
-              <div class="dropdown">
+              <div className="dropdown">
                 <button
-                  class="btn btn-orange dropdown-toggle"
+                  className="btn btn-orange dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
@@ -54,22 +54,24 @@ export const Navbar = () => {
                   User
                 </button>
                 <ul
-                  class="dropdown-menu dropdown-menu-end"
+                  className="dropdown-menu dropdown-menu-end"
                   aria-labelledby="dropdownMenuButton1"
                 >
                   <li>
-                    <a class="dropdown-item" href="#">
+                    <a className="dropdown-item" href="#">
                       My Profile
                     </a>
                   </li>
                   <li>
-                    <hr class="dropdown-divider" />
+                    <hr className="dropdown-divider" />
                   </li>
                   <li>
                     <a
-                      class="dropdown-item orange-text"
+                      className="dropdown-item orange-text"
                       href="#"
-                      onClick={() => actions.logout()}
+                      onClick={() => {
+                        actions.logout();
+                      }}
                     >
                       Log Out
                     </a>

@@ -15,8 +15,7 @@ export const Login = () => {
               <h1 className="mb-5"> Login </h1>
               {store.auth === true ? (
                 <>
-                  <h1>Succesful login!</h1>
-                  <p>You will now be redirected to your dashboard.</p>
+                  <Navigate to="/dashtest" />
                 </>
               ) : (
                 // <Navigate to="/register" /> Esto llevará al dashboard una vez esté hecho
@@ -28,9 +27,8 @@ export const Login = () => {
                   }}
                   onSubmit={(values) => {
                     values.robotCheck === true
-                      ? actions.loginUser(values)
-                      : // console.log(values)
-                        console.log(
+                      ? actions.loginUser(values) // console.log(values)
+                      : console.log(
                           "You can't login if you are a robot, sorry"
                         );
                   }}
