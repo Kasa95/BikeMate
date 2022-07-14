@@ -6,7 +6,17 @@ export const Dashboard = () => {
   return (
     <div className="">
       <div className="">
-        <div className="col">{localStorage.getItem("name")}</div>
+        <div className="col">
+          <div className="dashboard_page_card">
+            <div className="dashboard_page_text_content">
+              <h2 className="title">{localStorage.getItem("name")}</h2>
+              <p className="copy">{localStorage.getItem("city")}</p>
+              <Link to={"/ViewProfileSettings/"}>
+                <button className="dashboard_page_btn">Editar Perfil</button>
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="col">
           <main className="dashboard_page_content">
             <div className="dashboard_page_card">
