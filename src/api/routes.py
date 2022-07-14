@@ -83,7 +83,7 @@ def login():
     #     return jsonify ("datos incorrectos"), 401    
     
     access_token = create_access_token(identity=email)
-    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "access_token":access_token}
+    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "access_token":access_token, "routetype":user.routetype , "biketype":user.biketype}
     # return jsonify(access_token=access_token)   
     return jsonify(info_user)   
 
@@ -157,7 +157,7 @@ def dashboard_info():
     dash_info = []
 
     for x in info_groups:
-        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance }]
+        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance , "routetype":x.routetype}]
    
     return jsonify(dash_info), 200
 
@@ -171,6 +171,6 @@ def group_dinamic(groupId):
         return jsonify("msg: Error. Grupo no encontrado"), 404
 
     users_quantity = len(current_group.users)
-    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "users_quantity":users_quantity}
+    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "users_quantity":users_quantity, "routetype":current_group.routetype}
    
     return jsonify(group_info), 200
