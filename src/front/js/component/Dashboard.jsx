@@ -4,89 +4,69 @@ import { Context } from "../store/appContext";
 
 export const Dashboard = () => {
   return (
-    <div className="container">
-      <div className="row">
+    <div className="">
+      <div className="">
         <div className="col">Usuario</div>
         <div className="col">
-          <div
-            className="card text-white bg-dark mb-3"
-            style={{ width: "18rem" }}
-          >
-            <img
-              src="https://res.cloudinary.com/inelan/image/upload/c_scale,w_600/v1657741019/samples/jonny-kennaugh-nPOtzvGLYW0-unsplash_nybweu.jpg"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">Grupo de Sevilla</h5>
-              <p className="card-text"></p>
-              {/* <Link to={"/SingleDashboard/" + id}> */}
-              <span href="#" className="btn btn-primary">
-                Unirse a este grupo
-              </span>
-              {/* </Link> */}
+          <main className="dashboard_page_content">
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Sevilla</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
             </div>
-          </div>
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Málaga</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
+            </div>
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Madrid</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
+            </div>
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Barcelona</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
+            </div>
 
-          <div
-            className="card text-white bg-dark mb-3"
-            style={{ width: "18rem" }}
-          >
-            <img
-              src="https://res.cloudinary.com/inelan/image/upload/c_scale,w_450/v1657741157/samples/logan-deborde-ocVYkCIf2jE-unsplash_hcmg1o.jpg"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">Grupo de Málaga</h5>
-              <p className="card-text">Some quick example text</p>
-              {/* <Link to={"/SingleDashboard/" + id}> */}
-              <span href="#" className="btn btn-primary">
-                Unirse a este grupo
-              </span>
-              {/* </Link> */}
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Galicia</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
             </div>
-          </div>
-
-          <div
-            className="card text-white bg-dark mb-3"
-            style={{ width: "18rem" }}
-          >
-            <img
-              src="https://res.cloudinary.com/inelan/image/upload/c_scale,w_480/v1657738414/samples/bike.jpg"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">Grupo de Madrid</h5>
-              <p className="card-text">Some quick example</p>
-              {/* <Link to={"/SingleDashboard/" + id}> */}
-              <span href="#" className="btn btn-primary">
-                Unirse a este grupo
-              </span>
-              {/* </Link> */}
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Valencia</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
             </div>
-          </div>
-
-          <div
-            className="card text-white bg-dark mb-3"
-            style={{ width: "18rem" }}
-          >
-            <img
-              src="https://res.cloudinary.com/inelan/image/upload/c_scale,w_450/v1657741285/samples/marianna-lutkova-4PSLAKVQQ88-unsplash_daaalo.jpg"
-              className="card-img-top"
-              alt="..."
-            />
-            <div className="card-body">
-              <h5 className="card-title">Grupo de Barcelona</h5>
-              <p className="card-text">Some quick example text</p>
-              {/* <Link to={"/SingleDashboard/" + id}> */}
-              <span href="#" className="btn btn-primary">
-                Unirse a este grupo
-              </span>
-              {/* </Link> */}
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Ceuta</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
             </div>
-          </div>
+            <div className="dashboard_page_card">
+              <div className="dashboard_page_text_content">
+                <h2 className="title">Grupo Melilla</h2>
+                <p className="copy">Text</p>
+                <button className="dashboard_page_btn">Unirse</button>
+              </div>
+            </div>
+          </main>
         </div>
         <div className="col">Marketing</div>
       </div>
