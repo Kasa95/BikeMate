@@ -8,6 +8,8 @@ import { Single } from "./pages/single";
 import { Register } from "./pages/register";
 import { Login } from "./pages/login";
 import { Terms } from "./pages/terms";
+import { ViewDashboard } from "./pages/ViewDashboard.jsx";
+import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -31,11 +33,16 @@ const Layout = () => {
             <Route element={<Login />} path="/login" />
             <Route element={<Terms />} path="/terms" />
             <Route element={<Single />} path="/single/:theid" />
+            <Route element={<ViewDashboard />} path="/ViewDashboard/" />
+            <Route
+              element={<ViewDetailDashboard />}
+              path="/ViewDetailDashboard/"
+            />
             <Route element={<h1> Not found! </h1>} />
-          </Routes>
+          </Routes>{" "}
           <Footer />
-        </ScrollToTop>
-      </BrowserRouter>
+        </ScrollToTop>{" "}
+      </BrowserRouter>{" "}
     </div>
   );
 };
