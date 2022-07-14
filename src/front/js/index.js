@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import "../styles/cards.css";
 //import fonts
 import "../styles/fonts.css";
 //include your index.scss file into the bundle
