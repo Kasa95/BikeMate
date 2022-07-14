@@ -40,11 +40,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             (response) => {
               if (response.ok) {
                 {
-                  response
-                    .json()
-                    .then((response) =>
-                      localStorage.setItem("token", response.access_token)
-                    );
+                  response.json().then((response) => {
+                    localStorage.setItem("token", response.access_token);
+                    localStorage.setItem("auth", true);
+                    // localStorage.setItem("name", data.name);
+                  });
                   setStore({
                     auth: true,
                   });
@@ -128,13 +128,19 @@ const getState = ({ getStore, getActions, setStore }) => {
             // });
             localStorage.setItem("token", data.access_token);
             localStorage.setItem("name", data.name);
+            localStorage.setItem("city", data.city);
+            localStorage.setItem("speed", data.speed);
             localStorage.setItem("auth", true);
+            setStore({
+              auth: true,
+            });
           });
       },
 
       logout: () => {
         localStorage.removeItem("token");
         localStorage.removeItem("auth");
+        localStorage.removeItem("name");
         setStore({
           auth: false,
         });

@@ -15,10 +15,9 @@ export const Login = () => {
               <h1 className="mb-5"> Login </h1>
               {store.auth === true ? (
                 <>
-                  <Navigate to="/dashtest" />
+                  <Navigate to="/ViewDashboard" />
                 </>
               ) : (
-                // <Navigate to="/register" /> Esto llevará al dashboard una vez esté hecho
                 <Formik
                   initialValues={{
                     email: "",
@@ -66,7 +65,7 @@ export const Login = () => {
                         className="form-check-label"
                         htmlFor="flexCheckDefault"
                       >
-                        I am not a robot nor an e-bike.
+                        I am not a robot nor an e - bike.
                       </label>
                     </div>
                     <button

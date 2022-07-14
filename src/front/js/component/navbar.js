@@ -8,26 +8,9 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   return (
     <nav className="p-3 bg-white text-white navbar-static-top">
-      {localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
+      {store.auth === true || localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
         <div className="container">
           <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <ul className="nav col-12 col-lg-auto  mb-2 justify-content-center mb-md-0">
-              <li>
-                <a href="#main-hero" className="nav-link px-2 text-secondary">
-                  Dashboard
-                </a>
-              </li>
-              <li>
-                <a href="#featured-3" className="nav-link px-2 text-secondary">
-                  My Groups
-                </a>
-              </li>
-              <li>
-                <a href="#featured-3" className="nav-link px-2 text-secondary">
-                  Search
-                </a>
-              </li>
-            </ul>
             <div className="text-center">
               <Link
                 to="/"
@@ -41,6 +24,7 @@ export const Navbar = () => {
                   loading="lazy"
                 />
               </Link>
+              {/* <h4 className="text-dark">|Dashboard</h4> */}
             </div>
             <div className="text-end">
               <div className="dropdown">
@@ -51,7 +35,7 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  User
+                  {localStorage.getItem("name")}
                 </button>
                 <ul
                   className="dropdown-menu dropdown-menu-end"

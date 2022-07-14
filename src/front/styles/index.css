@@ -47,3 +47,19 @@ h1 {
     background: #fa6400;
     color: white;
 }
+
+.absolute {
+    position: absolute;
+}
+
+.text-gray-200 {
+    color: #edf2f7;
+}
+
+.left-0 {
+    left: 0;
+}
+
+.lg\:w-2\/3 {
+    width: 66.666667%;
+}
