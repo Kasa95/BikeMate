@@ -13,8 +13,6 @@ class User(db.Model):
     password = db.Column(db.String(250), unique=False, nullable=False)
     name = db.Column(db.String(120), unique=False, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=True)
-    biketype = db.Column(db.String(120), unique=False, nullable=True)
-    routetype = db.Column(db.String(120), unique=False, nullable=True)
     speed = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
     distance = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
     comments = db.relationship('Comment', backref='user', lazy=True)
@@ -35,9 +33,7 @@ class User(db.Model):
             "name": self.name,
             "city": self.city,
             "speed": self.speed,
-            "distance": self.distance,
-            "biketype": self.biketype,
-            "rutetype": self.rutetype
+            "distance": self.distance
             # do not serialize the password, its a security breach
         }
 
@@ -46,7 +42,6 @@ class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), unique=True, nullable=False)
     city = db.Column(db.String(120), unique=False, nullable=False)
-    routetype = db.Column(db.String(120), unique=False, nullable=False)
     speed = db.Column(db.Integer, nullable=False) 
     distance = db.Column(db.Integer, nullable=False) #Aqui distancia y velocidad no deberian poder dejarse en blanco porque la idea es que el usuario busque grupos del nivel que quiera
     comments = db.relationship('Comment', backref='group', lazy=True)
