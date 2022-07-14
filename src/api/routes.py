@@ -160,3 +160,17 @@ def dashboard_info():
         dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance }]
    
     return jsonify(dash_info), 200
+
+
+#dashboard info grupo individual con ruta dinamica
+@api.route('/group/<int:groupId>', methods=['GET'])
+def group_dinamic(groupId):
+    
+    current_group = Group.query.get(groupId)
+    if not current_group:
+        return jsonify("msg: Error. Grupo no encontrado"), 404
+
+    users_quantity = len(current_group.users)
+    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "users_quantity":users_quantity}
+   
+    return jsonify(group_info), 200
