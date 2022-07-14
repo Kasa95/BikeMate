@@ -6,7 +6,7 @@ export const Dashboard = () => {
   return (
     <div className="">
       <div className="">
-        <div className="col">Usuario</div>
+        <div className="col">{localStorage.getItem("name")}</div>
         <div className="col">
           <main className="dashboard_page_content">
             <div className="dashboard_page_card">

@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       auth: false,
-      userDetails: [{ name: "", city: "", speed: "", distance: "" }],
+      userDetails: { name: null, city: null, speed: null, distance: null },
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -40,11 +40,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             (response) => {
               if (response.ok) {
                 {
-                  response
-                    .json()
-                    .then((response) =>
-                      localStorage.setItem("token", response.access_token)
-                    );
+                  response.json().then((response) => {
+                    localStorage.setItem("token", response.access_token);
+                    localStorage.setItem("auth", true);
+                    // localStorage.setItem("name", data.name);
+                  });
                   setStore({
                     auth: true,
                   });
@@ -63,47 +63,84 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      // loginUser: (values) => {
+      //   try {
+      //     const logUser = {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify({
+      //         email: values.email,
+      //         password: values.password,
+      //       }),
+      //     };
+      //     fetch(process.env.BACKEND_URL + "/api/login", logUser).then(
+      //       (response) => {
+      //         if (response.ok) {
+      //           // {
+      //           response
+      //             .json()
+      //             .then((data) =>
+      //               localStorage.setItem("token", data.access_token)
+      //             );
+      //           setStore({
+      //             auth: true,
+      //             userDetails: {
+      //               name: data.name,
+      //               city: data.city,
+      //               speed: data.speed,
+      //               distance: data.distance,
+      //             },
+      //           });
+      //           console.log(getStore().auth);
+      //           console.log(getStore().userDetails);
+      //           // }
+      //         } else {
+      //           //lo que ocurre cuando la respuesta del endpoint no es OK
+      //           {
+      //             alert("Las credenciales no son correctas"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
+      //           }
+      //         }
+      //       }
+      //     );
+      //   } catch (error) {
+      //     console.log("There is an error with the server", error);
+      //   }
+      // },
       loginUser: (values) => {
-        try {
-          const logUser = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: values.email,
-              password: values.password,
-            }),
-          };
-          fetch(process.env.BACKEND_URL + "/api/login", logUser).then(
-            (response) => {
-              if (response.ok) {
-                {
-                  response
-                    .json()
-                    .then((response) =>
-                      localStorage.setItem("token", response.access_token)
-                    );
-                  setStore({
-                    auth: true,
-                  });
-                  console.log(getStore().auth);
-                }
-              } else {
-                //lo que ocurre cuando la respuesta del endpoint no es OK
-                {
-                  alert("Las credenciales no son correctas"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-                }
-              }
-            }
-          );
-        } catch (error) {
-          console.log("There is an error with the server", error);
-        }
+        const logUser = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: values.email,
+            password: values.password,
+          }),
+        };
+        fetch(process.env.BACKEND_URL + "/api/login", logUser)
+          .then((response) => response.json())
+          .then((data) => {
+            // setStore({
+            //   userDetails: data,
+            //   auth: true,
+            // });
+            localStorage.setItem("token", data.access_token);
+            localStorage.setItem("name", data.name);
+            localStorage.setItem("city", data.city);
+            localStorage.setItem("speed", data.speed);
+            localStorage.setItem("auth", true);
+            setStore({
+              auth: true,
+            });
+          });
       },
 
       logout: () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("auth");
+        localStorage.removeItem("name");
         setStore({
           auth: false,
         });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { Context } from "../store/appContext";
@@ -14,11 +14,7 @@ export const Register = () => {
             <div className="card-body p-5 text-center">
               <h1 className="mb-5"> Sign Up </h1>
               {store.auth === true ? (
-                <>
-                  <h1>Registration succesful!</h1>
-                  <p>You will now be redirected to your dashboard.</p>
-                  {/* <Navigate to="/register" /> Esto llevará al dashboard una vez esté hecho */}
-                </>
+                <Navigate to="/ViewDashboard" />
               ) : (
                 <Formik
                   initialValues={{
