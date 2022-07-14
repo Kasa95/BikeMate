@@ -25,6 +25,15 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
+#ruta protegida
+@api.route("/profile", methods=["GET"])
+@jwt_required() 
+def protected():
+        current_user = get_jwt_identity()
+        user = User.query.filter_by(email=current_user).first()
+        return jsonify(user.serialize()) , 200
+
+
 #crear usuario
 @api.route("/register", methods=["POST"])
 def create_user():
@@ -74,7 +83,9 @@ def login():
     #     return jsonify ("datos incorrectos"), 401    
     
     access_token = create_access_token(identity=email)
-    return jsonify(access_token=access_token)   
+    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "access_token":access_token}
+    # return jsonify(access_token=access_token)   
+    return jsonify(info_user)   
 
 
 #group search
@@ -136,3 +147,30 @@ def search_user():
         UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email}]
 
     return jsonify(UserSearchDict), 200
+
+
+#dashboard info grupos
+@api.route('/dashboard_info', methods=['GET'])
+def dashboard_info():
+    
+    info_groups = Group.query.all()
+    dash_info = []
+
+    for x in info_groups:
+        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance }]
+   
+    return jsonify(dash_info), 200
+
+
+#dashboard info grupo individual con ruta dinamica
+@api.route('/group/<int:groupId>', methods=['GET'])
+def group_dinamic(groupId):
+    
+    current_group = Group.query.get(groupId)
+    if not current_group:
+        return jsonify("msg: Error. Grupo no encontrado"), 404
+
+    users_quantity = len(current_group.users)
+    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "users_quantity":users_quantity}
+   
+    return jsonify(group_info), 200
