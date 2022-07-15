@@ -83,12 +83,14 @@ def login():
     #     return jsonify ("datos incorrectos"), 401    
     
     access_token = create_access_token(identity=email)
-    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "access_token":access_token}
+    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "bikemodel": user.bikemodel , "routetype": user.routetype ,"access_token":access_token}
     # return jsonify(access_token=access_token)   
     return jsonify(info_user)   
 
 
 #group search
+# ojo, falta arreglar que si en la busqueda la palabra buscada está en nombre y en ciudad
+# solo incluya un resultado. Arreglar con un if
 @api.route('/group_search', methods=['POST'])
 def search_groups():
     request_data = request.get_json()
@@ -115,7 +117,7 @@ def search_groups():
         return jsonify("msg: Grupo no encontrado"), 400
 
     for i in group_results:
-        NewDict += [{"name":i.name , "city":i.city , "speed":i.speed , "distance":i.distance}]
+        NewDict += [{"name":i.name , "city":i.city , "speed":i.speed , "distance":i.distance , "routetype": i.routetype}]
 
     return jsonify(NewDict), 200
 
@@ -144,7 +146,7 @@ def search_user():
         return jsonify("msg: Usuario no encontrado"), 400
 
     for g in user_results:
-        UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email}]
+        UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email , "bikemodel": g.bikemodel , "routetype": g.routetype}]
 
     return jsonify(UserSearchDict), 200
 
@@ -157,7 +159,7 @@ def dashboard_info():
     dash_info = []
 
     for x in info_groups:
-        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance }]
+        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance , "routetype": x.routetype}]
    
     return jsonify(dash_info), 200
 
@@ -171,6 +173,7 @@ def group_dinamic(groupId):
         return jsonify("msg: Error. Grupo no encontrado"), 404
 
     users_quantity = len(current_group.users)
-    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "users_quantity":users_quantity}
+    group_comments = current_group.comments
+    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "routetype":current_group.routetype ,"users_quantity":users_quantity}
    
     return jsonify(group_info), 200
