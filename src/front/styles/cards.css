@@ -125,6 +125,14 @@
     background-image: url(https://res.cloudinary.com/inelan/image/upload/v1657810619/samples/rajat-OXqXELsx350-unsplash_ycjrii.jpg);
 }
 
+.dashboard_page_card_profilecard:nth-child(1):before {
+    background-image: url(https://res.cloudinary.com/inelan/image/upload/v1657879464/samples/specialized-recon-3-1_qpd8vc.jpg);
+}
+
+.dashboard_page_card_marketing:nth-child(1):before {
+    background-image: url(https://res.cloudinary.com/inelan/image/upload/v1657741285/samples/marianna-lutkova-4PSLAKVQQ88-unsplash_daaalo.jpg);
+}
+
 .dashboard_page_text_content {
     position: relative;
     display: flex;
@@ -223,4 +231,18 @@
     .dashboard_page_card:focus-within .dashboard_page_text_content>*:not(.title) {
         transition-duration: 0s;
     }
+}
+
+.dashboard_container_profilecard {
+    margin-top: 100px;
+    margin-left: 90px;
+    width: 120%;
+    height: 150%;
+}
+
+.dashboard_container_marketing {
+    margin-top: 100px;
+    margin-left: 50px;
+    width: 120%;
+    height: 150%;
 }
