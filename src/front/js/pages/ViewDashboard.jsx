@@ -8,7 +8,7 @@ export const ViewDashboard = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="mt-5">
+    <div className="mt-4">
       <Dashboard />
     </div>
   );
