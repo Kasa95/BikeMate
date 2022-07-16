@@ -21,12 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         speed: null,
         distance: null,
       },
-      groupDetails: {
-        name: null,
-        city: null,
-        speed: null,
-        distance: null,
-      },
+      groupDetails: null,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -35,20 +30,18 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       //Fetch para traer info grupos
-      // groupInfo: () => {
-      //     fetch(
-      //             "https://3001-kasa95-bikemate-em5rdmkz5o6.ws-eu54.gitpod.io/api/dashboard_info"
-      //         )
-      //         .then((response) => response.json())
-      //         .then((data) => {
-      //             setStore({
-      //                 groupDetails: data,
-      //             });
-      //             // localStorage.setItem("groupName", data.name);
-      //             // .catch((err) => console.error(err));
-      //             console.log(data[0].name);
-      //         });
-      // },
+      groupInfo: () => {
+        fetch(process.env.BACKEND_URL + "/api/dashboard_info")
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              groupDetails: data,
+            });
+            // localStorage.setItem("groupName", data.name);
+            // .catch((err) => console.error(err));
+            console.log(getStore.groupDetails);
+          });
+      },
 
       registerUser: (values) => {
         try {

@@ -10,8 +10,8 @@ export const Navbar = () => {
     <nav className="p-3 bg-white text-white navbar-static-top">
       {store.auth === true || localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
         <div className="container">
-          <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <div className="text-center">
+          <div className="row">
+            <div className="text-start col-10">
               <Link
                 to="/"
                 className="text-decoration-none text-light display-5"
@@ -26,10 +26,10 @@ export const Navbar = () => {
               </Link>
               {/* <h4 className="text-dark">|Dashboard</h4> */}
             </div>
-            <div className="text-end">
-              <div className="dropdown">
+            <div className="col-2 align-self-center mt-2 text-center">
+              <div className="dropdown-center">
                 <button
-                  className="btn btn-orange dropdown-toggle"
+                  className="btn btn-outline-orange-login dropdown-toggle"
                   type="button"
                   id="dropdownMenuButton1"
                   data-bs-toggle="dropdown"
@@ -38,7 +38,7 @@ export const Navbar = () => {
                   {localStorage.getItem("name")}
                 </button>
                 <ul
-                  className="dropdown-menu dropdown-menu-end"
+                  className="dropdown-menu dropdown-menu-wide"
                   aria-labelledby="dropdownMenuButton1"
                 >
                   <li>
@@ -74,8 +74,8 @@ export const Navbar = () => {
       ) : (
         // aquí la barra de navegación cuando NO estamos logueados
         <div className="container">
-          <div className="d-flex flex-wrap align-items-center justify-content-between justify-content-lg-between">
-            <ul className="nav col-12 col-lg-auto  mb-2 justify-content-center mb-md-0">
+          <div className="row">
+            <ul className="nav col-2 justify-content-center align-items-center mt-3">
               <li>
                 <a href="#main-hero" className="nav-link px-2 text-secondary">
                   Home
@@ -87,7 +87,7 @@ export const Navbar = () => {
                 </a>
               </li>
             </ul>
-            <div className="text-center">
+            <div className="col-8 text-center">
               <Link
                 to="/"
                 className="text-decoration-none text-light display-5"
@@ -101,13 +101,13 @@ export const Navbar = () => {
                 />
               </Link>
             </div>
-            <div className="text-end">
+            <div className="col-2 align-self-center mt-2 text-center">
               <Link
                 to={"/login"}
                 type="button"
-                className="btn btn-outline-warning me-2"
+                className="btn btn-outline-orange-login me-2"
               >
-                Login
+                LOGIN
               </Link>
             </div>
           </div>
