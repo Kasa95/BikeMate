@@ -12,56 +12,13 @@ export const Search = () => {
 
   //     set search query to empty string
   const [q, setQ] = useState("");
+  const [minS, setMinS] = useState(null);
+  const [maxS, setMaxS] = useState(null);
+  const [minD, setMinD] = useState(null);
+  const [maxD, setMaxD] = useState(null);
+
   //     set search parameters
-  //     we only what to search countries by capital and name
-  //     this list can be longer if you want
-  //     you can search countries even by their population
-  // just add it to this array
   const [searchParam] = useState(["city", "name"]);
-
-  // useEffect(() => {
-  //   fetch(process.env.BACKEND_URL + "/api/dashboard_info")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setItems(data);
-  //     }),
-  //     [];
-  // });
-
-  // setItems(store.groupDetails);
-
-  // setItems(store.groupDetails);
-
-  // const items = [
-  //   {
-  //     city: "Valencia",
-  //     distance: 90,
-  //     name: "Los Chalaos",
-  //     routetype: "Hardcore",
-  //     speed: 35,
-  //   },
-  //   {
-  //     city: "Madrid",
-  //     distance: 50,
-  //     name: "Almuerzos",
-  //     routetype: null,
-  //     speed: 25,
-  //   },
-  //   {
-  //     city: "Vigo",
-  //     distance: 100,
-  //     name: "Figuras",
-  //     routetype: null,
-  //     speed: 45,
-  //   },
-  //   {
-  //     city: "Tarragona",
-  //     distance: 75,
-  //     name: "Els Pantumaca",
-  //     routetype: null,
-  //     speed: 28,
-  //   },
-  // ];
 
   function search(items) {
     return items.filter((item) => {
@@ -72,6 +29,7 @@ export const Search = () => {
       });
     });
   }
+
   // console.log(items);
   return (
     // busqueda empieza aquí
@@ -86,7 +44,7 @@ export const Search = () => {
                   className="btn-check"
                   name="options"
                   id="searchUser"
-                  autocomplete="off"
+                  autoComplete="off"
                   checked
                 />
                 <label className="btn btn-primary" htmlFor="searchUser">
@@ -112,7 +70,7 @@ export const Search = () => {
                 name="search-form"
                 id="search-form"
                 className="form-control"
-                placeholder="Search for users or groups here..."
+                placeholder="Search your city or a group name..."
                 value={q}
                 /*
                                 // set the value of our useState q
@@ -130,24 +88,74 @@ export const Search = () => {
                 <div className="card-body">
                   <form>
                     <div className="mb-3">
-                      <label htmlhtmlFor="maxSpeed" className="form-label">
-                        Max. Average Speed
+                      <label htmlFor="maxSpeed" className="form-label">
+                        Average Speed
                       </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="maxSpeed"
-                      />
+                      <div className="row d-flex justify-content-evenly">
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="minSpeed"
+                            placeholder="Min"
+                            value={minS}
+                            /*
+                                            // set the value of our useState q
+                                            //  anytime the user types in the search box
+                                            */
+                            onChange={(e) => setMinS(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control col-5"
+                            id="maxSpeed"
+                            placeholder="Max"
+                            value={maxS}
+                            /*
+                                            // set the value of our useState q
+                                            //  anytime the user types in the search box
+                                            */
+                            onChange={(e) => setMaxS(e.target.value)}
+                          />
+                        </div>
+                      </div>
                     </div>
                     <div className="mb-3">
-                      <label htmlhtmlFor="maxDistance" className="form-label">
-                        Max. Average Distance
+                      <label htmlFor="maxSpeed" className="form-label">
+                        Average Distance
                       </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="maxDistance"
-                      />
+                      <div className="row d-flex justify-content-evenly">
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control"
+                            id="minDistance"
+                            placeholder="Min"
+                            value={minD}
+                            /*
+                                            // set the value of our useState q
+                                            //  anytime the user types in the search box
+                                            */
+                            onChange={(e) => setMinD(e.target.value)}
+                          />
+                        </div>
+                        <div className="col-5">
+                          <input
+                            type="number"
+                            className="form-control col-5"
+                            id="maxDistance"
+                            placeholder="Max"
+                            value={maxD}
+                            /*
+                                            // set the value of our useState q
+                                            //  anytime the user types in the search box
+                                            */
+                            onChange={(e) => setMaxD(e.target.value)}
+                          />
+                        </div>
+                      </div>
                     </div>
 
                     <button type="submit" className="btn btn-primary">
@@ -158,19 +166,19 @@ export const Search = () => {
               </div>
             </div>
             {/* filtros de busqueda */}
+
+            {/* resultados de la busqueda */}
             <div className="col-9">
-              {/* {store.groupDetails.map((item, index) => (
-                <SearchResult
-                  key={index}
-                  theName={item.name}
-                  id={index + 1}
-                  city={item.city}
-                  distance={item.distance}
-                  speed={item.speed}
-                />
-              ))} */}
+              {q.length >= 1 && search(store.groupDetails).length == 0 ? (
+                <p className="text-center">No results for your query!</p>
+              ) : (
+                <></>
+              )}
               {q === "" ? (
-                <h1>Nothing here yet</h1>
+                <p className="text-center">
+                  Use the bar above to search <br></br>
+                  Your results will be shown here!
+                </p>
               ) : (
                 <>
                   {search(store.groupDetails).map((item, index) => (

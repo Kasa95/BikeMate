@@ -25,3 +25,8 @@
     left: 25px;
     color: grey;
 }
+
+.search-result {
+    transition: opacity 0.5s;
+    opacity: 1;
+}
