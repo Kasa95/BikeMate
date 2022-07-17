@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: e1bc786660da
+Revision ID: 15ded7a1a0ff
 Revises: 
-Create Date: 2022-07-15 14:57:46.561825
+Create Date: 2022-07-15 18:12:57.786945
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e1bc786660da'
+revision = '15ded7a1a0ff'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('city', sa.String(length=120), nullable=False),
+    sa.Column('routetype', sa.String(length=120), nullable=True),
     sa.Column('speed', sa.Integer(), nullable=False),
     sa.Column('distance', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
@@ -33,6 +34,8 @@ def upgrade():
     sa.Column('password', sa.String(length=250), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('city', sa.String(length=120), nullable=True),
+    sa.Column('bikemodel', sa.String(length=120), nullable=True),
+    sa.Column('routetype', sa.String(length=120), nullable=True),
     sa.Column('speed', sa.Integer(), nullable=True),
     sa.Column('distance', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
