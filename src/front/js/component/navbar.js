@@ -13,7 +13,7 @@ export const Navbar = () => {
           <div className="row">
             <div className="text-start col-10">
               <Link
-                to="/"
+                to="/ViewDashboard"
                 className="text-decoration-none text-light display-5"
               >
                 <img

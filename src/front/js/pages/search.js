@@ -32,36 +32,36 @@ export const Search = () => {
 
   // setItems(store.groupDetails);
 
-  const items = [
-    {
-      city: "Valencia",
-      distance: 90,
-      name: "Los Chalaos",
-      routetype: "Hardcore",
-      speed: 35,
-    },
-    {
-      city: "Madrid",
-      distance: 50,
-      name: "Almuerzos",
-      routetype: null,
-      speed: 25,
-    },
-    {
-      city: "Vigo",
-      distance: 100,
-      name: "Figuras",
-      routetype: null,
-      speed: 45,
-    },
-    {
-      city: "Tarragona",
-      distance: 75,
-      name: "Els Pantumaca",
-      routetype: null,
-      speed: 28,
-    },
-  ];
+  // const items = [
+  //   {
+  //     city: "Valencia",
+  //     distance: 90,
+  //     name: "Los Chalaos",
+  //     routetype: "Hardcore",
+  //     speed: 35,
+  //   },
+  //   {
+  //     city: "Madrid",
+  //     distance: 50,
+  //     name: "Almuerzos",
+  //     routetype: null,
+  //     speed: 25,
+  //   },
+  //   {
+  //     city: "Vigo",
+  //     distance: 100,
+  //     name: "Figuras",
+  //     routetype: null,
+  //     speed: 45,
+  //   },
+  //   {
+  //     city: "Tarragona",
+  //     distance: 75,
+  //     name: "Els Pantumaca",
+  //     routetype: null,
+  //     speed: 28,
+  //   },
+  // ];
 
   function search(items) {
     return items.filter((item) => {
@@ -169,16 +169,23 @@ export const Search = () => {
                   speed={item.speed}
                 />
               ))} */}
-              {search(items).map((item, index) => (
-                <SearchResult
-                  key={index}
-                  theName={item.name}
-                  id={index + 1}
-                  city={item.city}
-                  distance={item.distance}
-                  speed={item.speed}
-                />
-              ))}
+              {q === "" ? (
+                <h1>Nothing here yet</h1>
+              ) : (
+                <>
+                  {search(store.groupDetails).map((item, index) => (
+                    <SearchResult
+                      key={index}
+                      theName={item.name}
+                      id={index + 1}
+                      city={item.city}
+                      distance={item.distance}
+                      speed={item.speed}
+                    />
+                  ))}
+                </>
+              )}
+
               {/* <ul>
                 {items.map((item, index) => (
                   <li>
