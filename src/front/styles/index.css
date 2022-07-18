@@ -48,6 +48,60 @@ h1 {
     color: white;
 }
 
+.btn-outline-orange {
+    border-color: #fa6400;
+    color: #fa6400;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-outline-orange:hover {
+    background: #fa6400;
+    color: white;
+}
+
+.btn-outline-orange-login {
+    border-color: #fa6400;
+    color: #fa6400;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    padding: 0.375rem 2.75rem;
+    font-size: 1rem;
+    border-radius: 3rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-outline-orange-login:hover {
+    background: #fa6400;
+    color: white;
+}
+
 .absolute {
     position: absolute;
 }
@@ -62,4 +116,38 @@ h1 {
 
 .lg\:w-2\/3 {
     width: 66.666667%;
+}
+
+.btn-violet {
+    color: #fff;
+    background-color: #4a71e8;
+    border-color: #4a71e8;
+    display: inline-block;
+    font-weight: 500;
+    line-height: 2;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-violet:hover {
+    background: #3656c7;
+    color: white;
+}
+
+.height-40 {
+    height: 40%;
+}
+
+.dropdown-menu-wide {
+    min-width: 175px;
 }

@@ -130,21 +130,26 @@ export const Home = () => {
                   </div> */}
       <div className="container my-5" id="main-hero">
         <div className="row">
-          <div className="col-6">
-            <h1> You 've got the bike, you need the mates</h1>
+          <div className="col-1"></div>
+          <div className="col-5">
+            <h1>
+              You've got the bike,<br></br> you need the mates!
+            </h1>
           </div>
-          <div className="col-6">
+          <div className="col-1"></div>
+          <div className="col-4">
             <h3 className="orange-text">
               Try it now for <b> FREE </b>
             </h3>
             <Link
               to={"/register"}
               type="button"
-              className="btn btn-primary btn-lg px-4 me-sm-3 my-4"
+              className="btn btn-violet btn-lg px-4 me-sm-3 my-3 w-75 height-40"
             >
               GET STARTED
             </Link>
           </div>
+          <div className="col-1"></div>
         </div>
       </div>
       <div className="text-center">
