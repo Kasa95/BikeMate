@@ -26,6 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           name: "luis",
         },
       ],
+      userList: null,
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -44,6 +45,17 @@ const getState = ({ getStore, getActions, setStore }) => {
             // localStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
             console.log(getStore.groupDetails);
+          });
+      },
+      getUserList: () => {
+        fetch(process.env.BACKEND_URL + "/api/all_users")
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              userList: data,
+            });
+            // localStorage.setItem("groupName", data.name);
+            // .catch((err) => console.error(err));
           });
       },
 

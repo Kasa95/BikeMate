@@ -151,3 +151,7 @@ h1 {
 .dropdown-menu-wide {
     min-width: 175px;
 }
+
+.footer-bottom {
+    margin-bottom: 0;
+}
