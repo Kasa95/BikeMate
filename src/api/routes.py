@@ -61,6 +61,32 @@ def create_user():
     return jsonify(access_token=access_token), 200   
 
 
+
+#crear grupo
+@api.route("/new_group", methods=["POST"])
+def create_group():
+    body = json.loads(request.data)
+
+    if Group.query.filter_by(name=body["name"]).first():
+        return jsonify({"msg": "Grupo ya existente"}), 401 
+
+    if not body["name"] or not body["city"] or not body["speed"] or not body["distance"]:
+        return jsonify({"msg": "Name, City, Speed & Distance required"}), 404 
+
+    
+    group = Group(name=body["name"], city=body["city"], speed=body["speed"], distance=body["distance"])
+
+    # user = User(email=body["email"], password=body["password"], is_active=True)
+    db.session.add(group)
+    db.session.commit()
+
+    # response_body={
+    #     "msg": "Grupo creado"
+    # }
+    return jsonify(group.serialize()), 200
+    
+   
+
 #login
 @api.route("/login", methods=["POST"])
 def login():
@@ -177,3 +203,52 @@ def group_dinamic(groupId):
     group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "routetype":current_group.routetype ,"users_quantity":users_quantity}
    
     return jsonify(group_info), 200
+
+
+#editar perfil
+# NO USAR, NO ACABADO, TENGO QUE DARLE UNA VUELTA
+## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
+@api.route('/user/edit', methods=['PUT'])
+
+def edit_user():
+    body = json.loads(request.data)
+
+    if not body:
+        return jsonify("msg: Error. Faltan datos"), 404
+
+    name = request.json.get("name", None)  
+    email = request.json.get("email", None)
+    newemail = request.json.get("newemail", None)
+    city = request.json.get("city", None)
+    bikemodel = request.json.get("bikemodel", None)
+    routetype = request.json.get("routetype", None)
+    speed = request.json.get("speed", None)
+    distance = request.json.get("distance", None)
+    
+    if User.query.filter_by(email=newemail).first():
+        return jsonify("msg: Email ya registrado"), 404
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user :
+        return jsonify("msg: Email incorrecto"), 404
+
+
+    if name:    
+        user.name = name
+    if newemail:
+        user.email = newemail
+    if city:
+        user.city = city
+    if bikemodel:
+        user.bikemodel = bikemodel
+    if routetype:
+        user.routetype = routetype
+    if speed:
+        user.speed = speed
+    if distance:
+        user.distance = distance
+
+    db.session.commit()
+
+    return jsonify(user.serialize()), 200

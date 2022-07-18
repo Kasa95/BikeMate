@@ -12,17 +12,65 @@ export const Search = () => {
 
   //     set search query to empty string
   const [q, setQ] = useState("");
-  const [minS, setMinS] = useState(null);
-  const [maxS, setMaxS] = useState(null);
-  const [minD, setMinD] = useState(null);
-  const [maxD, setMaxD] = useState(null);
+  const [minS, setMinS] = useState(undefined);
+  const [maxS, setMaxS] = useState(undefined);
+  const [minD, setMinD] = useState(undefined);
+  const [maxD, setMaxD] = useState(undefined);
+  const [searchType, setSearchType] = useState("user");
 
-  //     set search parameters
-  const [searchParam] = useState(["city", "name"]);
+  const users = [
+    {
+      bikemodel: "haibike",
+      city: "Bailén",
+      distance: 50,
+      email: "peoeoe@gmail.com",
+      id: 2,
+      name: "Miguelito de Bailén",
+      routetype: "carretera",
+      speed: 20,
+    },
+    {
+      bikemodel: "haibike sl",
+      city: "Sevilla",
+      distance: 50,
+      email: "ld@mail.com ",
+      id: 1,
+      name: "Carlos el Sevi",
+      routetype: "carretera",
+      speed: 20,
+    },
+    {
+      bikemodel: "haibike sl",
+      city: "Valencia",
+      distance: 50,
+      email: "ld@mail.com ",
+      id: 1,
+      name: "Nacho de Huesca",
+      routetype: "carretera",
+      speed: 20,
+    },
+  ];
 
-  function search(items) {
+  //     set  group search parameters
+  const [searchParamGroup] = useState(["city", "name"]);
+
+  function searchGroup(items) {
     return items.filter((item) => {
-      return searchParam.some((newItem) => {
+      return searchParamGroup.some((newItem) => {
+        return (
+          item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
+        );
+      });
+    });
+  }
+
+  // set user search parameters
+
+  const [searchParamUser] = useState(["email", "name"]);
+
+  function searchUser(items) {
+    return items.filter((item) => {
+      return searchParamUser.some((newItem) => {
         return (
           item[newItem].toString().toLowerCase().indexOf(q.toLowerCase()) > -1
         );
@@ -45,7 +93,9 @@ export const Search = () => {
                   name="options"
                   id="searchUser"
                   autoComplete="off"
-                  checked
+                  // checked="true"
+                  defaultChecked={searchType === "user" ? true : false}
+                  onChange={() => setSearchType("user")}
                 />
                 <label className="btn btn-primary" htmlFor="searchUser">
                   Users
@@ -56,7 +106,9 @@ export const Search = () => {
                   className="btn-check"
                   name="options"
                   id="searchGroup"
-                  autocomplete="off"
+                  autoComplete="off"
+                  defaultChecked={searchType === "group" ? true : false}
+                  onChange={() => setSearchType("group")}
                 />
                 <label className="btn btn-primary" htmlFor="searchGroup">
                   Groups
@@ -70,7 +122,11 @@ export const Search = () => {
                 name="search-form"
                 id="search-form"
                 className="form-control"
-                placeholder="Search your city or a group name..."
+                placeholder={
+                  searchType === "user"
+                    ? "Search USERS by name or email..."
+                    : "Search GROUPS by city or group name..."
+                }
                 value={q}
                 /*
                                 // set the value of our useState q
@@ -81,141 +137,66 @@ export const Search = () => {
             </div>
           </div>
           {/* busqueda acaba aquí */}
-          {/* filtros de busqueda */}
-          <div className="row pt-2">
-            <div className="col-3">
-              <div className="card text-center my-1">
-                <div className="card-body">
-                  <form>
-                    <div className="mb-3">
-                      <label htmlFor="maxSpeed" className="form-label">
-                        Average Speed
-                      </label>
-                      <div className="row d-flex justify-content-evenly">
-                        <div className="col-5">
-                          <input
-                            type="number"
-                            className="form-control"
-                            id="minSpeed"
-                            placeholder="Min"
-                            value={minS}
-                            /*
-                                            // set the value of our useState q
-                                            //  anytime the user types in the search box
-                                            */
-                            onChange={(e) => setMinS(e.target.value)}
-                          />
-                        </div>
-                        <div className="col-5">
-                          <input
-                            type="number"
-                            className="form-control col-5"
-                            id="maxSpeed"
-                            placeholder="Max"
-                            value={maxS}
-                            /*
-                                            // set the value of our useState q
-                                            //  anytime the user types in the search box
-                                            */
-                            onChange={(e) => setMaxS(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="maxSpeed" className="form-label">
-                        Average Distance
-                      </label>
-                      <div className="row d-flex justify-content-evenly">
-                        <div className="col-5">
-                          <input
-                            type="number"
-                            className="form-control"
-                            id="minDistance"
-                            placeholder="Min"
-                            value={minD}
-                            /*
-                                            // set the value of our useState q
-                                            //  anytime the user types in the search box
-                                            */
-                            onChange={(e) => setMinD(e.target.value)}
-                          />
-                        </div>
-                        <div className="col-5">
-                          <input
-                            type="number"
-                            className="form-control col-5"
-                            id="maxDistance"
-                            placeholder="Max"
-                            value={maxD}
-                            /*
-                                            // set the value of our useState q
-                                            //  anytime the user types in the search box
-                                            */
-                            onChange={(e) => setMaxD(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                    </div>
 
-                    <button type="submit" className="btn btn-primary">
-                      Filter
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-            {/* filtros de busqueda */}
-
+          <div className="row pt-4  justify-content-center">
             {/* resultados de la busqueda */}
-            <div className="col-9">
-              {q.length >= 1 && search(store.groupDetails).length == 0 ? (
-                <p className="text-center">No results for your query!</p>
-              ) : (
-                <></>
-              )}
-              {q === "" ? (
-                <p className="text-center">
-                  Use the bar above to search <br></br>
-                  Your results will be shown here!
-                </p>
+            <div className="col-10">
+              {searchType === "user" ? (
+                <>
+                  {q.length >= 1 && searchUser(users).length == 0 ? (
+                    <p className="text-center">No results for your query!</p>
+                  ) : (
+                    <></>
+                  )}
+                  {q === "" ? (
+                    <p className="text-center">
+                      Use the bar above to search <br></br>
+                      Your results will be shown here!
+                    </p>
+                  ) : (
+                    <>
+                      {searchUser(users).map((item, index) => (
+                        <SearchResult
+                          key={index}
+                          theName={item.name}
+                          id={index + 1}
+                          city={item.city}
+                          distance={item.distance}
+                          speed={item.speed}
+                        />
+                      ))}
+                    </>
+                  )}
+                </>
               ) : (
                 <>
-                  {search(store.groupDetails).map((item, index) => (
-                    <SearchResult
-                      key={index}
-                      theName={item.name}
-                      id={index + 1}
-                      city={item.city}
-                      distance={item.distance}
-                      speed={item.speed}
-                    />
-                  ))}
+                  {q.length >= 1 &&
+                  searchGroup(store.groupDetails).length == 0 ? (
+                    <p className="text-center">No results for your query!</p>
+                  ) : (
+                    <></>
+                  )}
+                  {q === "" ? (
+                    <p className="text-center">
+                      Use the bar above to search <br></br>
+                      Your results will be shown here!
+                    </p>
+                  ) : (
+                    <>
+                      {searchGroup(store.groupDetails).map((item, index) => (
+                        <SearchResult
+                          key={index}
+                          theName={item.name}
+                          id={index + 1}
+                          city={item.city}
+                          distance={item.distance}
+                          speed={item.speed}
+                        />
+                      ))}
+                    </>
+                  )}
                 </>
               )}
-
-              {/* <ul>
-                {items.map((item, index) => (
-                  <li>
-                    <article className="card" key={index}>
-                      <div className="card-content">
-                        <h2 className="card-name">{item.name}</h2>
-                        <ol className="card-list">
-                          <li>
-                            speed: <span>{item.speed}</span>
-                          </li>
-                          <li>
-                            distance: <span>{item.distance}</span>
-                          </li>
-                          <li>
-                            City: <span>{item.city}</span>
-                          </li>
-                        </ol>
-                      </div>
-                    </article>
-                  </li>
-                ))}
-              </ul> */}
             </div>
           </div>
         </div>
