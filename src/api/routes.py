@@ -185,9 +185,22 @@ def dashboard_info():
     dash_info = []
 
     for x in info_groups:
-        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance , "routetype": x.routetype}]
+        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance , "routetype": x.routetype , "id": x.id}]
    
     return jsonify(dash_info), 200
+
+
+#info ALL users
+@api.route('/all_users', methods=['GET'])
+def users_info():
+    
+    info_users = User.query.all()
+    users = []
+
+    for u in info_users:
+        users += [{"name":u.name , "city":u.city , "speed":u.speed , "distance": u.distance , "routetype": u.routetype, "bikemodel": u.bikemodel , "email": u.email , "id":u.id }]
+   
+    return jsonify(users), 200
 
 
 #dashboard info grupo individual con ruta dinamica
@@ -206,7 +219,6 @@ def group_dinamic(groupId):
 
 
 #editar perfil
-# NO USAR, NO ACABADO, TENGO QUE DARLE UNA VUELTA
 ## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
 @api.route('/user/edit', methods=['PUT'])
 
@@ -218,15 +230,15 @@ def edit_user():
 
     name = request.json.get("name", None)  
     email = request.json.get("email", None)
-    newemail = request.json.get("newemail", None)
+    # newemail = request.json.get("newemail", None)
     city = request.json.get("city", None)
     bikemodel = request.json.get("bikemodel", None)
     routetype = request.json.get("routetype", None)
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     
-    if User.query.filter_by(email=newemail).first():
-        return jsonify("msg: Email ya registrado"), 404
+    # if User.query.filter_by(email=newemail).first():
+    #     return jsonify("msg: Email ya registrado"), 404
 
     user = User.query.filter_by(email=email).first()
 
@@ -236,8 +248,8 @@ def edit_user():
 
     if name:    
         user.name = name
-    if newemail:
-        user.email = newemail
+    # if newemail:
+    #     user.email = newemail
     if city:
         user.city = city
     if bikemodel:
@@ -252,3 +264,11 @@ def edit_user():
     db.session.commit()
 
     return jsonify(user.serialize()), 200
+
+
+@api.route('/add_group', methods=['POST'])
+@jwt_required()
+def upload_file():
+    #el usuario que se le ingresa la imagen
+    userId = get_jwt_identity() #
+
