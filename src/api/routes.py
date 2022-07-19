@@ -8,6 +8,7 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 import json
 import bcrypt
 from bcrypt import hashpw
+import datetime
 # para instalar paquete de bcrypt, para pass encriptado, instalar:
 # pipenv install py-bcrypt
 # pipenv install flask-jwt-extended
@@ -57,7 +58,7 @@ def create_user():
         "msg": "usuario creado"
     }
     # return jsonify(response_body), 200
-    access_token = create_access_token(identity=body["email"])
+    access_token = create_access_token(identity=body["email"], expires_delta=datetime.timedelta(minutes=60))
     return jsonify(access_token=access_token), 200   
 
 
@@ -108,8 +109,8 @@ def login():
     # if user and user.password != password:
     #     return jsonify ("datos incorrectos"), 401    
     
-    access_token = create_access_token(identity=email)
-    info_user = {"email":user.email , "name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "bikemodel": user.bikemodel , "routetype": user.routetype ,"access_token":access_token}
+    access_token = create_access_token(identity=email , expires_delta=datetime.timedelta(minutes=60))
+    info_user = {"email":user.email ,"id":user.id ,"name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "bikemodel": user.bikemodel , "routetype": user.routetype ,"access_token":access_token}
     # return jsonify(access_token=access_token)   
     return jsonify(info_user)   
 
@@ -143,7 +144,7 @@ def search_groups():
         return jsonify("msg: Grupo no encontrado"), 400
 
     for i in group_results:
-        NewDict += [{"name":i.name , "city":i.city , "speed":i.speed , "distance":i.distance , "routetype": i.routetype}]
+        NewDict += [{"name":i.name , "city":i.city , "speed":i.speed , "distance":i.distance , "routetype": i.routetype , "id":i.id}]
 
     return jsonify(NewDict), 200
 
@@ -172,7 +173,7 @@ def search_user():
         return jsonify("msg: Usuario no encontrado"), 400
 
     for g in user_results:
-        UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email , "bikemodel": g.bikemodel , "routetype": g.routetype}]
+        UserSearchDict += [{"name":g.name , "city":g.city , "speed":g.speed , "distance":g.distance , "email":g.email , "bikemodel": g.bikemodel , "routetype": g.routetype , "id":g.id}]
 
     return jsonify(UserSearchDict), 200
 
@@ -213,15 +214,15 @@ def group_dinamic(groupId):
 
     users_quantity = len(current_group.users)
     group_comments = current_group.comments
-    group_info = {"name":current_group.name , "city":current_group.city , "speed":current_group.speed , "distance":current_group.distance, "routetype":current_group.routetype ,"users_quantity":users_quantity}
+    group_info = {"name":current_group.name , "city":current_group.city , "id":current_group.id, "speed":current_group.speed , "distance":current_group.distance, "routetype":current_group.routetype ,"users_quantity":users_quantity}
    
     return jsonify(group_info), 200
 
 
 #editar perfil
 ## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
+# revisar y hacer la identificacion con el token
 @api.route('/user/edit', methods=['PUT'])
-
 def edit_user():
     body = json.loads(request.data)
 
@@ -239,6 +240,7 @@ def edit_user():
     
     # if User.query.filter_by(email=newemail).first():
     #     return jsonify("msg: Email ya registrado"), 404
+    # esta parte la hemos quitado porque no vamos a cambiar mail por seguridad
 
     user = User.query.filter_by(email=email).first()
 
@@ -250,6 +252,7 @@ def edit_user():
         user.name = name
     # if newemail:
     #     user.email = newemail
+    # eliminado cambio de email por seguridad
     if city:
         user.city = city
     if bikemodel:
@@ -266,9 +269,30 @@ def edit_user():
     return jsonify(user.serialize()), 200
 
 
-@api.route('/add_group', methods=['POST'])
+# endpoint unirse a grupo
+# como parametro entra el grupo. El user lo coge con el token
+@api.route("/add_group/<int:groupId>" , methods=['POST'])
 @jwt_required()
-def upload_file():
-    #el usuario que se le ingresa la imagen
-    userId = get_jwt_identity() #
+def add_to_group(groupId):
+    userEmail = get_jwt_identity()
+    group_to_add = Group.query.get(groupId)
+    user_to_add = User.query.filter_by(email=userEmail).first()
+
+    # No da mensaje de error si el usuario ya existe en el grupo, pero 
+    # directamente si ya está, no lo añade
+    # seria importante desde el front hacer que si el user ya está en grupo
+    # el boton de unirse aparezca DISABLED
+
+    user_to_add.groups.append(group_to_add)
+    db.session.commit()
+
+    users_quantity = len(group_to_add.users)
+    group_info = {"name":group_to_add.name , "city":group_to_add.city , "speed":group_to_add.speed , "distance":group_to_add.distance, "routetype":group_to_add.routetype ,"users_quantity":users_quantity , "id": group_to_add.id}
+   
+    return jsonify(group_info), 200
+
+    # return jsonify(group_to_add.serialize()), 200
+
+
+
 
