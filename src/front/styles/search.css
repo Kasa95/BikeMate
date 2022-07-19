@@ -9,13 +9,16 @@
 .search input {
     height: 60px;
     text-indent: 25px;
-    border: 2px solid #d6d4d4;
+    border: none;
+    -webkit-box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
+    box-shadow: 0px 8px 20pxrgba (0, 0, 0, 0.06);
+    border-radius: 8px;
 }
 
 .search input:focus {
-    -webkit-box-shadow: 0px 0px 4px 0px rgba(250, 100, 0, 1);
-    -moz-box-shadow: 0px 0px 4px 0px rgba(250, 100, 0, 1);
-    box-shadow: 0px 0px 4px 0px rgba(250, 100, 0, 1);
+    -webkit-box-shadow: 0px 0px 4px 0px rgb(114, 114, 114);
+    -moz-box-shadow: 0px 0px 4px 0px rgb(114, 114, 114);
+    box-shadow: 0px 0px 4px 0px rgb(114, 114, 114);
     border: none;
 }
 
@@ -29,4 +32,113 @@
 .search-result {
     transition: opacity 0.5s;
     opacity: 1;
+}
+
+.search-header .search-landing-header-container {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    max-height: 360px;
+    background-color: #fd507e;
+}
+
+.search-header .search-image-container {
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #fdb465;
+}
+
+.orange-searchman-background {
+    background-color: #fdb465;
+    height: 15rem;
+}
+
+.centered {
+    position: relative;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.centered>h1 {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+}
+
+.centered>p {
+    color: white;
+    text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+}
+
+.search-header-img {
+    max-height: -webkit-fill-available;
+    opacity: 80%;
+}
+
+.search-box {
+    transform: translateY(-30%);
+}
+
+/* spinner */
+
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    margin-left: 45%;
+    width: 80px;
+    height: 120px;
+}
+
+.lds-ripple div {
+    position: absolute;
+    border: 4px solid #6c757d;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    4.9% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    5% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
 }
