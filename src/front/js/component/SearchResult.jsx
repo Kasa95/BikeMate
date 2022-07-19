@@ -1,18 +1,12 @@
 import React from "react";
 import "../../styles/search.css";
+import { Link } from "react-router-dom";
 
 export const SearchResult = ({ theName, id, city, distance, speed, email }) => {
   return (
     <>
       <div className="card text-center my-1 search-result">
         <div className="card-body">
-          {/* <img
-            src="https://source.unsplash.com/random"
-            alt=""
-            height="55px"
-            className="img-thumbnail"
-            style={{ maxHeight: "85px" }}
-          /> */}
           <h5 className="card-title">
             <b>{theName}</b>
           </h5>
@@ -20,7 +14,7 @@ export const SearchResult = ({ theName, id, city, distance, speed, email }) => {
             {city != undefined ? (
               <>
                 Located in
-                <b> {city}</b>.
+                <b> {city}</b>.{" "}
               </>
             ) : (
               <>Unknown location. </>
@@ -36,7 +30,7 @@ export const SearchResult = ({ theName, id, city, distance, speed, email }) => {
             {speed != undefined ? (
               <>
                 and their average speed is
-                <b>{speed}</b>.
+                <b> {speed}</b>.
               </>
             ) : (
               <></>

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import "../../styles/search.css";
-import searchMan from "../../img/searchman.jpg";
+import searchMan from "../../img/searchman.png";
+import searchSpinner from "../../img/YlWC.gif";
 
 import { Context } from "../store/appContext";
 import { SearchResult } from "../component/SearchResult.jsx";
@@ -87,7 +88,7 @@ export const Search = () => {
             />
           </div>
           <div className="col-3 d-flex justify-content-around align-items-center">
-            <div className="btn-group w-100 mt-3">
+            <div className="btn-group w-100 mt-2">
               <input
                 type="radio"
                 className="btn-check"
@@ -98,8 +99,19 @@ export const Search = () => {
                 defaultChecked={searchType === "user" ? true : false}
                 onChange={() => setSearchType("user")}
               />
-              <label className="btn btn-primary" htmlFor="searchUser">
-                Users
+              <label
+                className="btn btn-secondary"
+                htmlFor="searchUser"
+                style={
+                  searchType === "user"
+                    ? { color: "#FA6400", background: "#F2F2F2" }
+                    : {
+                        color: "rgba(0,0,0,.6)",
+                        background: "#565E64",
+                      }
+                }
+              >
+                <b>USERS</b>
               </label>
               <input
                 type="radio"
@@ -110,8 +122,19 @@ export const Search = () => {
                 defaultChecked={searchType === "group" ? true : false}
                 onChange={() => setSearchType("group")}
               />
-              <label className="btn btn-primary" htmlFor="searchGroup">
-                Groups
+              <label
+                className="btn btn-secondary"
+                htmlFor="searchGroup"
+                style={
+                  searchType != "user"
+                    ? { color: "#FA6400", background: "#F2F2F2" }
+                    : {
+                        color: "rgba(0,0,0,.6)",
+                        background: "#565E64",
+                      }
+                }
+              >
+                <b>GROUPS</b>
               </label>
             </div>
           </div>
@@ -128,10 +151,16 @@ export const Search = () => {
                   <> </>
                 )}
                 {q === "" ? (
-                  <p className="text-center">
-                    Use the bar above to search <br />
-                    Your results will be shown here!
-                  </p>
+                  <>
+                    <div className="lds-ripple ">
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <p className="text-center mb-5 text-muted">
+                      Use the bar above to search <br />
+                      Your results will be shown here!
+                    </p>
+                  </>
                 ) : (
                   <>
                     {searchUser(store.userList).map((item, index) => (
@@ -157,10 +186,16 @@ export const Search = () => {
                   <> </>
                 )}
                 {q === "" ? (
-                  <p className="text-center">
-                    Use the bar above to search <br />
-                    Your results will be shown here!
-                  </p>
+                  <>
+                    <div className="lds-ripple ">
+                      <div></div>
+                      <div></div>
+                    </div>
+                    <p className="text-center mb-5 text-muted">
+                      Use the bar above to search <br />
+                      Your results will be shown here!
+                    </p>
+                  </>
                 ) : (
                   <>
                     {searchGroup(store.groupDetails).map((item, index) => (

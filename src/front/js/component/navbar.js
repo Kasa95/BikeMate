@@ -11,7 +11,7 @@ export const Navbar = () => {
       {store.auth === true || localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
         <div className="container">
           <div className="row">
-            <div className="text-start col-10">
+            <div className="text-start col-8">
               <Link
                 to="/ViewDashboard"
                 className="text-decoration-none text-light display-5"
@@ -26,6 +26,21 @@ export const Navbar = () => {
               </Link>
               {/* <h4 className="text-dark">|Dashboard</h4> */}
             </div>
+            <ul className="nav col-2 justify-content-center align-items-center mt-3">
+              <li>
+                <Link
+                  to="/ViewDashboard"
+                  className="nav-link px-2 text-secondary"
+                >
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link to="/search" className="nav-link px-2 text-secondary">
+                  Search
+                </Link>
+              </li>
+            </ul>
             <div className="col-2 align-self-center mt-2 text-center">
               <div className="dropdown-center">
                 <button
