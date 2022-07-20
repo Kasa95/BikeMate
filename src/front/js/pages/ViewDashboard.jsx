@@ -11,11 +11,11 @@ export const ViewDashboard = () => {
 
   return (
     <>
-      <div class="row">
+      <div className="row">
         <div className="col-3 mt-5 ml-3">
           <Profile />
         </div>
-        <div class="col-6 col-lg-6">
+        <div className="col-6 col-lg-6">
           <div className="row">
             {store.groupInfo.map((item, index) => (
               <div className="col-lg-4">
@@ -31,7 +31,7 @@ export const ViewDashboard = () => {
             ))}
           </div>
         </div>
-        <div class="col-3">
+        <div className="col-3">
           <Marketing />
         </div>
       </div>

@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const ProfileSettings = () => {
   const { store, actions } = useContext(Context);
-
+  useEffect(() => {
+    actions.userInfo();
+  }, []);
   return (
     <>
       <div className="container">
@@ -41,14 +43,22 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-lg-3 control-label">Name:</label>
                 <div className="col-lg-8">
-                  <input className="form-control" type="text" value="Carlos" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={localStorage.getItem("name")}
+                  />
                 </div>
               </div>
 
               <div className="form-group">
                 <label className="col-lg-3 control-label">Email:</label>
                 <div className="col-lg-8">
-                  <input className="form-control" type="e-mail" />
+                  <input
+                    className="form-control"
+                    type="e-mail"
+                    defaultValue={localStorage.getItem("email")}
+                  />
                 </div>
               </div>
 
@@ -62,7 +72,11 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-md-3 control-label">Speed:</label>
                 <div className="col-md-8">
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={localStorage.getItem("speed")}
+                  />
                 </div>
               </div>
 
