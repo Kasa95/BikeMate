@@ -8,7 +8,9 @@ import { Single } from "./pages/single";
 import { Register } from "./pages/register";
 import { Login } from "./pages/login";
 import { Terms } from "./pages/terms";
+import { Search } from "./pages/search";
 import { ViewDashboard } from "./pages/ViewDashboard.jsx";
+import { NewGroup } from "./pages/NewGroup.jsx";
 import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
 import { ViewProfileSettings } from "./pages/ViewProfileSettings.jsx";
 import injectContext from "./store/appContext";
@@ -33,6 +35,8 @@ const Layout = () => {
             <Route element={<Register />} path="/register" />
             <Route element={<Login />} path="/login" />
             <Route element={<Terms />} path="/terms" />
+            <Route element={<Search />} path="/search" />
+            <Route element={<NewGroup />} path="/new-group" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<ViewDashboard />} path="/ViewDashboard/" />
             <Route
