@@ -10,11 +10,11 @@ import { Login } from "./pages/login";
 import { Terms } from "./pages/terms";
 import { ViewDashboard } from "./pages/ViewDashboard.jsx";
 import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
+import { ViewProfileSettings } from "./pages/ViewProfileSettings.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import { Search } from "./pages/search";
 
 //create your first component
 const Layout = () => {
@@ -33,18 +33,21 @@ const Layout = () => {
             <Route element={<Register />} path="/register" />
             <Route element={<Login />} path="/login" />
             <Route element={<Terms />} path="/terms" />
-            <Route element={<Search />} path="/search" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<ViewDashboard />} path="/ViewDashboard/" />
+            <Route
+              element={<ViewProfileSettings />}
+              path="/ViewProfileSettings/"
+            />
             <Route
               element={<ViewDetailDashboard />}
               path="/ViewDetailDashboard/"
             />
             <Route element={<h1> Not found! </h1>} />
-          </Routes>
+          </Routes>{" "}
           <Footer />
-        </ScrollToTop>
-      </BrowserRouter>
+        </ScrollToTop>{" "}
+      </BrowserRouter>{" "}
     </div>
   );
 };
