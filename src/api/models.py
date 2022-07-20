@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+import datetime
+from sqlalchemy import DateTime
 
 db = SQLAlchemy()
 
@@ -70,7 +72,7 @@ class Group(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(500), unique=False, nullable=False)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),
         nullable=False) 
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'),

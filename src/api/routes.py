@@ -9,6 +9,8 @@ import json
 import bcrypt
 from bcrypt import hashpw
 import datetime
+from sqlalchemy import Column, DateTime
+import datetime
 # para instalar paquete de bcrypt, para pass encriptado, instalar:
 # pipenv install py-bcrypt
 # pipenv install flask-jwt-extended
@@ -275,8 +277,9 @@ def edit_user():
 @jwt_required()
 def add_to_group(groupId):
     userEmail = get_jwt_identity()
-    group_to_add = Group.query.get(groupId)
     user_to_add = User.query.filter_by(email=userEmail).first()
+    group_to_add = Group.query.get(groupId)
+    
 
     # No da mensaje de error si el usuario ya existe en el grupo, pero 
     # directamente si ya está, no lo añade
@@ -289,10 +292,114 @@ def add_to_group(groupId):
     users_quantity = len(group_to_add.users)
     group_info = {"name":group_to_add.name , "city":group_to_add.city , "speed":group_to_add.speed , "distance":group_to_add.distance, "routetype":group_to_add.routetype ,"users_quantity":users_quantity , "id": group_to_add.id}
    
+    # return jsonify(group_to_add.serialize()), 200
     return jsonify(group_info), 200
 
-    # return jsonify(group_to_add.serialize()), 200
+
+# endpoint salirse de un grupo
+# como parametro entra el grupo. El user lo coge con el token
+@api.route("/leave_group/<int:groupId>" , methods=['POST'])
+@jwt_required()
+def leave_group(groupId):
+    userEmail = get_jwt_identity()
+    user_to_leave = User.query.filter_by(email=userEmail).first()
+    group_to_leave = Group.query.get(groupId)
+
+    # Falta ver como meter el mensaje de error si el user no pertenece ya a ese grupo
+    # ahora mismo si no está en grupo, da estado 500
+
+    # Este codigo de abajo no sirve para eliminar el error:
+    # if user_to_leave not in group_to_leave:
+    #     return jsonify ("msg: usuario no pertenece al grupo"), 400
+
+    user_to_leave.groups.remove(group_to_leave)
+    db.session.commit()
+
+    # users_quantity = len(group_to_leave.users)
+    # group_info = {"name":group_to_leave.name , "city":group_to_leave.city , "speed":group_to_leave.speed , "distance":group_to_leave.distance, "routetype":group_to_leave.routetype ,"users_quantity":users_quantity , "id": group_to_leave.id}
+   
+    # return jsonify(group_info), 200
+    return jsonify("msg: usuario eliminado del grupo"), 200
+
+   
+
+#crear comentarios
+@api.route("/comment/<int:groupId>", methods=["POST"])
+@jwt_required()
+def create_comment(groupId):
+    body = json.loads(request.data)
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+    group = Group.query.get(groupId)
+
+    # if Group.query.filter_by(name=body["name"]).first():
+    #     return jsonify({"msg": "Grupo ya existente"}), 401 
+
+    if not body["text"]:
+        return jsonify({"msg": "Formato erroneo"}), 404 
+
+    
+    comment = Comment(text=body["text"], user_id=user.id, group_id=group.id)
+
+    db.session.add(comment)
+    db.session.commit()
+
+    comment_info = {"text":comment.text , "user_id":user.id , "group_id": group.id , "id":comment.id , "datetime":comment.date}
+
+    # return jsonify(comment.serialize()),200
+    return jsonify(comment_info), 200
 
 
+#borrar comentarios
+@api.route("/comment_delete/<int:commentId>", methods=["DELETE"])
+@jwt_required()
+def delete_comment(commentId):
+    
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+    comment = Comment.query.get(commentId)
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    return jsonify("msg: comentario borrado"), 200
+
+
+
+#recuperar comentarios de un grupo
+#da el id de user que ha hecho el comentario, necesitariamos también el nombre para mostrarlo en infogrupos ?
+@api.route('/get_comment/<int:groupId>', methods=['GET'])
+def group_comments(groupId):
+    
+    current_group = Group.query.get(groupId)
+
+    if not current_group:
+        return jsonify("msg: Error. Grupo no encontrado"), 404
+
+    
+    group_comments = current_group.comments
+    comments = []
+    
+    for comment in group_comments : 
+        comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id, "datetime":comment.date}]
+   
+    return jsonify(comments), 200
+
+
+
+#recuperar grupos de un user
+@api.route('/get_usergroups/', methods=['GET'])
+@jwt_required()
+def usergroups():
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+
+    groups_added = user.groups
+    groups = []
+
+    for group in groups_added : 
+        groups += [{"name": group.name, "city": group.city , "routetype": group.routetype , "speed": group.speed , "distance": group.distance , "group_id":group.id}]
+
+    return jsonify(groups), 200
 
 
