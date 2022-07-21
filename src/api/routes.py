@@ -9,7 +9,7 @@ import json
 import bcrypt
 from bcrypt import hashpw
 import datetime
-from sqlalchemy import Column, DateTime
+from sqlalchemy import Column, DateTime, ForeignKey
 import datetime
 # para instalar paquete de bcrypt, para pass encriptado, instalar:
 # pipenv install py-bcrypt
@@ -28,7 +28,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-#ruta protegida
+#ruta protegida . Obtener perfil del usuario : Profile
 @api.route("/profile", methods=["GET"])
 @jwt_required() 
 def protected():
@@ -221,6 +221,31 @@ def group_dinamic(groupId):
     return jsonify(group_info), 200
 
 
+#Obtener nombres e id de los users que están en un grupo
+# endpoint con relaciones many to many
+@api.route('/group_usernames/<int:groupId>', methods=['GET'])
+def group_usernames(groupId):
+    
+    current_group = Group.query.get(groupId)
+    
+    if not current_group:
+        return jsonify("msg: Grupo no existe"), 404
+
+    users_quantity = len(current_group.users)
+    if not users_quantity:
+        return jsonify("msg: Grupo vacio"), 400
+
+    usersmail = current_group.users
+
+    # lo ideal seria hacer un map si solo quisieramos el nombre del grupo, asi:
+    # names = list(map(lambda item: item.name, usersmail))
+    datos_users = []
+    for mail in usersmail:
+        datos_users += [{"name": mail.name , "id": mail.id}]
+
+    return jsonify(datos_users), 200
+
+
 #editar perfil
 ## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
 # revisar y hacer la identificacion con el token
@@ -367,7 +392,8 @@ def delete_comment(commentId):
 
 
 #recuperar comentarios de un grupo
-#da el id de user que ha hecho el comentario, necesitariamos también el nombre para mostrarlo en infogrupos ?
+# Da el id de user que ha hecho el comentario
+# necesitariamos también el nombre para mostrarlo en infogrupos
 @api.route('/get_comment/<int:groupId>', methods=['GET'])
 def group_comments(groupId):
     
@@ -379,9 +405,16 @@ def group_comments(groupId):
     
     group_comments = current_group.comments
     comments = []
+    # mail = []
+
+    # for item in group_comments:
+    #     mail += User.query.filter_by(id=item.user_id)
+
+    # mail = list(map(lambda item: User.query.filter_by(id=item.user_id).first(), group_comments))
+    
     
     for comment in group_comments : 
-        comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id, "datetime":comment.date}]
+        comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id, "datetime":comment.date }]
    
     return jsonify(comments), 200
 
