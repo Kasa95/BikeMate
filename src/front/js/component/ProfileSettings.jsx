@@ -46,7 +46,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={localStorage.getItem("name")}
+                    defaultValue={store.profile.name}
                   />
                 </div>
               </div>
@@ -57,7 +57,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="e-mail"
-                    defaultValue={localStorage.getItem("email")}
+                    defaultValue={store.profile.email}
                   />
                 </div>
               </div>
@@ -65,7 +65,11 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-md-3 control-label">Username:</label>
                 <div className="col-md-8">
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={store.profile.username}
+                  />
                 </div>
               </div>
 
@@ -75,7 +79,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={localStorage.getItem("speed")}
+                    defaultValue={store.profile.speed}
                   />
                 </div>
               </div>
@@ -83,28 +87,44 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-md-3 control-label">City:</label>
                 <div className="col-md-8">
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={store.profile.city}
+                  />
                 </div>
               </div>
 
               <div className="form-group">
-                <label className="col-md-3 control-label">BikeModel:</label>
+                <label className="col-md-3 control-label">Bikemodel:</label>
                 <div className="col-md-8">
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={store.profile.bikeModel}
+                  />
                 </div>
               </div>
 
               <div className="form-group">
                 <label className="col-md-3 control-label">RouteType:</label>
                 <div className="col-md-8">
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={store.profile.routetype}
+                  />
                 </div>
               </div>
 
               <div className="form-group">
                 <label className="col-md-3 control-label">Distance:</label>
                 <div className="col-md-8">
-                  <input className="form-control" type="text" />
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={store.profile.distance}
+                  />
                 </div>
               </div>
 

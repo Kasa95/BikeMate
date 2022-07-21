@@ -32,6 +32,7 @@ const injectContext = (PassedComponent) => {
        **/
       state.actions.getMessage(); // <---- calling this function from the flux.js actions
       state.actions.groupInfo();
+      state.actions.userInfo();
     }, []);
 
     // The initial value for the context is not null anymore, but the current state of this component,
@@ -39,7 +40,7 @@ const injectContext = (PassedComponent) => {
     // on the state of this component
     return (
       <Context.Provider value={state}>
-        <PassedComponent {...props} />
+        <PassedComponent {...props} />{" "}
       </Context.Provider>
     );
   };
