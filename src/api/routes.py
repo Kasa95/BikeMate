@@ -391,33 +391,48 @@ def delete_comment(commentId):
 
 
 
-#recuperar comentarios de un grupo
-# Da el id de user que ha hecho el comentario
-# necesitariamos también el nombre para mostrarlo en infogrupos
+#recuperar comentarios de un grupo. Ya devuelve los nombres del user que publica comentario también
 @api.route('/get_comment/<int:groupId>', methods=['GET'])
 def group_comments(groupId):
     
+    # Busco el grupo por el parametro que me da el front
     current_group = Group.query.get(groupId)
 
+    #Si el grupo no existe, devuelve error
     if not current_group:
         return jsonify("msg: Error. Grupo no encontrado"), 404
 
-    
+    # Saco los comentarios del grupo, seleccionando .comments
     group_comments = current_group.comments
+    # Saco las ids de los users de los comentarios del grupo con este map
+    id = list(map(lambda item: item.user_id, group_comments))
+    # print (id)
+
+    # Con esta funcion, que itero tantas veces como ids haya, devuelvo los users (su mail que es lo que los identifica)
+    def get_by_id(id):
+        for i in id:
+            users = User.query.get(i)
+            return (users)
+    # llamo a la funcion y la guardo en la variable namelist
+    namelist =[get_by_id(id)]
+    # mapeo namelist para que a partir del user (mail) , me de el nombre de cada usuario que ha publicado comentarios en ese grupo
+    names = list(map(lambda item: item.name, namelist))
+    # print (names)
+
     comments = []
-    # mail = []
-
-    # for item in group_comments:
-    #     mail += User.query.filter_by(id=item.user_id)
-
-    # mail = list(map(lambda item: User.query.filter_by(id=item.user_id).first(), group_comments))
     
-    
+    # hago for de cada comentario en el listado de comentarios del grupo que preparé en la linea 406 (18 ineas arriba)
+    # despues hago for de names para que me devuelva uno a uno los nombres del listado de nombres que metí en names
+    # finalmente name lo meto como username en el for que recorre todos los comentarios y que me devuelve el array de objetos
     for comment in group_comments : 
-        comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id, "datetime":comment.date }]
+        for name in names:
+            name
+            comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id,"user.name":name , "datetime":comment.date}]
    
-    return jsonify(comments), 200
+    if comments == []:
+        return jsonify("msg: no hay mensajes"), 400
 
+    return jsonify(comments), 200
 
 
 #recuperar grupos de un user
