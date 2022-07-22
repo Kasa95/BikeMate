@@ -61,6 +61,7 @@ const getState = ({
                 },
             ],
             profile: {},
+            edit: {},
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -239,7 +240,7 @@ const getState = ({
                 }
             },
 
-            //fetch para traer info usuario para editar perfil
+            //fetch GET para traer info usuario para editar perfil
 
             userInfo: () => {
                 const accesToken = localStorage.getItem("token");
@@ -259,6 +260,29 @@ const getState = ({
                         // localStorage.setItem("groupName", data.name);
                         // .catch((err) => console.error(err));
                         console.log(getStore().profile);
+                    });
+            },
+
+            //Fetch PUT para actualizar datos de perfil
+
+            userUpdate: (user) => {
+                const accesToken = localStorage.getItem("token");
+                console.log(accesToken);
+                fetch(process.env.BACKEND_URL + "/api/user/edit", {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + accesToken,
+                        },
+                        body: JSON.stringify(user),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            edit: data,
+                        });
+                        console.log(getStore().edit);
                     });
             },
         },

@@ -105,8 +105,8 @@ def login():
 
 
     # if email != user.email or password != user.password:
-    if email != user.email or not bcrypt.checkpw(password, user.password):
-        return jsonify({"msg": "datos incorrectos"}), 401 
+    # if email != user.email or not bcrypt.checkpw(password, user.password):
+    #     return jsonify({"msg": "datos incorrectos"}), 401 
     
     # if user and user.password != password:
     #     return jsonify ("datos incorrectos"), 401    
@@ -250,6 +250,7 @@ def group_usernames(groupId):
 ## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
 # revisar y hacer la identificacion con el token
 @api.route('/user/edit', methods=['PUT'])
+@jwt_required()
 def edit_user():
     body = json.loads(request.data)
 
@@ -269,7 +270,10 @@ def edit_user():
     #     return jsonify("msg: Email ya registrado"), 404
     # esta parte la hemos quitado porque no vamos a cambiar mail por seguridad
 
-    user = User.query.filter_by(email=email).first()
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+
+    # user = User.query.filter_by(email=email).first()
 
     if not user :
         return jsonify("msg: Email incorrecto"), 404

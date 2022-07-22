@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Dashboard = ({ name, id, distance, speed }) => {
   const { store, actions } = useContext(Context);
+  useEffect(() => {
+    actions.groupInfo();
+    actions.userInfo();
+  }, []);
   return (
     // <div className="">
     //   <div className="row">
