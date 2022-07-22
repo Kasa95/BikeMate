@@ -55,7 +55,11 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {localStorage.getItem("name")}
+                  {localStorage.getItem("name") === null ? (
+                    "User"
+                  ) : (
+                    <>{localStorage.getItem("name")}</>
+                  )}
                 </button>
                 <ul
                   className="dropdown-menu dropdown-menu-wide"

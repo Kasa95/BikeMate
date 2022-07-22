@@ -11,6 +11,7 @@ import { Terms } from "./pages/terms";
 import { Search } from "./pages/search";
 import { ViewDashboard } from "./pages/ViewDashboard.jsx";
 import { NewGroup } from "./pages/NewGroup.jsx";
+import { NewGroup2 } from "./pages/NewGroup2.jsx";
 import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
 import { ViewProfileSettings } from "./pages/ViewProfileSettings.jsx";
 import injectContext from "./store/appContext";
@@ -37,6 +38,7 @@ const Layout = () => {
             <Route element={<Terms />} path="/terms" />
             <Route element={<Search />} path="/search" />
             <Route element={<NewGroup />} path="/new-group" />
+            <Route element={<NewGroup2 />} path="/new-group2" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<ViewDashboard />} path="/ViewDashboard/" />
             <Route
