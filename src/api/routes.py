@@ -77,7 +77,7 @@ def create_group():
         return jsonify({"msg": "Name, City, Speed & Distance required"}), 404 
 
     
-    group = Group(name=body["name"], city=body["city"], speed=body["speed"], distance=body["distance"])
+    group = Group(name=body["name"], city=body["city"], speed=body["speed"], distance=body["distance"], routetype=body["routetype"])
 
     # user = User(email=body["email"], password=body["password"], is_active=True)
     db.session.add(group)
@@ -105,8 +105,8 @@ def login():
 
 
     # if email != user.email or password != user.password:
-    if email != user.email or not bcrypt.checkpw(password, user.password):
-        return jsonify({"msg": "datos incorrectos"}), 401 
+    # if email != user.email or not bcrypt.checkpw(password, user.password):
+    #     return jsonify({"msg": "datos incorrectos"}), 401 
     
     # if user and user.password != password:
     #     return jsonify ("datos incorrectos"), 401    
@@ -250,6 +250,7 @@ def group_usernames(groupId):
 ## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
 # revisar y hacer la identificacion con el token
 @api.route('/user/edit', methods=['PUT'])
+@jwt_required()
 def edit_user():
     body = json.loads(request.data)
 
@@ -269,7 +270,10 @@ def edit_user():
     #     return jsonify("msg: Email ya registrado"), 404
     # esta parte la hemos quitado porque no vamos a cambiar mail por seguridad
 
-    user = User.query.filter_by(email=email).first()
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+
+    # user = User.query.filter_by(email=email).first()
 
     if not user :
         return jsonify("msg: Email incorrecto"), 404
@@ -391,33 +395,52 @@ def delete_comment(commentId):
 
 
 
-#recuperar comentarios de un grupo
-# Da el id de user que ha hecho el comentario
-# necesitariamos también el nombre para mostrarlo en infogrupos
+#recuperar comentarios de un grupo. Ya devuelve los nombres del user que publica comentario también
 @api.route('/get_comment/<int:groupId>', methods=['GET'])
 def group_comments(groupId):
     
-    current_group = Group.query.get(groupId)
+    # current_group = Group.query.get(groupId)
 
-    if not current_group:
-        return jsonify("msg: Error. Grupo no encontrado"), 404
+    comment = Comment.query.filter_by(group_id=groupId).all()
+    # print (comment)
 
+    # EL ** sirve para unir los 2 objetos
+    comentarios = list(map(lambda item: {** item.serialize(), **item.serialize2()}, comment))
+    # print (comentarios)
+
+    if comentarios == []:
+       return jsonify("msg: no hay mensajes"), 400
+
+    return jsonify(comentarios), 200
+
+    # if not current_group:
+    #     return jsonify("msg: Error. Grupo no encontrado"), 404
+
+    # group_comments = current_group.comments
+    # ids = list(map(lambda item: item.user_id, group_comments))
+    # # print (id)
+
+    # namelist = list(map(lambda item: User.query.get(item), id))
+    # names = list(map(lambda item: item.name, namelist))
     
-    group_comments = current_group.comments
-    comments = []
-    # mail = []
-
-    # for item in group_comments:
-    #     mail += User.query.filter_by(id=item.user_id)
-
-    # mail = list(map(lambda item: User.query.filter_by(id=item.user_id).first(), group_comments))
+    # print (names)
+    # # comments2 = []
+    # # for name in names:
+    # #     comments2 += [{"username":name}]
     
+    # comments = []
+
+    # map(lambda item, name: item.name=name, ids, names)
     
-    for comment in group_comments : 
-        comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id, "datetime":comment.date }]
+    # for comment in group_comments : 
+    #     for name in names:
+            
+    #         comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id,"user.name":name , "datetime":comment.date}]
    
-    return jsonify(comments), 200
+    # if comments == []:
+    #     return jsonify("msg: no hay mensajes"), 400
 
+    # return jsonify(comments), 200
 
 
 #recuperar grupos de un user

@@ -61,6 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       profile: {},
+      edit: {},
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -216,17 +217,16 @@ const getState = ({ getStore, getActions, setStore }) => {
               distance: values.groupDistance,
               speed: values.groupSpeed,
             }),
-            // falta añadir el routetype, que ahora mismo no está en la ruta
           };
           fetch(process.env.BACKEND_URL + "/api/new_group", newGroup).then(
             (response) => {
               if (response.ok) {
-                response.json().then((response) => {
-                  console.log(response);
-                  alert("Group created succesfully!");
-                });
-
-                return true;
+                {
+                  response.json().then((response) => {
+                    console.log(response);
+                    alert("Group created succesfully!");
+                  });
+                }
               } else {
                 //lo que ocurre cuando la respuesta del endpoint no es OK
                 {
@@ -240,7 +240,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      //fetch para traer info usuario para editar perfil
+      //fetch GET para traer info usuario para editar perfil
 
       userInfo: () => {
         const accesToken = localStorage.getItem("token");
@@ -260,6 +260,29 @@ const getState = ({ getStore, getActions, setStore }) => {
             // localStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
             console.log(getStore().profile);
+          });
+      },
+
+      //Fetch PUT para actualizar datos de perfil
+
+      userUpdate: (user) => {
+        const accesToken = localStorage.getItem("token");
+        console.log(accesToken);
+        fetch(process.env.BACKEND_URL + "/api/user/edit", {
+          method: "PUT",
+
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accesToken,
+          },
+          body: JSON.stringify(user),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              edit: data,
+            });
+            console.log(getStore().edit);
           });
       },
     },
