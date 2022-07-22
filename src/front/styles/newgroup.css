@@ -2,3 +2,25 @@ input.input-error,
 select.input-error {
     border-color: red;
 }
+
+.group-box {
+    transform: translateY(-10%);
+}
+
+.newgroup-shadow {
+    -webkit-box-shadow: 0px 8px 20px rgb(0 0 0 / 6%);
+    box-shadow: 0px 8px 20pxrgba (0, 0, 0, 0.06);
+}
+
+/* input {
+    text-align: center;
+} */
+
+.display-newgroupsuccess {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 25%;
+    width: 750px;
+    height: 10rem;
+}
