@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const ProfileSettings = () => {
   const { store, actions } = useContext(Context);
+  const [user, setUser] = useState({});
   useEffect(() => {
     actions.userInfo();
   }, []);
@@ -41,12 +42,15 @@ export const ProfileSettings = () => {
 
             <form className="form-horizontal" role="form">
               <div className="form-group">
-                <label className="col-lg-3 control-label">Name:</label>
+                <label className="col-lg-3 control-label">UserName:</label>
                 <div className="col-lg-8">
                   <input
                     className="form-control"
                     type="text"
                     defaultValue={store.profile.name}
+                    onChange={(e) => {
+                      setUser({ ...user, name: e.target.value });
+                    }}
                   />
                 </div>
               </div>
@@ -63,23 +67,15 @@ export const ProfileSettings = () => {
               </div>
 
               <div className="form-group">
-                <label className="col-md-3 control-label">Username:</label>
-                <div className="col-md-8">
-                  <input
-                    className="form-control"
-                    type="text"
-                    defaultValue={store.profile.username}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
                 <label className="col-md-3 control-label">Speed:</label>
                 <div className="col-md-8">
                   <input
                     className="form-control"
                     type="text"
                     defaultValue={store.profile.speed}
+                    onChange={(e) => {
+                      setUser({ ...user, speed: e.target.value });
+                    }}
                   />
                 </div>
               </div>
@@ -91,6 +87,9 @@ export const ProfileSettings = () => {
                     className="form-control"
                     type="text"
                     defaultValue={store.profile.city}
+                    onChange={(e) => {
+                      setUser({ ...user, city: e.target.value });
+                    }}
                   />
                 </div>
               </div>
@@ -102,6 +101,9 @@ export const ProfileSettings = () => {
                     className="form-control"
                     type="text"
                     defaultValue={store.profile.bikeModel}
+                    onChange={(e) => {
+                      setUser({ ...user, bikemodel: e.target.value });
+                    }}
                   />
                 </div>
               </div>
@@ -113,6 +115,9 @@ export const ProfileSettings = () => {
                     className="form-control"
                     type="text"
                     defaultValue={store.profile.routetype}
+                    onChange={(e) => {
+                      setUser({ ...user, routetype: e.target.value });
+                    }}
                   />
                 </div>
               </div>
@@ -124,6 +129,9 @@ export const ProfileSettings = () => {
                     className="form-control"
                     type="text"
                     defaultValue={store.profile.distance}
+                    onChange={(e) => {
+                      setUser({ ...user, distance: e.target.value });
+                    }}
                   />
                 </div>
               </div>
@@ -131,11 +139,16 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-md-3 control-label"></label>
                 <div className="col-md-8">
-                  <input
+                  <button
                     type="button"
                     className="btn btn-primary"
-                    value="Save Changes"
-                  />
+                    onClick={() => {
+                      actions.userUpdate(user);
+                      console.log(user);
+                    }}
+                  >
+                    Save Changes
+                  </button>
                   <span></span>
                   <input
                     type="reset"

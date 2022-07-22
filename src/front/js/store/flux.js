@@ -265,24 +265,26 @@ const getState = ({
 
             //Fetch PUT para actualizar datos de perfil
 
-            // userUpdate: () => {
-            //     const accesToken = localStorage.getItem("token");
-            //     console.log(accesToken);
-            //     fetch(process.env.BACKEND_URL + "/user/edit", {
-            //             method: "PUT",
-            //             headers: {
-            //                 "Content-Type": "application/json",
-            //                 Authorization: "Bearer " + accesToken,
-            //             },
-            //         })
-            //         .then((response) => response.json())
-            //         .then((data) => {
-            //             setStore({
-            //                 edit: data,
-            //             });
-            //             console.log(getStore().edit);
-            //         });
-            // },
+            userUpdate: (user) => {
+                const accesToken = localStorage.getItem("token");
+                console.log(accesToken);
+                fetch(process.env.BACKEND_URL + "/api/user/edit", {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: "Bearer " + accesToken,
+                        },
+                        body: JSON.stringify(user),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        setStore({
+                            edit: data,
+                        });
+                        console.log(getStore().edit);
+                    });
+            },
         },
     };
 };
