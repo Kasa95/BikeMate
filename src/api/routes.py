@@ -77,7 +77,7 @@ def create_group():
         return jsonify({"msg": "Name, City, Speed & Distance required"}), 404 
 
     
-    group = Group(name=body["name"], city=body["city"], speed=body["speed"], distance=body["distance"])
+    group = Group(name=body["name"], city=body["city"], speed=body["speed"], distance=body["distance"], routetype=body["routetype"])
 
     # user = User(email=body["email"], password=body["password"], is_active=True)
     db.session.add(group)
@@ -395,44 +395,48 @@ def delete_comment(commentId):
 @api.route('/get_comment/<int:groupId>', methods=['GET'])
 def group_comments(groupId):
     
-    # Busco el grupo por el parametro que me da el front
-    current_group = Group.query.get(groupId)
+    # current_group = Group.query.get(groupId)
 
-    #Si el grupo no existe, devuelve error
-    if not current_group:
-        return jsonify("msg: Error. Grupo no encontrado"), 404
+    comment = Comment.query.filter_by(group_id=groupId).all()
+    # print (comment)
 
-    # Saco los comentarios del grupo, seleccionando .comments
-    group_comments = current_group.comments
-    # Saco las ids de los users de los comentarios del grupo con este map
-    id = list(map(lambda item: item.user_id, group_comments))
-    # print (id)
+    # EL ** sirve para unir los 2 objetos
+    comentarios = list(map(lambda item: {** item.serialize(), **item.serialize2()}, comment))
+    # print (comentarios)
 
-    # Con esta funcion, que itero tantas veces como ids haya, devuelvo los users (su mail que es lo que los identifica)
-    def get_by_id(id):
-        for i in id:
-            users = User.query.get(i)
-            return (users)
-    # llamo a la funcion y la guardo en la variable namelist
-    namelist =[get_by_id(id)]
-    # mapeo namelist para que a partir del user (mail) , me de el nombre de cada usuario que ha publicado comentarios en ese grupo
-    names = list(map(lambda item: item.name, namelist))
-    # print (names)
+    if comentarios == []:
+       return jsonify("msg: no hay mensajes"), 400
 
-    comments = []
+    return jsonify(comentarios), 200
+
+    # if not current_group:
+    #     return jsonify("msg: Error. Grupo no encontrado"), 404
+
+    # group_comments = current_group.comments
+    # ids = list(map(lambda item: item.user_id, group_comments))
+    # # print (id)
+
+    # namelist = list(map(lambda item: User.query.get(item), id))
+    # names = list(map(lambda item: item.name, namelist))
     
-    # hago for de cada comentario en el listado de comentarios del grupo que preparé en la linea 406 (18 ineas arriba)
-    # despues hago for de names para que me devuelva uno a uno los nombres del listado de nombres que metí en names
-    # finalmente name lo meto como username en el for que recorre todos los comentarios y que me devuelve el array de objetos
-    for comment in group_comments : 
-        for name in names:
-            name
-            comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id,"user.name":name , "datetime":comment.date}]
-   
-    if comments == []:
-        return jsonify("msg: no hay mensajes"), 400
+    # print (names)
+    # # comments2 = []
+    # # for name in names:
+    # #     comments2 += [{"username":name}]
+    
+    # comments = []
 
-    return jsonify(comments), 200
+    # map(lambda item, name: item.name=name, ids, names)
+    
+    # for comment in group_comments : 
+    #     for name in names:
+            
+    #         comments += [{"text":comment.text , "id":comment.id ,"user.id":comment.user_id,"user.name":name , "datetime":comment.date}]
+   
+    # if comments == []:
+    #     return jsonify("msg: no hay mensajes"), 400
+
+    # return jsonify(comments), 200
 
 
 #recuperar grupos de un user

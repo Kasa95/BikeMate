@@ -86,5 +86,12 @@ class Comment(db.Model):
             "id": self.id,
             "text": self.text,
             "date": self.date,
+            "user_id": self.user_id
             
+        }
+
+    def serialize2(self):
+        commentuser=User.query.filter_by(id=self.user_id).first()
+        return {
+            "username_comment": commentuser.name
         }
