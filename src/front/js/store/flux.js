@@ -28,36 +28,18 @@ const getState = ({ getStore, getActions, setStore }) => {
           city: "null",
           speed: "null",
           distance: "null",
+          id: "null",
+          routetype: "null",
         },
+      ],
+      mygroupsInfo: [
         {
           name: "null",
           city: "null",
           speed: "null",
           distance: "null",
-        },
-        {
-          name: "null",
-          city: "null",
-          speed: "null",
-          distance: "null",
-        },
-        {
-          name: "null",
-          city: "null",
-          speed: "null",
-          distance: "null",
-        },
-        {
-          name: "null",
-          city: "null",
-          speed: "null",
-          distance: "null",
-        },
-        {
-          name: "null",
-          city: "null",
-          speed: "null",
-          distance: "null",
+          id: "null",
+          routetype: "null",
         },
       ],
       profile: {},
@@ -67,72 +49,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
-      },
-
-      //Fetch para traer info grupos
-      groupInfo: () => {
-        fetch(process.env.BACKEND_URL + "/api/dashboard_info")
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({
-              groupDetails: data,
-            });
-            // localStorage.setItem("groupName", data.name);
-            // .catch((err) => console.error(err));
-            console.log(getStore.groupDetails);
-          });
-      },
-
-      getUserList: () => {
-        fetch(process.env.BACKEND_URL + "/api/all_users")
-          .then((response) => response.json())
-          .then((data) => {
-            setStore({
-              userList: data,
-            });
-            // localStorage.setItem("groupName", data.name);
-            // .catch((err) => console.error(err));
-          });
-      },
-
-      registerUser: (values) => {
-        try {
-          const newUser = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: values.email,
-              password: values.password,
-              name: values.name,
-            }),
-          };
-          fetch(process.env.BACKEND_URL + "/api/register", newUser).then(
-            (response) => {
-              if (response.ok) {
-                {
-                  response.json().then((response) => {
-                    localStorage.setItem("token", response.access_token);
-                    localStorage.setItem("auth", true);
-                    localStorage.setItem("name", values.name);
-                  });
-                  setStore({
-                    auth: true,
-                  });
-                  console.log(getStore().auth);
-                }
-              } else {
-                //lo que ocurre cuando la respuesta del endpoint no es OK
-                {
-                  alert("Parece que ese usuario ya existe"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-                }
-              }
-            }
-          );
-        } catch (error) {
-          console.log("There is an error with the server", error);
-        }
       },
 
       loginUser: (values) => {
@@ -230,7 +146,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             return response.ok;
           } else {
-            alert("The group could not be created");
+            alert("Seems like this group already exists!");
           }
           // .then(
           //   (response) => {
@@ -254,42 +170,92 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      // createGroup: (values) => {
-      //   try {
-      //     const newGroup = {
-      //       method: "POST",
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //       },
-      //       body: JSON.stringify({
-      //         name: values.groupName,
-      //         city: values.groupCity,
-      //         distance: values.groupDistance,
-      //         speed: values.groupSpeed,
-      //         routetype: values.groupRoutetype,
-      //       }),
-      //     };
-      //     fetch(process.env.BACKEND_URL + "/api/new_group", newGroup).then(
-      //       (response) => {
-      //         if (response.ok) {
-      //           {
-      //             response.json().then((response) => {
-      //               console.log(response);
-      //               alert("Group created succesfully!");
-      //             });
-      //           }
-      //         } else {
-      //           //lo que ocurre cuando la respuesta del endpoint no es OK
-      //           {
-      //             alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-      //           }
-      //         }
-      //       }
-      //     );
-      //   } catch (error) {
-      //     console.log("There is an error with the server", error);
-      //   }
-      // },
+      //fetch GET para traer info usuario para editar perfil
+      //Fetch para traer info grupos
+      groupInfo: () => {
+        fetch(process.env.BACKEND_URL + "/api/dashboard_info")
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              groupInfo: data,
+            });
+            // localStorage.setItem("groupName", data.name);
+            // .catch((err) => console.error(err));
+          });
+      },
+
+      //Fetch para traer info grupos a los que pertenezco
+      mygroupsInfo: () => {
+        const accesToken = localStorage.getItem("token");
+        fetch(process.env.BACKEND_URL + "/api/get_usergroups", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accesToken,
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              mygroupsInfo: data,
+            });
+            // localStorage.setItem("groupName", data.name);
+            console.log(getStore().mygroupsInfo);
+            // .catch((err) => console.error(err));
+          });
+      },
+
+      getUserList: () => {
+        fetch(process.env.BACKEND_URL + "/api/all_users")
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              userList: data,
+            });
+            // localStorage.setItem("groupName", data.name);
+            // .catch((err) => console.error(err));
+          });
+      },
+
+      registerUser: (values) => {
+        try {
+          const newUser = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: values.email,
+              password: values.password,
+              name: values.name,
+            }),
+          };
+          fetch(process.env.BACKEND_URL + "/api/register", newUser).then(
+            (response) => {
+              if (response.ok) {
+                {
+                  response.json().then((response) => {
+                    localStorage.setItem("token", response.access_token);
+                    localStorage.setItem("auth", true);
+                    localStorage.setItem("name", values.name);
+                  });
+                  setStore({
+                    auth: true,
+                  });
+                  console.log(getStore().auth);
+                }
+              } else {
+                //lo que ocurre cuando la respuesta del endpoint no es OK
+                {
+                  alert("Parece que ese usuario ya existe"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
+                }
+              }
+            }
+          );
+        } catch (error) {
+          console.log("There is an error with the server", error);
+        }
+      },
 
       //fetch GET para traer info usuario para editar perfil
 

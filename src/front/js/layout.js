@@ -13,6 +13,7 @@ import { ViewDashboard } from "./pages/ViewDashboard.jsx";
 import { NewGroup } from "./pages/NewGroup.jsx";
 import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
 import { ViewProfileSettings } from "./pages/ViewProfileSettings.jsx";
+import { ViewComments } from "./pages/ViewComments.jsx";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -39,6 +40,7 @@ const Layout = () => {
             <Route element={<NewGroup />} path="/new-group" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<ViewDashboard />} path="/ViewDashboard/" />
+            <Route element={<ViewComments />} path="/ViewComments" />
             <Route
               element={<ViewProfileSettings />}
               path="/ViewProfileSettings/"
