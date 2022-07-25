@@ -204,7 +204,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
       },
 
-      createGroup: (values) => {
+      createGroup: async (values) => {
         try {
           const newGroup = {
             method: "POST",
@@ -216,29 +216,80 @@ const getState = ({ getStore, getActions, setStore }) => {
               city: values.groupCity,
               distance: values.groupDistance,
               speed: values.groupSpeed,
+              routetype: values.groupRoutetype,
             }),
+            // falta añadir el routetype, que ahora mismo no está en la ruta
           };
-          fetch(process.env.BACKEND_URL + "/api/new_group", newGroup).then(
-            (response) => {
-              if (response.ok) {
-                {
-                  response.json().then((response) => {
-                    console.log(response);
-                    alert("Group created succesfully!");
-                  });
-                }
-              } else {
-                //lo que ocurre cuando la respuesta del endpoint no es OK
-                {
-                  alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-                }
-              }
-            }
+
+          // fetch(process.env.BACKEND_URL + "/api/new_group", newGroup)
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/new_group",
+            newGroup
           );
+          const data = await response.json();
+          if (response.ok) {
+            return response.ok;
+          } else {
+            alert("The group could not be created");
+          }
+          // .then(
+          //   (response) => {
+          //     if (response.ok) {
+          //       response.json().then((response) => {
+          //         console.log(response);
+          //         alert("Group created succesfully!");
+          //       });
+
+          //       return response.ok;
+          //     } else {
+          //       //lo que ocurre cuando la respuesta del endpoint no es OK
+          //       {
+          //         alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
+          //       }
+          //     }
+          //   }
+          // );
         } catch (error) {
           console.log("There is an error with the server", error);
         }
       },
+
+      // createGroup: (values) => {
+      //   try {
+      //     const newGroup = {
+      //       method: "POST",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //       body: JSON.stringify({
+      //         name: values.groupName,
+      //         city: values.groupCity,
+      //         distance: values.groupDistance,
+      //         speed: values.groupSpeed,
+      //         routetype: values.groupRoutetype,
+      //       }),
+      //     };
+      //     fetch(process.env.BACKEND_URL + "/api/new_group", newGroup).then(
+      //       (response) => {
+      //         if (response.ok) {
+      //           {
+      //             response.json().then((response) => {
+      //               console.log(response);
+      //               alert("Group created succesfully!");
+      //             });
+      //           }
+      //         } else {
+      //           //lo que ocurre cuando la respuesta del endpoint no es OK
+      //           {
+      //             alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
+      //           }
+      //         }
+      //       }
+      //     );
+      //   } catch (error) {
+      //     console.log("There is an error with the server", error);
+      //   }
+      // },
 
       //fetch GET para traer info usuario para editar perfil
 
