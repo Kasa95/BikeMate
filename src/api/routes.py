@@ -444,7 +444,7 @@ def group_comments(groupId):
 
 
 #recuperar grupos de un user
-@api.route('/get_usergroups/', methods=['GET'])
+@api.route('/get_usergroups', methods=['GET'])
 @jwt_required()
 def usergroups():
     userEmail = get_jwt_identity()

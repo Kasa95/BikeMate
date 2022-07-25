@@ -46,7 +46,7 @@
 
 @media (min-width: 600px) {
     .dashboard_page_card {
-        height: 350px;
+        height: 380px;
     }
 }
 
@@ -233,16 +233,22 @@
     }
 }
 
-.dashboard_container_profilecard {
+/* .dashboard_container_profilecard {
     margin-top: 100px;
     margin-left: 90px;
-    width: 120%;
-    height: 150%;
-}
+    width: 100%;
+    height: 300%;
+} */
 
-.dashboard_container_marketing {
+/* .dashboard_container_marketing {
     margin-top: 100px;
     margin-left: 50px;
     width: 120%;
     height: 150%;
+} */
+
+@media (min-width: 600px) {
+    .dashboard_container_profilecard {
+        height: 470px;
+    }
 }
