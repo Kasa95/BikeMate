@@ -34,7 +34,7 @@ export const NewGroup = () => {
   return localStorage.getItem("auth") == "true" ? (
     <>
       {" "}
-      {displaySuccess === undefined ? <NewGroupSuccess /> : ""}
+      {displaySuccess === true ? <NewGroupSuccess /> : ""}
       <div className="container-fluid text-center orange-searchman-background">
         <img
           src="https://i.ibb.co/WfrBPM7/BIEKRS3.png"
@@ -54,9 +54,10 @@ export const NewGroup = () => {
           <div className="col-11 col-md-9 col-lg-8 col-xl-8">
             <div className="card rounded-3 newgroup-shadow">
               <div className="card-body py-4 px-5 text-center">
-                {/* <h1 className="mb-5"> Create New Group </h1> */}
-
-                <form onSubmit={handleSubmit}>
+                <form
+                  onSubmit={handleSubmit}
+                  className={displaySuccess === true ? "transparent-form" : ""}
+                >
                   <div className="row mt-2">
                     <div className="form-outline mb-4 col-6">
                       {errors.groupName && touched.groupName ? (
@@ -184,7 +185,7 @@ export const NewGroup = () => {
                       aria-labelledby="my-radio-group"
                       className=""
                     >
-                      <div className="form-check-inline d-flex flex-row justify-content-center">
+                      <div className="form-check-inline d-flex flex-row justify-content-center py-2">
                         <input
                           id="Road"
                           name="groupRoutetype"
@@ -193,9 +194,9 @@ export const NewGroup = () => {
                           value="Road"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          className="form-check-input mx-1"
+                          className="form-check-input me-2"
                         />
-                        <label htmlFor="Road" className="form-check-label me-3">
+                        <label htmlFor="Road" className="form-check-label me-4">
                           Road
                         </label>
 
@@ -207,9 +208,9 @@ export const NewGroup = () => {
                           value="Mountain Bike"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          className="form-check-input mx-1"
+                          className="form-check-input me-2"
                         />
-                        <label htmlFor="MTB" className="form-check-label me-3">
+                        <label htmlFor="MTB" className="form-check-label me-4">
                           Mountain Bike
                         </label>
                         <input
@@ -220,11 +221,11 @@ export const NewGroup = () => {
                           value="Mixed"
                           onBlur={handleBlur}
                           onChange={handleChange}
-                          className="form-check-input mx-1"
+                          className="form-check-input me-2"
                         />
                         <label
                           htmlFor="Mixed"
-                          className="form-check-label me-3"
+                          className="form-check-label me-4"
                         >
                           Mixed
                         </label>
@@ -252,16 +253,13 @@ export const NewGroup = () => {
                   touched.groupDistance === true &&
                   touched.groupSpeed === true &&
                   Object.keys(errors).length === 0 ? (
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-lg btn-block mt-1"
-                    >
+                    <button type="submit" className="submitbutton mt-1">
                       <b>CREATE GROUP</b>
                     </button>
                   ) : (
                     <button
                       type="submit"
-                      className="btn btn-primary btn-lg btn-block mt-1"
+                      className="submitbutton mt-1"
                       disabled
                     >
                       <b>CREATE GROUP</b>

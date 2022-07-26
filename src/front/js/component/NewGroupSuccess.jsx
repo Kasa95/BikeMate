@@ -1,16 +1,42 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const NewGroupSuccess = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
 
   return (
-    <div className="card display-newgroupsuccess">
-      <h1>New group created!</h1>
-      <div className="row col-6">
-        <button className="col-6 btn btn-secondary">Back to Dashboard</button>
-        <button className="col-6 btn btn-primary">Visit my new group!</button>
+    <div
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div className="container-fluid display-newgroupsuccess d-flex justify-content-center">
+        <div className="cookiesContent" id="cookiesPopup">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5716/5716716.png"
+            alt="cookies-img"
+          />
+          <p>Group created successfully!</p>
+          <div className="d-flex justify-content-evenly">
+            <button
+              className="viewgroup"
+              // onClick={() => navigate("/ViewDashboard/" + { groupID })}
+            >
+              View Group
+            </button>
+            <button
+              className="backtodash"
+              onClick={() => navigate("/ViewDashboard")}
+            >
+              Back to Dashboard
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bmLogoOrange from "../../img/bmLogoOrange.png";
 import bmLogoWhite from "../../img/bmLogoWhite.png";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+  const navigate = useNavigate();
+
   return (
     <nav className="p-3 bg-white text-white navbar-static-top">
       {store.auth === true || localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
@@ -79,6 +81,7 @@ export const Navbar = () => {
                       href="#"
                       onClick={() => {
                         actions.logout();
+                        navigate("/");
                       }}
                     >
                       Log Out
