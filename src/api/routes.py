@@ -11,9 +11,11 @@ from bcrypt import hashpw
 import datetime
 from sqlalchemy import Column, DateTime, ForeignKey
 import datetime
+from flask_mail import Mail, Message
+
 # para instalar paquete de bcrypt, para pass encriptado, instalar:
 # pipenv install py-bcrypt
-# pipenv install flask-jwt-extended
+# pipenv install Flask-Mail
 
 api = Blueprint('api', __name__)
 
@@ -37,7 +39,7 @@ def protected():
         return jsonify(user.serialize()) , 200
 
 
-#crear usuario
+#crear usuario (modificado, ahora manda mail bienvenida cuando se registra)
 @api.route("/register", methods=["POST"])
 def create_user():
     body = json.loads(request.data)
@@ -55,6 +57,19 @@ def create_user():
     # user = User(email=body["email"], password=body["password"], is_active=True)
     db.session.add(user)
     db.session.commit()
+
+    # inicio mail de bienvenida
+    with current_app.app_context():
+        mail = Mail() 
+    
+        msg = Message("Welcome to BikeMate",
+                  sender="bikemateapp@gmail.com",
+                  recipients=[user.name])
+        msg.body = "Hello " + (user.name) + ", welcome to BikeMate !"
+
+
+        mail.send(msg)
+    # final mail de bienvenida
 
     response_body={
         "msg": "usuario creado"
