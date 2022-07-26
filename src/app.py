@@ -14,6 +14,8 @@ from api.commands import setup_commands
 import bcrypt
 from bcrypt import hashpw
 from flask_jwt_extended import JWTManager #falta esto
+from flask_mail import Mail, Message
+
 
 #from models import Person
 
@@ -37,6 +39,30 @@ db.init_app(app)
 CORS(app)
 
 jwt = JWTManager(app) # Y esto
+
+
+# mailtrap mail
+mail_settings={
+    'MAIL_SERVER':'smtp.mailtrap.io',
+    'MAIL_PORT' : 2525,
+    'MAIL_USERNAME' : '9c12102bb0e40d',
+    'MAIL_PASSWORD' : 'dea4b4ab177f6d',
+    'MAIL_USE_TLS' : True,
+    'MAIL_USE_SSL': False
+}
+
+# google mail , no funciona
+# mail_settings={
+#     'MAIL_SERVER':'smtp.gmail.com',
+#     'MAIL_PORT' : 587,
+#     'MAIL_USERNAME' : 'bikemateapp@gmail.com',
+#     'MAIL_PASSWORD' : 'udlpdskhzoqjiqwk',
+#     'MAIL_USE_TLS' : True,
+# }
+
+app.config.update(mail_settings)
+mail = Mail(app)
+app.mail = mail
 
 
 # add the admin
