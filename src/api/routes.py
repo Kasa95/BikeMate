@@ -50,11 +50,16 @@ def create_user():
     if not body["email"] or not body["password"] or not body["name"]:
         return jsonify({"msg": "Datos incorrectos"}), 404 
 
+  
     hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
-    user = User(email=body["email"], password=hashed, name=body["name"])
-    
 
+    # Incluir cuando hagamos cambio en el front, porque sino, va a esperar el dato y va a dar error:
+    # user = User(email=body["email"], password=hashed, name=body["name"] , city=body["city"] , bikemodel=body["bikemodel"] , routetype=body["routetype"], speed=body["speed"], distance=body["distance"])
+            
+    user = User(email=body["email"], password=hashed, name=body["name"]) 
+    # user = User.query.filter_by(email=email).first()
     # user = User(email=body["email"], password=body["password"], is_active=True)
+
     db.session.add(user)
     db.session.commit()
 
@@ -64,21 +69,21 @@ def create_user():
     
         msg = Message("Welcome to BikeMate",
                   sender="bikemateapp@gmail.com",
-                  recipients=[user.name])
+                  recipients=[user.email])
         msg.body = "Hello " + (user.name) + ", welcome to BikeMate !"
-
+        msg.html = "<h1>Hello " + (user.name) + ". Welcome to <strong>BikeMate!</strong></h1> <br> <p>Any question? mail us at: <strong>bikemateapp@gmail.com</strong></p>"
 
         mail.send(msg)
     # final mail de bienvenida
 
     response_body={
-        "msg": "usuario creado"
-    }
-    # return jsonify(response_body), 200
+            "msg": "usuario creado"
+        }
+        # return jsonify(response_body), 200
     access_token = create_access_token(identity=body["email"], expires_delta=datetime.timedelta(minutes=60))
     return jsonify(access_token=access_token), 200   
 
-
+   
 
 #crear grupo
 @api.route("/new_group", methods=["POST"])
@@ -342,7 +347,7 @@ def add_to_group(groupId):
 
 # endpoint salirse de un grupo
 # como parametro entra el grupo. El user lo coge con el token
-@api.route("/leave_group/<int:groupId>" , methods=['POST'])
+@api.route("/leave_group/<int:groupId>" , methods=['DELETE'])
 @jwt_required()
 def leave_group(groupId):
     userEmail = get_jwt_identity()
@@ -376,8 +381,6 @@ def create_comment(groupId):
     user = User.query.filter_by(email=userEmail).first()
     group = Group.query.get(groupId)
 
-    # if Group.query.filter_by(name=body["name"]).first():
-    #     return jsonify({"msg": "Grupo ya existente"}), 401 
 
     if not body["text"]:
         return jsonify({"msg": "Formato erroneo"}), 404 
