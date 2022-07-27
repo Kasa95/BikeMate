@@ -10,7 +10,7 @@ import { NewGroupSuccess } from "../component/NewGroupSuccess.jsx";
 
 export const NewGroup = () => {
   const { store, actions } = useContext(Context);
-  const [displaySuccess, setDisplaySuccess] = useState(null);
+  const [newGroupId, setNewGroupId] = useState(null); // se usa para conseguir el ID del nuevo grupo creado y para mostrar el modal
   const { values, handleBlur, errors, handleChange, handleSubmit, touched } =
     useFormik({
       initialValues: {
@@ -22,19 +22,15 @@ export const NewGroup = () => {
       },
       validationSchema: newGroupSchema,
       onSubmit: async (values) => {
-        let response = await actions.createGroup(values);
-        setDisplaySuccess(response);
+        const response = await actions.createGroup(values);
+        setNewGroupId(response.id);
       },
     });
-  // console.log(touched);
-  // console.log(errors);
-  // console.log(values);
-  console.log(displaySuccess);
 
   return localStorage.getItem("auth") == "true" ? (
     <>
       {" "}
-      {displaySuccess === true ? <NewGroupSuccess /> : ""}
+      {newGroupId >= 1 ? <NewGroupSuccess groupId={newGroupId} /> : ""}
       <div className="container-fluid text-center orange-searchman-background">
         <img
           src="https://i.ibb.co/WfrBPM7/BIEKRS3.png"
@@ -56,7 +52,7 @@ export const NewGroup = () => {
               <div className="card-body py-4 px-5 text-center">
                 <form
                   onSubmit={handleSubmit}
-                  className={displaySuccess === true ? "transparent-form" : ""}
+                  className={newGroupId >= 1 ? "transparent-form" : ""}
                 >
                   <div className="row mt-2">
                     <div className="form-outline mb-4 col-6">

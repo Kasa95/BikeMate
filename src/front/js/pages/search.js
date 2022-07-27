@@ -14,7 +14,11 @@ export const Search = () => {
 
   useEffect(() => {
     actions.getUserList();
+    actions.groupInfo();
+    actions.mygroupsInfo();
   }, []);
+
+  console.log(store.groupInfo);
 
   //     set search query to empty string
   const [q, setQ] = useState("");
@@ -140,9 +144,9 @@ export const Search = () => {
           </div>
         </div>
         {/* busqueda acaba aquí */}
-        <div className="row pt-2  justify-content-center">
+        <div className="row justify-content-center">
           {/* resultados de la busqueda */}
-          <div className="col-10">
+          <div className="search-results-container">
             {searchType === "user" ? (
               <>
                 {q.length >= 1 && searchUser(store.userList).length == 0 ? (
@@ -179,8 +183,7 @@ export const Search = () => {
               </>
             ) : (
               <>
-                {q.length >= 1 &&
-                searchGroup(store.groupDetails).length == 0 ? (
+                {q.length >= 1 && searchGroup(store.groupInfo).length == 0 ? (
                   <p className="text-center"> No results for your query! </p>
                 ) : (
                   <> </>
@@ -198,12 +201,13 @@ export const Search = () => {
                   </>
                 ) : (
                   <>
-                    {searchGroup(store.groupDetails).map((item, index) => (
+                    {searchGroup(store.groupInfo).map((item, index) => (
                       <SearchResult
                         key={index}
                         theName={item.name}
                         id={index + 1}
                         city={item.city}
+                        groupId={item.id}
                         distance={item.distance}
                         speed={item.speed}
                       />

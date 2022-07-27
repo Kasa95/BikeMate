@@ -144,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await response.json();
           if (response.ok) {
-            return response.ok;
+            return data;
           } else {
             alert("Seems like this group already exists!");
           }
@@ -301,6 +301,35 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
             console.log(getStore().edit);
           });
+      },
+      joinGroup: async (groupid) => {
+        try {
+          const accessToken = localStorage.getItem("token");
+          const joinGroup = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + accessToken,
+            },
+            body: JSON.stringify({
+              groupId: groupid,
+            }),
+          };
+          const response = await fetch(
+            process.env.BACKEND_URL + `/api/add_group/${groupid}`,
+            joinGroup
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            return true;
+          } else {
+            alert("Not able to join group");
+          }
+        } catch (error) {
+          console.log("There is an error with the server", error);
+        }
       },
     },
   };

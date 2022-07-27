@@ -29,10 +29,7 @@
     color: grey;
 }
 
-.search-result {
-    transition: opacity 0.5s;
-    opacity: 1;
-}
+.search-result {}
 
 .search-header .search-landing-header-container {
     position: relative;
@@ -141,4 +138,103 @@
         height: 72px;
         opacity: 0;
     }
+}
+
+.visitgroup {
+    background-color: #ed6755;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    padding: 12px 3rem;
+    font-size: 14px;
+    color: white;
+    /* box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1); */
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 12px;
+}
+
+.visitgroup:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #ca5748;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.joingroup {
+    background-color: #4a71e8;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    padding: 12px 3rem;
+    font-size: 14px;
+    color: white;
+    /* box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1); */
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 12px;
+}
+
+.joingroup:hover {
+    text-decoration: none;
+    color: white;
+    background-color: #4063ce;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.joinedgroup {
+    background-color: #253461;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+    padding: 12px 3rem;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    /* box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1); */
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 12px;
+    transition: background-color 0.2s ease-in;
+}
+
+.joinedgroup:hover {
+    color: white;
+}
+
+.search-result-card {
+    height: 15rem;
+    transition: opacity 0.5s;
+    opacity: 1;
+    text-align: center !important;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.5rem;
+    margin: 0.4rem;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.search-result-card:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.search-result-title {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 25px;
+}
+
+.search-results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
