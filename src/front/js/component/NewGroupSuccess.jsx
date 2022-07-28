@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const NewGroupSuccess = () => {
+export const NewGroupSuccess = ({ groupId }) => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export const NewGroupSuccess = () => {
           <div className="d-flex justify-content-evenly">
             <button
               className="viewgroup"
-              // onClick={() => navigate("/ViewDashboard/" + { groupID })}
+              onClick={() => navigate(`/ViewDashboard/${groupId}`)}
             >
               View Group
             </button>
