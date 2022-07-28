@@ -40,7 +40,11 @@ const Layout = () => {
             <Route element={<NewGroup />} path="/new-group" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<ViewDashboard />} path="/ViewDashboard/" />
-            <Route element={<ViewComments />} path="/ViewComments" />
+            <Route
+              element={<ViewComments />}
+              exact
+              path="/ViewComments/:group_id"
+            />
             <Route
               element={<ViewProfileSettings />}
               path="/ViewProfileSettings/"
