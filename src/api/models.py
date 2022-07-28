@@ -19,6 +19,7 @@ class User(db.Model):
     routetype = db.Column(db.String(120), unique=False, nullable=True)
     speed = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
     distance = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
+    photo = db.Column(db.String(250), unique=False, nullable=True)
     comments = db.relationship('Comment', backref='user', lazy=True)
     groups = db.relationship('Group', secondary=user_groups, lazy='subquery',
         backref=db.backref('users', lazy=True))
@@ -39,7 +40,8 @@ class User(db.Model):
             "speed": self.speed,
             "distance": self.distance,
             "bikemodel": self.bikemodel,
-            "routetype": self.routetype
+            "routetype": self.routetype,
+            "photo": self.photo
             # do not serialize the password, its a security breach
         }
 
@@ -51,6 +53,7 @@ class Group(db.Model):
     routetype = db.Column(db.String(120), unique=False, nullable=True)
     speed = db.Column(db.Integer, nullable=False) 
     distance = db.Column(db.Integer, nullable=False) #Aqui distancia y velocidad no deberian poder dejarse en blanco porque la idea es que el usuario busque grupos del nivel que quiera
+    photo = db.Column(db.String(250), unique=False, nullable=True)
     comments = db.relationship('Comment', backref='group', lazy=True)
     
 
@@ -64,7 +67,8 @@ class Group(db.Model):
             "city": self.city,
             "speed": self.speed,
             "distance": self.distance,
-            "routetype": self.routetype
+            "routetype": self.routetype,
+            "photo": self.photo
             # do not serialize the password, its a security breach
         }
 

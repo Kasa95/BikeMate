@@ -1,93 +1,115 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const DetailDashboard = () => {
+  const { store, actions } = useContext(Context);
+  const [comment, setComment] = useState("");
+  const { group_id } = useParams();
+
+  useEffect(() => {
+    actions.getComment(group_id);
+  }, []);
+
   return (
     <div className="">
       {/* <!-- Contenedor Principal --> */}
-      <div class="comments-container">
+      <div className="comments-container">
         <h1>
           Comments <a href="http://creaticode.com"></a>
         </h1>
 
-        <ul id="comments-list" class="comments-list">
+        <ul id="comments-list" className="comments-list">
           <li>
-            <div class="comment-main-level">
+            <div className="comment-main-level">
               {/* <!-- Avatar --> */}
-              <div class="comment-avatar">
+              <div className="comment-avatar">
                 <img
                   src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
                   alt=""
                 />
               </div>
               {/* <!-- Contenedor del Comentario --> */}
-              <div class="comment-box">
-                <div class="comment-head">
-                  <h6 class="comment-name by-author">
+              <div className="comment-box">
+                <div className="comment-head">
+                  <h6 className="comment-name by-author">
                     <a href="http://creaticode.com/blog">Agustin Ortiz</a>
                   </h6>
                   <span>hace 20 minutos</span>
-                  <i class="fa fa-reply"></i>
-                  <i class="fa fa-heart"></i>
+                  <i className="fa fa-reply"></i>
+                  <i className="fa fa-heart"></i>
                 </div>
-                <div class="comment-content">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Velit omnis animi et iure laudantium vitae, praesentium optio,
-                  sapiente distinctio illo?
+                <div className="comment-content">
+                  <input
+                    type="text"
+                    value={comment}
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
             </div>
             {/* <!-- Respuestas de los comentarios --> */}
-            <ul class="comments-list reply-list">
+            <ul className="comments-list reply-list">
               <li>
                 {/* <!-- Avatar --> */}
-                <div class="comment-avatar">
+                <div className="comment-avatar">
                   <img
                     src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
                     alt=""
                   />
                 </div>
                 {/* <!-- Contenedor del Comentario --> */}
-                <div class="comment-box">
-                  <div class="comment-head">
-                    <h6 class="comment-name">
+                <div className="comment-box">
+                  <div className="comment-head">
+                    <h6 className="comment-name">
                       <a href="http://creaticode.com/blog">Lorena Rojero</a>
                     </h6>
                     <span>hace 10 minutos</span>
-                    <i class="fa fa-reply"></i>
-                    <i class="fa fa-heart"></i>
+                    <i className="fa fa-reply"></i>
+                    <i className="fa fa-heart"></i>
                   </div>
-                  <div class="comment-content">
+                  <div className="comment-content">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Velit omnis animi et iure laudantium vitae, praesentium
                     optio, sapiente distinctio illo?
+                    <div>
+                      {" "}
+                      {store.comment.map((comment) => {
+                        return <div key={comment.id}> {comment.text} </div>;
+                      })}{" "}
+                    </div>
                   </div>
                 </div>
               </li>
 
               <li>
                 {/* <!-- Avatar --> */}
-                <div class="comment-avatar">
+                <div className="comment-avatar">
                   <img
                     src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
                     alt=""
                   />
                 </div>
                 {/* <!-- Contenedor del Comentario --> */}
-                <div class="comment-box">
-                  <div class="comment-head">
-                    <h6 class="comment-name by-author">
+                <div className="comment-box">
+                  <div className="comment-head">
+                    <h6 className="comment-name by-author">
                       <a href="http://creaticode.com/blog">Agustin Ortiz</a>
                     </h6>
                     <span>hace 10 minutos</span>
-                    <i class="fa fa-reply"></i>
-                    <i class="fa fa-heart"></i>
+                    <i className="fa fa-reply"></i>
+                    <i className="fa fa-heart"></i>
                   </div>
-                  <div class="comment-content">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Velit omnis animi et iure laudantium vitae, praesentium
-                    optio, sapiente distinctio illo?
+                  <div className="comment-content">
+                    <button
+                      onClick={() => {
+                        actions.addComment(group_id, comment);
+                      }}
+                    >
+                      HOLA SOY EL BOTON
+                    </button>
                   </div>
                 </div>
               </li>
@@ -95,25 +117,25 @@ export const DetailDashboard = () => {
           </li>
 
           <li>
-            <div class="comment-main-level">
+            <div className="comment-main-level">
               {/* <!-- Avatar --> */}
-              <div class="comment-avatar">
+              <div className="comment-avatar">
                 <img
                   src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg"
                   alt=""
                 />
               </div>
               {/* <!-- Contenedor del Comentario --> */}
-              <div class="comment-box">
-                <div class="comment-head">
-                  <h6 class="comment-name">
+              <div className="comment-box">
+                <div className="comment-head">
+                  <h6 className="comment-name">
                     <a href="http://creaticode.com/blog">Lorena Rojero</a>
                   </h6>
                   <span>hace 10 minutos</span>
-                  <i class="fa fa-reply"></i>
-                  <i class="fa fa-heart"></i>
+                  <i className="fa fa-reply"></i>
+                  <i className="fa fa-heart"></i>
                 </div>
-                <div class="comment-content">
+                <div className="comment-content">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Velit omnis animi et iure laudantium vitae, praesentium optio,
                   sapiente distinctio illo?

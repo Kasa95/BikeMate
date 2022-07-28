@@ -2,8 +2,9 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { DetailsGroup } from "../component/DetailsGroup.jsx";
-import { DetailDashboard } from "../component/DetailDashboard.jsx";
+// import { DetailDashboard } from "../component/DetailDashboard.jsx";
 import { RouteTracking } from "../component/RouteTracking.jsx";
+import Commentsection from "../component/Comentsection.jsx";
 import "../../styles/cards.css";
 
 export const ViewComments = () => {
@@ -18,7 +19,8 @@ export const ViewComments = () => {
         </div>
         <div className="col-8">
           <div className="row">
-            <DetailDashboard />
+            {/* <DetailDashboard /> */}
+            <Commentsection />
           </div>
         </div>
       </div>

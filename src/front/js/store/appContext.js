@@ -33,6 +33,7 @@ const injectContext = (PassedComponent) => {
       state.actions.getMessage(); // <---- calling this function from the flux.js actions
       state.actions.groupInfo();
       state.actions.userInfo();
+      state.actions.mygroupsInfo();
       // state.actions.userUpdate();
     }, []);
 

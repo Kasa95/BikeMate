@@ -44,6 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       profile: {},
       edit: {},
+      comment: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -62,22 +63,28 @@ const getState = ({ getStore, getActions, setStore }) => {
             password: values.password,
           }),
         };
-        fetch(process.env.BACKEND_URL + "/api/login", logUser)
-          .then((response) => response.json())
-          .then((data) => {
-            // setStore({
-            //   userDetails: data,
-            //   auth: true,
-            // });
-            localStorage.setItem("token", data.access_token);
-            localStorage.setItem("name", data.name);
-            localStorage.setItem("city", data.city);
-            localStorage.setItem("speed", data.speed);
-            localStorage.setItem("auth", true);
-            setStore({
-              auth: true,
-            });
-          });
+        fetch(process.env.BACKEND_URL + "/api/login", logUser).then(
+          (response) => {
+            if (response.ok) {
+              response.json().then((data) => {
+                // setStore({
+                //   userDetails: data,
+                //   auth: true,
+                // });
+                localStorage.setItem("token", data.access_token);
+                localStorage.setItem("name", data.name);
+                localStorage.setItem("city", data.city);
+                localStorage.setItem("speed", data.speed);
+                localStorage.setItem("auth", true);
+                setStore({
+                  auth: true,
+                });
+              });
+            } else {
+              alert("unable to login");
+            }
+          }
+        );
       },
 
       logout: () => {
@@ -144,27 +151,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await response.json();
           if (response.ok) {
-            return data;
+            return response.ok;
           } else {
             alert("Seems like this group already exists!");
           }
-          // .then(
-          //   (response) => {
-          //     if (response.ok) {
-          //       response.json().then((response) => {
-          //         console.log(response);
-          //         alert("Group created succesfully!");
-          //       });
-
-          //       return response.ok;
-          //     } else {
-          //       //lo que ocurre cuando la respuesta del endpoint no es OK
-          //       {
-          //         alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-          //       }
-          //     }
-          //   }
-          // );
         } catch (error) {
           console.log("There is an error with the server", error);
         }
@@ -257,8 +247,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      //fetch GET para traer info usuario para editar perfil
-
       userInfo: () => {
         const accesToken = localStorage.getItem("token");
         console.log(accesToken);
@@ -300,6 +288,50 @@ const getState = ({ getStore, getActions, setStore }) => {
               edit: data,
             });
             console.log(getStore().edit);
+          });
+      },
+
+      //Fetch POST para crear comentarios
+
+      addComment: (group_id, comment) => {
+        const accesToken = localStorage.getItem("token");
+        console.log(accesToken);
+        fetch(process.env.BACKEND_URL + "/api/comment/" + group_id, {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accesToken,
+          },
+          body: JSON.stringify({
+            text: comment,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            getActions().getComment(group_id);
+            console.log(getStore().edit);
+          });
+      },
+
+      //Fetch GET para traer comentarios
+
+      getComment: (id) => {
+        //const accesToken = localStorage.getItem("token");
+        //console.log(accesToken);
+        fetch(process.env.BACKEND_URL + "/api/get_comment/" + id, {
+          method: "GET",
+          //headers: {
+          //Authorization: "Bearer " + accesToken,
+          //},
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setStore({
+              comment: data,
+            });
+            // localStorage.setItem("groupName", data.name);
+            // .catch((err) => console.error(err));
           });
       },
       joinGroup: async (groupid) => {

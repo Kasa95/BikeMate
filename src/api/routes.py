@@ -11,9 +11,13 @@ from bcrypt import hashpw
 import datetime
 from sqlalchemy import Column, DateTime, ForeignKey
 import datetime
+from flask_mail import Mail, Message
+import random
+import string
+
 # para instalar paquete de bcrypt, para pass encriptado, instalar:
 # pipenv install py-bcrypt
-# pipenv install flask-jwt-extended
+# pipenv install Flask-Mail
 
 api = Blueprint('api', __name__)
 
@@ -37,7 +41,7 @@ def protected():
         return jsonify(user.serialize()) , 200
 
 
-#crear usuario
+#crear usuario (modificado, ahora manda mail bienvenida cuando se registra)
 @api.route("/register", methods=["POST"])
 def create_user():
     body = json.loads(request.data)
@@ -48,22 +52,40 @@ def create_user():
     if not body["email"] or not body["password"] or not body["name"]:
         return jsonify({"msg": "Datos incorrectos"}), 404 
 
+  
     hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
-    user = User(email=body["email"], password=hashed, name=body["name"])
-    
 
+    # Incluir cuando hagamos cambio en el front, porque sino, va a esperar el dato y va a dar error:
+    # user = User(email=body["email"], password=hashed, name=body["name"] , city=body["city"] , bikemodel=body["bikemodel"] , routetype=body["routetype"], speed=body["speed"], distance=body["distance"])
+            
+    user = User(email=body["email"], password=hashed, name=body["name"]) 
+    # user = User.query.filter_by(email=email).first()
     # user = User(email=body["email"], password=body["password"], is_active=True)
+
     db.session.add(user)
     db.session.commit()
 
+    # inicio mail de bienvenida
+    with current_app.app_context():
+        mail = Mail() 
+    
+        msg = Message("Welcome to BikeMate",
+                  sender="bikemateapp@gmail.com",
+                  recipients=[user.email])
+        msg.body = "Hello " + (user.name) + ", welcome to BikeMate !"
+        msg.html = "<h1>Hello " + (user.name) + ". Welcome to <strong>BikeMate!</strong></h1> <br> <p>Any question? mail us at: <strong>bikemateapp@gmail.com</strong></p>"
+
+        mail.send(msg)
+    # final mail de bienvenida
+
     response_body={
-        "msg": "usuario creado"
-    }
-    # return jsonify(response_body), 200
+            "msg": "usuario creado"
+        }
+        # return jsonify(response_body), 200
     access_token = create_access_token(identity=body["email"], expires_delta=datetime.timedelta(minutes=60))
     return jsonify(access_token=access_token), 200   
 
-
+   
 
 #crear grupo
 @api.route("/new_group", methods=["POST"])
@@ -105,8 +127,8 @@ def login():
 
 
     # if email != user.email or password != user.password:
-    # if email != user.email or not bcrypt.checkpw(password, user.password):
-    #     return jsonify({"msg": "datos incorrectos"}), 401 
+    if email != user.email or not bcrypt.checkpw(password, user.password):
+        return jsonify({"msg": "datos incorrectos"}), 401 
     
     # if user and user.password != password:
     #     return jsonify ("datos incorrectos"), 401    
@@ -247,8 +269,6 @@ def group_usernames(groupId):
 
 
 #editar perfil
-## ver seguridad (si va en el front o en el back o donde, como se puede autentificar)
-# revisar y hacer la identificacion con el token
 @api.route('/user/edit', methods=['PUT'])
 @jwt_required()
 def edit_user():
@@ -265,7 +285,11 @@ def edit_user():
     routetype = request.json.get("routetype", None)
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
-    
+    photo = request.json.get("photo", None)
+    password = request.json.get("password", None)
+    # aqui encriptamos la contraseña
+    hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
+
     # if User.query.filter_by(email=newemail).first():
     #     return jsonify("msg: Email ya registrado"), 404
     # esta parte la hemos quitado porque no vamos a cambiar mail por seguridad
@@ -294,10 +318,61 @@ def edit_user():
         user.speed = speed
     if distance:
         user.distance = distance
+    # metemos la contraseña cambiada y encriptada por bcrypt
+    if hashed:
+        user.password = hashed
+    if photo:
+        user.photo = photo
 
     db.session.commit()
 
     return jsonify(user.serialize()), 200
+
+
+#editar grupo
+@api.route('/group_edit/<int:groupId>', methods=['PUT'])
+@jwt_required()
+def group_edit(groupId):
+    body = json.loads(request.data)
+
+    if not body:
+        return jsonify("msg: Error. Faltan datos"), 404
+
+    name = request.json.get("name", None)  
+    city = request.json.get("city", None)
+    routetype = request.json.get("routetype", None)
+    speed = request.json.get("speed", None)
+    distance = request.json.get("distance", None)
+    photo = request.json.get("photo", None)
+
+
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+    group = Group.query.get(groupId)
+
+    # Ver con Rosinni como hacer que solo se pueda editar el grupo si el user ESTÁ en el grupo
+    # if userEmail in group:
+
+    if name:    
+        group.name = name
+    if city:
+        group.city = city
+    if routetype:
+        group.routetype = routetype
+    if speed:
+        group.speed = speed
+    if distance:
+        group.distance = distance
+    if photo:
+        group.photo = photo
+
+    db.session.commit()
+
+    return jsonify(group.serialize()), 200
+    
+    # else por si el usuario no esta en el grupo y no puede editar
+    # else:
+    #     return jsonify("msg: User not in group"), 400
 
 
 # endpoint unirse a grupo
@@ -327,7 +402,7 @@ def add_to_group(groupId):
 
 # endpoint salirse de un grupo
 # como parametro entra el grupo. El user lo coge con el token
-@api.route("/leave_group/<int:groupId>" , methods=['POST'])
+@api.route("/leave_group/<int:groupId>" , methods=['DELETE'])
 @jwt_required()
 def leave_group(groupId):
     userEmail = get_jwt_identity()
@@ -361,8 +436,6 @@ def create_comment(groupId):
     user = User.query.filter_by(email=userEmail).first()
     group = Group.query.get(groupId)
 
-    # if Group.query.filter_by(name=body["name"]).first():
-    #     return jsonify({"msg": "Grupo ya existente"}), 401 
 
     if not body["text"]:
         return jsonify({"msg": "Formato erroneo"}), 404 
@@ -458,4 +531,36 @@ def usergroups():
 
     return jsonify(groups), 200
 
+
+# restablecer contraseña por mail
+# revisar porque no consigo atrapar los fallos si no hay mail o si el mail no existe
+# ahora mismo dan error 500
+# mirar tambien cerrar todas las sesiones al cambiar la pass, con Flask-Security-Too
+@api.route("/forgotpassword", methods=["POST"])
+def forgotpassword():
+    recover_email = request.json["email"]
+    # aqui saco una nueva contraseña aleatoria
+    recover_password = "".join(random.choice(string.ascii_uppercase + string.digits)for x in range(10))
+
+    if not recover_email:
+        return jsonify({"msg":"Debe ingresar el correo"}), 401
+    user = User.query.filter_by(email=recover_email).first()
+    if recover_email != user.email:
+        return jsonify({"msg": "El correo no existe en nuestra BBDD"}), 400
+    # encripto la contraseña nueva aleatoria y la guardo en el user
+    hashed = bcrypt.hashpw(recover_password, bcrypt.gensalt())
+    user.password = hashed
+    db.session.commit()
+    # se la envio al usuario por mail
+    with current_app.app_context():
+        mail = Mail() 
+    
+        msg = Message("Password restored",
+                  sender="bikemateapp@gmail.com",
+                  recipients=[user.email])
+        msg.body = "Hello " + (user.name) + ", your new password is: " + (recover_password)
+        msg.html = "<h1>Hello " + (user.name) + "</h1> <br> <p>Your new password is: </p>" + (recover_password)
+
+        mail.send(msg)
+    return jsonify({"msg": "Enviada nueva contraseña al correo electronico ingresado"})
 
