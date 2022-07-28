@@ -327,13 +327,13 @@ const getState = ({
             //Fetch GET para traer comentarios
 
             getComment: (id) => {
-                const accesToken = localStorage.getItem("token");
-                console.log(accesToken);
+                //const accesToken = localStorage.getItem("token");
+                //console.log(accesToken);
                 fetch(process.env.BACKEND_URL + "/api/get_comment/" + id, {
                         method: "GET",
-                        headers: {
-                            Authorization: "Bearer " + accesToken,
-                        },
+                        //headers: {
+                        //Authorization: "Bearer " + accesToken,
+                        //},
                     })
                     .then((response) => response.json())
                     .then((data) => {
@@ -342,7 +342,6 @@ const getState = ({
                         });
                         // localStorage.setItem("groupName", data.name);
                         // .catch((err) => console.error(err));
-                        console.log(getStore().profile);
                     });
             },
         },
