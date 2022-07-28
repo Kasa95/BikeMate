@@ -17,6 +17,7 @@ export const Marketing = ({ name, id, distance, speed, city, routetype }) => {
   const groups_belong = store.mygroupsInfo.map((i, index) => {
     return <li key={index}>{store.mygroupsInfo[index].name}</li>;
   });
+
   return (
     <div className="dashboard_page_card">
       <div className="dashboard_page_text_content">
