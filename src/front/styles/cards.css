@@ -94,7 +94,7 @@
 }
 
 .dashboard_page_card:nth-child(1):before {
-    background-image: url(https://res.cloudinary.com/inelan/image/upload/v1657741285/samples/marianna-lutkova-4PSLAKVQQ88-unsplash_daaalo.jpg);
+    background-image: url(https://bike-clothes.com/wp-content/uploads/2016/11/Isdore-brand-page-hero.png);
 }
 
 .dashboard_page_card:nth-child(2):before {
@@ -157,7 +157,7 @@
 .copy {
     font-family: var(--font-serif);
     font-size: 1.125rem;
-    font-style: italic;
+    /* font-style: italic; */
     line-height: 1.35;
 }
 
