@@ -33,7 +33,7 @@ export const SearchResult = ({
         >
           <b>{theName}</b>
         </h5>
-        <p className="card-text">
+        <p className="search-result-text">
           {city != undefined ? (
             <>
               Located in

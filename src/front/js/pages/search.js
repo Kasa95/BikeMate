@@ -160,7 +160,7 @@ export const Search = () => {
                       <div></div>
                       <div></div>
                     </div>
-                    <p className="text-center mb-5 text-muted">
+                    <p className="text-center mb-5 text-muted w-100">
                       Use the bar above to search <br />
                       Your results will be shown here!
                     </p>
