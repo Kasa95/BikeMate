@@ -42,6 +42,7 @@ const Commentsection = () => {
         currentData={(data) => {
           console.log("curent data", data);
         }}
+        onEditAction={() => actions.addComment(1, store.comment[0].text)}
       />
     </>
   );
