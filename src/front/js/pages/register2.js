@@ -4,9 +4,11 @@ import { Formik, input, Form, useFormik } from "formik";
 import * as Yup from "yup";
 import { Context } from "../store/appContext";
 import { newUserSchema } from "../validations/schemas";
+import { NewUserSuccess } from "../component/NewUserSuccess.jsx";
 
 export const Register2 = () => {
   const { store, actions } = useContext(Context);
+  const [newUserSuccess, setNewUserSuccess] = useState(null);
   const { values, handleBlur, errors, handleChange, handleSubmit, touched } =
     useFormik({
       initialValues: {
@@ -17,21 +19,20 @@ export const Register2 = () => {
       validationSchema: newUserSchema,
       onSubmit: async (values) => {
         const response = await actions.registerUser(values);
+        setNewUserSuccess(response);
       },
     });
-  console.log(errors);
-  console.log(touched);
-  console.log(values);
+
+  console.log(newUserSuccess);
   return (
-    <div className="container py-5 h-100">
-      <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div className="card shadow-2-strong rounded-3">
-            <div className="card-body p-5 text-center">
-              <h1 className="mb-5"> Sign Up </h1>
-              {store.auth === true ? (
-                <Navigate to="/ViewDashboard" />
-              ) : (
+    <>
+      {newUserSuccess >= 1 ? <NewUserSuccess /> : ""}
+      <div className="container py-5 h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div className="card shadow-2-strong rounded-3">
+              <div className="card-body p-5 text-center">
+                <h1 className="mb-5"> Sign Up </h1>
                 <form onSubmit={handleSubmit}>
                   <div className="form-outline mb-4">
                     {errors.name && touched.name ? (
@@ -84,34 +85,48 @@ export const Register2 = () => {
                         Password
                       </label>
                     )}
-                    <input
-                      className="form-control form-control-lg"
-                      id="password"
-                      name="password"
-                      type="password"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                    />
+                    <div>
+                      <input
+                        className="form-control form-control-lg"
+                        id="password"
+                        name="password"
+                        type="password"
+                        onBlur={handleBlur}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="d-flex justify-content-center mb-4">
-                    <label className="form-check-label">
+                    <label className="">
                       By registering, you agree to the{" "}
                       <Link to="#"> Terms & Conditions </Link>
                     </label>
                   </div>
-
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-lg btn-block"
-                  >
-                    REGISTER
-                  </button>
+                  {touched.name === true &&
+                  touched.email === true &&
+                  // touched.password === true &&
+                  Object.keys(errors).length === 0 ? (
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-lg btn-block"
+                    >
+                      REGISTER
+                    </button>
+                  ) : (
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-lg btn-block"
+                      disabled
+                    >
+                      REGISTER
+                    </button>
+                  )}
                 </form>
-              )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };

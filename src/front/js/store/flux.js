@@ -151,10 +151,27 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await response.json();
           if (response.ok) {
-            return response.ok;
+            return data;
           } else {
             alert("Seems like this group already exists!");
           }
+          // .then(
+          //   (response) => {
+          //     if (response.ok) {
+          //       response.json().then((response) => {
+          //         console.log(response);
+          //         alert("Group created succesfully!");
+          //       });
+
+          //       return response.ok;
+          //     } else {
+          //       //lo que ocurre cuando la respuesta del endpoint no es OK
+          //       {
+          //         alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
+          //       }
+          //     }
+          //   }
+          // );
         } catch (error) {
           console.log("There is an error with the server", error);
         }
@@ -228,6 +245,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                     localStorage.setItem("token", response.access_token);
                     localStorage.setItem("auth", true);
                     localStorage.setItem("name", values.name);
+                    return response;
                   });
                   setStore({
                     auth: true,

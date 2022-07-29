@@ -23,7 +23,7 @@ export const NewGroup = () => {
       validationSchema: newGroupSchema,
       onSubmit: async (values) => {
         const response = await actions.createGroup(values);
-        setNewGroupId(response.id);
+        // setNewGroupId(response);
       },
     });
 

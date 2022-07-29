@@ -11,7 +11,7 @@ export const Profile = (props) => {
   return (
     <>
       {" "}
-      {store.profile.city != 0 ? (
+      {store.profile.city == 0 ? (
         <>
           <div className="dashboard_page_card">
             <div className="dashboard_page_text_content">
