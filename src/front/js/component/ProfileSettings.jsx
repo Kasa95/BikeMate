@@ -30,14 +30,6 @@ export const ProfileSettings = () => {
 
           {/* <!-- edit form column --> */}
           <div className="col-md-9 personal-info">
-            <div className="alert alert-info alert-dismissable">
-              <a className="panel-close close" data-dismiss="alert">
-                ×
-              </a>
-              <i className="fa fa-coffee"></i>
-              This is an <strong>.alert</strong>. Use this to show important
-              messages to the user.
-            </div>
             <h3>Personal info</h3>
 
             <form className="form-horizontal" role="form">
