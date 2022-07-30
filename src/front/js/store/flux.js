@@ -290,24 +290,25 @@ const getState = ({
 
             //Fetch POST para crear comentarios
 
-            addComment: (group_id, comment) => {
+            addComment: (group_id, data) => {
+                const {
+                    text
+                } = data;
                 const accesToken = localStorage.getItem("token");
-                console.log(accesToken);
+
                 fetch(process.env.BACKEND_URL + "/api/comment/" + group_id, {
                         method: "POST",
-
                         headers: {
                             "Content-Type": "application/json",
                             Authorization: "Bearer " + accesToken,
                         },
                         body: JSON.stringify({
-                            text: comment,
+                            text: text,
                         }),
                     })
                     .then((response) => response.json())
                     .then((data) => {
                         getActions().getComment(group_id);
-                        console.log(getStore().edit);
                     });
             },
 
