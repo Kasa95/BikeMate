@@ -286,9 +286,9 @@ def edit_user():
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
-    password = request.json.get("password", None)
+    # password = request.json.get("password", None)
     # aqui encriptamos la contraseña
-    hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
+    # hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
 
     # if User.query.filter_by(email=newemail).first():
     #     return jsonify("msg: Email ya registrado"), 404
@@ -319,8 +319,8 @@ def edit_user():
     if distance:
         user.distance = distance
     # metemos la contraseña cambiada y encriptada por bcrypt
-    if hashed:
-        user.password = hashed
+    # if hashed:
+    #     user.password = hashed
     if photo:
         user.photo = photo
 

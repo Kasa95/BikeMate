@@ -3,9 +3,8 @@ import { CommentSection } from "react-comments-section";
 import { Context } from "../store/appContext";
 import "./../../styles/comments.css";
 
-const Commentsection = () => {
+const Commentsection = ({ group_id }) => {
   const { store, actions } = useContext(Context);
-  console.log(store.comment);
 
   const data = store.comment.map((item) => {
     return {
@@ -18,30 +17,35 @@ const Commentsection = () => {
       replies: [],
     };
   });
+  console.log(store.profile);
+  const customNoComment = () => (
+    <div className="no-com">Sheessh! Zero Comments posted here!</div>
+  );
 
   useEffect(() => {
-    actions.getComment(1);
+    actions.getComment(group_id);
   }, []);
   return (
     <>
       <CommentSection
         currentUser={{
-          currentUserId: "1",
-          currentUserImg:
-            "https://ui-avatars.com/api/name=Riya&background=random",
-          currentUserProfile:
-            "https://www.linkedin.com/in/riya-negi-8879631a9/",
-          currentUserFullName: "Carlos",
+          currentUserId: store.profile.id,
+          currentUserImg: `https://ui-avatars.com/api/name=${store.profile.name}&background=random`,
+          currentUserProfile: null,
+          currentUserFullName: store.profile.name,
         }}
         logIn={{
           loginLink: "http://localhost:3001/",
           signupLink: "http://localhost:3001/",
         }}
         commentData={data}
-        onSubmitAction={(data) => console.log("check submit, ", data)}
+        onSubmitAction={(data) => actions.addComment(group_id, data)}
+        customNoComment={() => customNoComment()}
+        onDeleteAction={(data) => console.log(data)}
         currentData={(data) => {
           console.log("curent data", data);
         }}
+        // onEditAction={() => actions.addComment(1, store.comment[0].text)}
       />
     </>
   );
