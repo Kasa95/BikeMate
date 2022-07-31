@@ -89,7 +89,7 @@
 .lds-ripple {
     display: inline-block;
     position: relative;
-    /* margin-left: 45%; */
+    margin: auto;
     width: 80px;
     height: 120px;
 }
@@ -166,15 +166,15 @@
     background-color: #4a71e8;
     border: none;
     border-radius: 5px;
-    width: 40%;
-    padding: 12px 3rem;
+    width: 45%;
+    padding: 12px 1rem;
     font-size: 14px;
     color: white;
     /* box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1); */
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
-    margin: 0 12px;
+    margin: 0 2px;
 }
 
 .joingroup:hover {
@@ -188,15 +188,15 @@
     background-color: #253461;
     border: none;
     border-radius: 5px;
-    width: 40%;
-    padding: 12px 3rem;
+    width: 45%;
+    padding: 12px 1rem;
     font-size: 14px;
     color: rgb(255, 255, 255);
     /* box-shadow: 0px 6px 18px -5px rgba(237, 103, 85, 1); */
     text-transform: uppercase;
     font-weight: 600;
     cursor: pointer;
-    margin: 0 12px;
+    margin: 0 2px;
     transition: background-color 0.2s ease-in;
 }
 
@@ -222,6 +222,7 @@
     margin: 0.4rem;
     margin-top: 0.6rem;
     transition: box-shadow 0.2s ease-in-out;
+    align-items: center;
 }
 
 .search-result-card:hover {

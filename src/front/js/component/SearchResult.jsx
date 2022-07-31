@@ -26,13 +26,20 @@ export const SearchResult = ({
   return (
     <>
       <div className="search-result-card">
-        <h5
-          className="search-result-title"
-          onClick={() => navigate(`/ViewComments/${groupId}`)}
-          style={{ cursor: "pointer" }}
-        >
-          <b>{theName}</b>
-        </h5>
+        {email != undefined ? (
+          <h5 className="search-result-title">
+            <b>{theName}</b>
+          </h5>
+        ) : (
+          <h5
+            className="search-result-title"
+            onClick={() => navigate(`/ViewComments/${groupId}`)}
+            style={{ cursor: "pointer" }}
+          >
+            <b>{theName}</b>
+          </h5>
+        )}
+
         <p className="search-result-text">
           {city != undefined ? (
             <>
@@ -60,11 +67,28 @@ export const SearchResult = ({
           )}
         </p>
         {email != undefined ? (
-          <a href="#" className="btn btn-primary">
-            Add friend!
-          </a>
+          <>
+            {alreadyJoined ? (
+              <a className="joinedgroup" style={{ justifySelf: "center" }}>
+                Request sent.
+              </a>
+            ) : (
+              <a
+                className="joingroup"
+                style={{ justifySelf: "center" }}
+                onClick={() => {
+                  setAlreadyJoined(true);
+                }}
+              >
+                Add friend!
+              </a>
+            )}
+          </>
         ) : (
-          <div className="row justify-content-center">
+          <div
+            className="justify-content-center"
+            style={{ display: "flex", width: "100%" }}
+          >
             <a
               className="visitgroup"
               onClick={() => navigate(`/ViewComments/${groupId}`)}
@@ -72,15 +96,7 @@ export const SearchResult = ({
               Visit group
             </a>
             {alreadyJoined ? (
-              <a
-                className="joinedgroup"
-                onClick={() => {
-                  actions.joinGroup(groupId);
-                  setAlreadyJoined(true);
-                }}
-              >
-                You're a member
-              </a>
+              <a className="joinedgroup">You're a member</a>
             ) : (
               <a
                 className="joingroup"

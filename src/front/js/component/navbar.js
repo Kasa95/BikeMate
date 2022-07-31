@@ -9,7 +9,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="p-3 bg-white text-white navbar-static-top">
+    <nav className="p-3 bg-white text-white sticky-top shadow-sm">
       {store.auth === true || localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
         <div className="container">
           <div className="row">
@@ -68,9 +68,9 @@ export const Navbar = () => {
                   aria-labelledby="dropdownMenuButton1"
                 >
                   <li>
-                    <a className="dropdown-item" href="#">
+                    <Link to="/ViewProfileSettings" className="dropdown-item">
                       My Profile
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
@@ -104,12 +104,15 @@ export const Navbar = () => {
           <div className="row">
             <ul className="nav col-2 justify-content-center align-items-center mt-3">
               <li>
-                <a href="#main-hero" className="nav-link px-2 text-secondary">
+                <Link to="/" className="nav-link px-2 text-secondary">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#featured-3" className="nav-link px-2 text-secondary">
+                <a
+                  href="#featured-3"
+                  className="nav-link px-2 text-secondary disabled"
+                >
                   Features
                 </a>
               </li>
