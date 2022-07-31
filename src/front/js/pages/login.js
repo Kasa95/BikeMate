@@ -6,13 +6,22 @@ import { Context } from "../store/appContext";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
+  const [wrongLogin, setWrongLogin] = useState("");
+  console.log(wrongLogin);
   return (
-    <div className="container py-5 h-100">
+    <div className="container-fluid py-5 h-100 orange-background">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-          <div className="card shadow-2-strong rounded-3">
+          <div className="card shadow-2-strong rounded-3 semitransparent">
             <div className="card-body p-5 text-center">
-              <h1 className="mb-5"> Login </h1>
+              <h1 className="mb-3"> Login </h1>
+              {wrongLogin === false ? (
+                <p className="text-danger">
+                  <b>The login data is not correct</b>
+                </p>
+              ) : (
+                <p className="no-opacity">.</p>
+              )}
               {store.auth === true ? (
                 <>
                   <Navigate to="/ViewDashboard" />
@@ -22,20 +31,17 @@ export const Login = () => {
                   initialValues={{
                     email: "",
                     password: "",
-                    robotCheck: false,
                   }}
-                  onSubmit={(values) => {
-                    values.robotCheck === true
-                      ? actions.loginUser(values) // console.log(values)
-                      : console.log(
-                          "You can't login if you are a robot, sorry"
-                        );
+                  onSubmit={async (values) => {
+                    const response = await actions.loginUser(values);
+                    // actions.loginUser(values);
+                    setWrongLogin(response);
                   }}
                 >
                   <Form>
                     <div className="form-outline mb-4">
                       <Field
-                        className="form-control form-control-lg"
+                        className="form-control form-control-lg bg-transparent"
                         id="email"
                         name="email"
                         type="email"
@@ -46,7 +52,7 @@ export const Login = () => {
                     </div>
                     <div className="form-outline mb-4">
                       <Field
-                        className="form-control form-control-lg"
+                        className="form-control form-control-lg bg-transparent"
                         id="password"
                         name="password"
                         type="password"
@@ -55,28 +61,18 @@ export const Login = () => {
                         Password
                       </label>
                     </div>
-                    <div className="d-flex justify-content-center mb-4">
-                      <Field
-                        name="robotCheck"
-                        className="me-1"
-                        type="checkbox"
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="flexCheckDefault"
-                      >
-                        I am not a robot nor an e - bike.
-                      </label>
-                    </div>
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-lg btn-block"
-                    >
+                    <button type="submit" className="submit-registration">
                       LOGIN
                     </button>
                   </Form>
                 </Formik>
-              )}
+              )}{" "}
+              <div className="d-flex justify-content-center mt-5 text-black-50">
+                <label>
+                  Don't have an account yet?{" "}
+                  <Link to="/register"> Register here! </Link>
+                </label>
+              </div>
             </div>
           </div>
         </div>

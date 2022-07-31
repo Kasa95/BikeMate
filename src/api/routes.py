@@ -59,9 +59,9 @@ def create_user():
     hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
 
     # Incluir cuando hagamos cambio en el front, porque sino, va a esperar el dato y va a dar error:
-    # user = User(email=body["email"], password=hashed, name=body["name"] , city=body["city"] , bikemodel=body["bikemodel"] , routetype=body["routetype"], speed=body["speed"], distance=body["distance"])
+    user = User(email=body["email"], password=hashed, name=body["name"] , city=body["city"] , bikemodel=body["bikemodel"] , routetype=body["routetype"], speed=body["speed"], distance=body["distance"])
             
-    user = User(email=body["email"], password=hashed, name=body["name"]) 
+    # user = User(email=body["email"], password=hashed, name=body["name"]) 
     # user = User.query.filter_by(email=email).first()
     # user = User(email=body["email"], password=body["password"], is_active=True)
 

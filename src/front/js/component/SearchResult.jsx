@@ -28,7 +28,7 @@ export const SearchResult = ({
       <div className="search-result-card">
         <h5
           className="search-result-title"
-          onClick={() => navigate(`/ViewDashboard/${groupId}`)}
+          onClick={() => navigate(`/ViewComments/${groupId}`)}
           style={{ cursor: "pointer" }}
         >
           <b>{theName}</b>
@@ -67,7 +67,7 @@ export const SearchResult = ({
           <div className="row justify-content-center">
             <a
               className="visitgroup"
-              onClick={() => navigate(`/ViewDashboard/${groupId}`)}
+              onClick={() => navigate(`/ViewComments/${groupId}`)}
             >
               Visit group
             </a>
