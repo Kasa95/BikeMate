@@ -55,6 +55,7 @@ class Group(db.Model):
     distance = db.Column(db.Integer, nullable=False) #Aqui distancia y velocidad no deberian poder dejarse en blanco porque la idea es que el usuario busque grupos del nivel que quiera
     photo = db.Column(db.String(250), unique=False, nullable=True)
     comments = db.relationship('Comment', backref='group', lazy=True)
+    meetings = db.relationship('Meeting', backref='group', lazy=True)
     
 
     def __repr__(self):
@@ -98,4 +99,31 @@ class Comment(db.Model):
         commentuser=User.query.filter_by(id=self.user_id).first()
         return {
             "username_comment": commentuser.name
+        }
+
+
+class Meeting(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime)
+    address = db.Column(db.String(500), unique=False, nullable=False)
+    # iframe_map = db.Column(db.String(500), unique=False, nullable=True)
+    latitude = db.Column(db.String(80), unique=False, nullable=True)
+    longitude = db.Column(db.String(80), unique=False, nullable=True)
+    aditional_info = db.Column(db.String(500), unique=False, nullable=True)
+    # latitude = db.Column(db.Integer, nullable=True) 
+    # longitude = db.Column(db.Integer, nullable=True) 
+    group_id = db.Column(db.Integer, db.ForeignKey('group.id'),
+        nullable=False) 
+
+    def __repr__(self):
+        return f'<Meeting {self.id}>'
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "address": self.address,
+            "date": self.date,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "aditional_info": self.aditional_info
         }
