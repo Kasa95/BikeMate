@@ -52,40 +52,75 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
-      loginUser: (values) => {
-        const logUser = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        };
-        fetch(process.env.BACKEND_URL + "/api/login", logUser).then(
-          (response) => {
-            if (response.ok) {
-              response.json().then((data) => {
-                // setStore({
-                //   userDetails: data,
-                //   auth: true,
-                // });
-                localStorage.setItem("token", data.access_token);
-                localStorage.setItem("name", data.name);
-                localStorage.setItem("city", data.city);
-                localStorage.setItem("speed", data.speed);
-                localStorage.setItem("auth", true);
-                setStore({
-                  auth: true,
-                });
-              });
-            } else {
-              alert("unable to login");
-            }
+      loginUser: async (values) => {
+        try {
+          const logUser = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: values.email,
+              password: values.password,
+            }),
+          };
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/login",
+            logUser
+          );
+          const data = await response.json();
+          if (response.ok) {
+            localStorage.setItem("token", data.access_token);
+            localStorage.setItem("name", data.name);
+            localStorage.setItem("city", data.city);
+            localStorage.setItem("speed", data.speed);
+            localStorage.setItem("auth", true);
+            setStore({
+              auth: true,
+            });
+            return data;
+          } else {
+            return false;
           }
-        );
+        } catch (error) {
+          console.log("There is an error with the server", error);
+        }
       },
+
+      // }
+      // const logUser = {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     email: values.email,
+      //     password: values.password,
+      //   }),
+      // };
+      // fetch(process.env.BACKEND_URL + "/api/login", logUser).then(
+      //   (response) => {
+      //     if (response.ok) {
+      //       response.json().then((data) => {
+      //         // setStore({
+      //         //   userDetails: data,
+      //         //   auth: true,
+      //         // });
+      //         localStorage.setItem("token", data.access_token);
+      //         localStorage.setItem("name", data.name);
+      //         localStorage.setItem("city", data.city);
+      //         localStorage.setItem("speed", data.speed);
+      //         localStorage.setItem("auth", true);
+      //         setStore({
+      //           auth: true,
+      //         });
+      //       });
+      //     } else {
+      //       return false;
+      //     }
+      //     }
+      //   );
+      // },
 
       logout: () => {
         localStorage.removeItem("token");
@@ -218,6 +253,11 @@ const getState = ({ getStore, getActions, setStore }) => {
               email: values.email,
               password: values.password,
               name: values.name,
+              city: values.city,
+              distance: values.distance,
+              speed: values.speed,
+              routetype: values.routes,
+              bikemodel: "",
             }),
           };
           const response = await fetch(
@@ -236,29 +276,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           } else {
             alert("Can't create this user");
           }
-          //   fetch(process.env.BACKEND_URL + "/api/register", newUser).then(
-          //     (response) => {
-          //       if (response.ok) {
-          //         {
-          //           response.json().then((response) => {
-          //             localStorage.setItem("token", response.access_token);
-          //             localStorage.setItem("auth", true);
-          //             localStorage.setItem("name", values.name);
-          //             return response;
-          //           });
-          //           setStore({
-          //             auth: true,
-          //           });
-          //           console.log(getStore().auth);
-          //         }
-          //       } else {
-          //         //lo que ocurre cuando la respuesta del endpoint no es OK
-          //         {
-          //           alert("Parece que ese usuario ya existe"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-          //         }
-          //       }
-          //     }
-          //   );
         } catch (error) {
           console.log("There is an error with the server", error);
         }

@@ -5,7 +5,7 @@ import ScrollToTop from "./component/scrollToTop";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import { Register2 } from "./pages/register2";
+import { Register } from "./pages/register";
 import { Login } from "./pages/login";
 import { Terms } from "./pages/terms";
 import { Search } from "./pages/search";
@@ -33,7 +33,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Demo />} path="/demo" />
-            <Route element={<Register2 />} path="/register" />
+            <Route element={<Register />} path="/register" />
             <Route element={<Login />} path="/login" />
             <Route element={<Terms />} path="/terms" />
             <Route element={<Search />} path="/search" />
