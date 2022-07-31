@@ -43,7 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       profile: {},
-      edit: {},
+      user: {},
       comment: [],
     },
     actions: {
@@ -86,41 +86,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("There is an error with the server", error);
         }
       },
-
-      // }
-      // const logUser = {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     email: values.email,
-      //     password: values.password,
-      //   }),
-      // };
-      // fetch(process.env.BACKEND_URL + "/api/login", logUser).then(
-      //   (response) => {
-      //     if (response.ok) {
-      //       response.json().then((data) => {
-      //         // setStore({
-      //         //   userDetails: data,
-      //         //   auth: true,
-      //         // });
-      //         localStorage.setItem("token", data.access_token);
-      //         localStorage.setItem("name", data.name);
-      //         localStorage.setItem("city", data.city);
-      //         localStorage.setItem("speed", data.speed);
-      //         localStorage.setItem("auth", true);
-      //         setStore({
-      //           auth: true,
-      //         });
-      //       });
-      //     } else {
-      //       return false;
-      //     }
-      //     }
-      //   );
-      // },
 
       logout: () => {
         localStorage.removeItem("token");
@@ -176,10 +141,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               speed: values.groupSpeed,
               routetype: values.groupRoutetype,
             }),
-            // falta añadir el routetype, que ahora mismo no está en la ruta
           };
 
-          // fetch(process.env.BACKEND_URL + "/api/new_group", newGroup)
           const response = await fetch(
             process.env.BACKEND_URL + "/api/new_group",
             newGroup
@@ -225,7 +188,6 @@ const getState = ({ getStore, getActions, setStore }) => {
               mygroupsInfo: data,
             });
             // localStorage.setItem("groupName", data.name);
-            console.log(getStore().mygroupsInfo);
             // .catch((err) => console.error(err));
           });
       },
@@ -298,7 +260,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
             // localStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
-            console.log(getStore().profile);
           });
       },
 
@@ -319,32 +280,31 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             setStore({
-              edit: data,
+              user: data,
             });
-            console.log(getStore().edit);
+            console.log(getStore().user);
           });
       },
 
       //Fetch POST para crear comentarios
 
-      addComment: (group_id, comment) => {
+      addComment: (group_id, data) => {
+        const { text } = data;
         const accesToken = localStorage.getItem("token");
-        console.log(accesToken);
+
         fetch(process.env.BACKEND_URL + "/api/comment/" + group_id, {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + accesToken,
           },
           body: JSON.stringify({
-            text: comment,
+            text: text,
           }),
         })
           .then((response) => response.json())
           .then((data) => {
             getActions().getComment(group_id);
-            console.log(getStore().edit);
           });
       },
 
@@ -368,6 +328,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             // .catch((err) => console.error(err));
           });
       },
+
       joinGroup: async (groupid) => {
         try {
           const accessToken = localStorage.getItem("token");

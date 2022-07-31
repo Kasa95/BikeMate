@@ -16,7 +16,7 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
           <p className="copy">Average distance: {distance} km</p>
           <p className="copy">Average speed: {speed} km/h</p>
           {/* <p className="copy">Route type: {routetype} </p> */}
-          <Link to={"/ViewDetailDashboard/"}>
+          <Link to={"/ViewComments/" + id}>
             <button className="dashboard_page_btn">Unirse</button>
           </Link>
         </div>
