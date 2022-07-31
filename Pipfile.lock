@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "31177195680cf6f861046955cf30297906e547baba064eb7bf75613198e17e1a"
+            "sha256": "89b64571bbd05ae8892a1390dc0d75722a3494baa4c07da1d94cc60a5cbe038a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -80,11 +80,11 @@
         },
         "flask-jwt-extended": {
             "hashes": [
-                "sha256:793f9e720d0e679cea8f99af6436819bfd1622fc345afeff48878c09f42548f6",
-                "sha256:f582bba980fcf728ab7250dbb6fbdca8d4e074e24eb2915b01184376ffff98c7"
+                "sha256:188907ea9332bdd123a95a457e7487556770480264ce3b78c8835b4347e324cc",
+                "sha256:a2571df484c5635ad996d364242ec28fc69f386915cd69b1842639712b84c36d"
             ],
             "index": "pypi",
-            "version": "==4.4.2"
+            "version": "==4.4.3"
         },
         "flask-mail": {
             "hashes": [
@@ -116,6 +116,21 @@
             ],
             "index": "pypi",
             "version": "==0.2.14"
+        },
+        "geographiclib": {
+            "hashes": [
+                "sha256:8f441c527b0b8a26cd96c965565ff0513d1e4d9952b704bf449409e5015c77b7",
+                "sha256:ac400d672b8954b0306bca890b088bb8ba2a757dc8133cca0b878f34b33b2740"
+            ],
+            "version": "==1.52"
+        },
+        "geopy": {
+            "hashes": [
+                "sha256:58b7edf526b8c32e33126570b5f4fcdfaa29d4416506064777ae8d84cd103fdd",
+                "sha256:8f1f949082b964385de61fcc3a667a6a9a6e242beb1ae8972449f164b2ba0e89"
+            ],
+            "index": "pypi",
+            "version": "==2.2.0"
         },
         "greenlet": {
             "hashes": [
@@ -464,11 +479,11 @@
         },
         "werkzeug": {
             "hashes": [
-                "sha256:81806f8a5b35e6cb1b39a6f28dabf0e123f069c8596119a1a9a43838870016cd",
-                "sha256:fe8bcdcef40275ed915fc734c2527a39d705b57a716d4f09e790296abbd16a7f"
+                "sha256:4d7013ef96fd197d1cdeb03e066c6c5a491ccb44758a5b2b91137319383e5a5a",
+                "sha256:7e1db6a5ba6b9a8be061e47e900456355b8714c0f238b0313f53afce1a55a79a"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==2.2.0"
+            "version": "==2.2.1"
         },
         "wtforms": {
             "hashes": [
