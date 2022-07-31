@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, current_app
-from api.models import db, User, Group, Comment
+from api.models import db, User, Group, Comment, Meeting
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
 import json
@@ -14,10 +14,13 @@ import datetime
 from flask_mail import Mail, Message
 import random
 import string
+from geopy.geocoders import Nominatim
 
-# para instalar paquete de bcrypt, para pass encriptado, instalar:
+
+# instalar:
 # pipenv install py-bcrypt
 # pipenv install Flask-Mail
+# pipenv install geopy
 
 api = Blueprint('api', __name__)
 
@@ -286,9 +289,9 @@ def edit_user():
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
-    password = request.json.get("password", None)
-    # aqui encriptamos la contraseña
-    hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
+    # password = request.json.get("password", None)
+    # # aqui encriptamos la contraseña
+    # hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
 
     # if User.query.filter_by(email=newemail).first():
     #     return jsonify("msg: Email ya registrado"), 404
@@ -319,8 +322,8 @@ def edit_user():
     if distance:
         user.distance = distance
     # metemos la contraseña cambiada y encriptada por bcrypt
-    if hashed:
-        user.password = hashed
+    # if hashed:
+    #     user.password = hashed
     if photo:
         user.photo = photo
 
@@ -564,3 +567,47 @@ def forgotpassword():
         mail.send(msg)
     return jsonify({"msg": "Enviada nueva contraseña al correo electronico ingresado"})
 
+
+
+@api.route('/new_route/<int:groupId>', methods=['POST'])
+def route(groupId):
+    
+    body = json.loads(request.data)
+    group = Group.query.get(groupId)
+    geo = Nominatim(user_agent="MyApp")
+
+    aditional_info = body["info"]
+    lugar = body["address"]
+    loc = geo.geocode(lugar)
+    latitud = (loc.latitude)
+    longitud = (loc.longitude)
+    print (latitud, longitud)
+    # iframe = "https://maps.google.com/?ll="+ (latitud) + "," + (longitud) +"&z=14&t=m&output=embed" 
+
+    meeting = Meeting(address=body["address"], date=body["date"], latitude=latitud , longitude=longitud, group_id=group.id, aditional_info=aditional_info) 
+
+    db.session.add(meeting)
+    db.session.commit()
+
+    return jsonify(meeting.serialize())
+
+
+# <iframe class="iframe" src="https://maps.google.com/?ll=latitude,longitude&z=14&t=m&output=embed" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+@api.route('/routes/<int:groupId>', methods=['GET'])
+def group_routes(groupId):
+    
+    group = Group.query.get(groupId)
+    routes = group.meetings
+    all_routes = []
+   
+    # iframe = "https://maps.google.com/?ll="+ (latitud) + "," + (longitud) +"&z=14&t=m&output=embed" 
+
+    for route in routes:
+        all_routes += [{"id":route.id , "address":route.address , "date":route.date , "latitude": route.latitude , "longitude": route.longitude , "info":route.aditional_info}]
+   
+    return jsonify(all_routes), 200
+
+
+# <iframe class="iframe" src="https://maps.google.com/?ll=latitude,longitude&z=14&t=m&output=embed" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
