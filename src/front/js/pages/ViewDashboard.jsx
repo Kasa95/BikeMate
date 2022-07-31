@@ -55,7 +55,7 @@ export const ViewDashboard = () => {
                       city={item.city}
                       speed={item.speed}
                       distance={item.distance}
-                      id={index}
+                      id={item.id}
                     />
                   </div>
                 ))}

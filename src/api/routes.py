@@ -290,7 +290,8 @@ def edit_user():
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
     # password = request.json.get("password", None)
-    # # aqui encriptamos la contraseña
+
+    # aqui encriptamos la contraseña
     # hashed = bcrypt.hashpw(body["password"], bcrypt.gensalt())
 
     # if User.query.filter_by(email=newemail).first():
