@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const NewUserSuccess = () => {
+export const NewUserSuccess = (userName) => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
-
+  console.log(userName);
+  const welcomeName = userName.userName;
   return (
     <div
       id="staticBackdrop"
@@ -21,7 +22,10 @@ export const NewUserSuccess = () => {
             src="https://cdn-icons-png.flaticon.com/512/5716/5716716.png"
             alt="cookies-img"
           />
-          <p>Group created successfully!</p>
+          <p>
+            Registration completed! <br />
+            Welcome to BikeMate {welcomeName}
+          </p>
           <div className="d-flex justify-content-evenly">
             <button
               className="viewgroup"

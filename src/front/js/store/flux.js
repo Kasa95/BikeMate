@@ -155,23 +155,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           } else {
             alert("Seems like this group already exists!");
           }
-          // .then(
-          //   (response) => {
-          //     if (response.ok) {
-          //       response.json().then((response) => {
-          //         console.log(response);
-          //         alert("Group created succesfully!");
-          //       });
-
-          //       return response.ok;
-          //     } else {
-          //       //lo que ocurre cuando la respuesta del endpoint no es OK
-          //       {
-          //         alert("The group could not be created"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-          //       }
-          //     }
-          //   }
-          // );
         } catch (error) {
           console.log("There is an error with the server", error);
         }
@@ -224,7 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
-      registerUser: (values) => {
+      registerUser: async (values) => {
         try {
           const newUser = {
             method: "POST",
@@ -237,29 +220,45 @@ const getState = ({ getStore, getActions, setStore }) => {
               name: values.name,
             }),
           };
-          fetch(process.env.BACKEND_URL + "/api/register", newUser).then(
-            (response) => {
-              if (response.ok) {
-                {
-                  response.json().then((response) => {
-                    localStorage.setItem("token", response.access_token);
-                    localStorage.setItem("auth", true);
-                    localStorage.setItem("name", values.name);
-                    return response;
-                  });
-                  setStore({
-                    auth: true,
-                  });
-                  console.log(getStore().auth);
-                }
-              } else {
-                //lo que ocurre cuando la respuesta del endpoint no es OK
-                {
-                  alert("Parece que ese usuario ya existe"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
-                }
-              }
-            }
+          const response = await fetch(
+            process.env.BACKEND_URL + "/api/register",
+            newUser
           );
+          const data = await response.json();
+          if (response.ok) {
+            localStorage.setItem("token", data.access_token);
+            localStorage.setItem("auth", true);
+            localStorage.setItem("name", values.name);
+            setStore({
+              auth: true,
+            });
+            return data;
+          } else {
+            alert("Can't create this user");
+          }
+          //   fetch(process.env.BACKEND_URL + "/api/register", newUser).then(
+          //     (response) => {
+          //       if (response.ok) {
+          //         {
+          //           response.json().then((response) => {
+          //             localStorage.setItem("token", response.access_token);
+          //             localStorage.setItem("auth", true);
+          //             localStorage.setItem("name", values.name);
+          //             return response;
+          //           });
+          //           setStore({
+          //             auth: true,
+          //           });
+          //           console.log(getStore().auth);
+          //         }
+          //       } else {
+          //         //lo que ocurre cuando la respuesta del endpoint no es OK
+          //         {
+          //           alert("Parece que ese usuario ya existe"); //aquí habria que meter algo mas bonito que una alerta, pero de momento MVP
+          //         }
+          //       }
+          //     }
+          //   );
         } catch (error) {
           console.log("There is an error with the server", error);
         }
