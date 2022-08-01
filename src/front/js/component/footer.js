@@ -6,8 +6,8 @@ import { Context } from "../store/appContext";
 export const Footer = () => {
   const { store, actions } = useContext(Context);
   return (
-    <div className="container footer-bottom">
-      <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div className="container-fluid footer-bottom">
+      <footer className="">
         <p className="col-md-4 mb-0 text-muted"> ©2022 BikeMate </p>
         <ul className="nav col-md-4 justify-content-end">
           <li className="nav-item">
