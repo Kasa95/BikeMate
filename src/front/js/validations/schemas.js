@@ -26,6 +26,12 @@ export const newUserSchema = Yup.object().shape({
     .required("Please create a password")
     .min(8, "Password should be at least 8 characters long")
     .max(64, "That password is tooooo long"),
-  distance: Yup.number().min(1, "More than 1!").max(900, "Be realistic!"),
-  speed: Yup.number().min(1, "More than 1!").max(100, "Be realistic!"),
+  distance: Yup.number()
+    .min(1, "More than 1!")
+    .max(900, "Be realistic!")
+    .nullable(true),
+  speed: Yup.number()
+    .min(1, "More than 1!")
+    .max(100, "Be realistic!")
+    .nullable(true),
 });
