@@ -486,7 +486,8 @@ def group_comments(groupId):
     # print (comentarios)
 
     if comentarios == []:
-       return jsonify("msg: no hay mensajes"), 400
+    #    return jsonify("msg: no hay mensajes"), 400
+       return jsonify(comentarios), 404
 
     return jsonify(comentarios), 200
 
@@ -569,10 +570,13 @@ def forgotpassword():
     return jsonify({"msg": "Enviada nueva contraseña al correo electronico ingresado"})
 
 
-
+# publicar una nueva ruta. Necesita token para estar logueado
 @api.route('/new_route/<int:groupId>', methods=['POST'])
+@jwt_required()
 def route(groupId):
     
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
     body = json.loads(request.data)
     group = Group.query.get(groupId)
     geo = Nominatim(user_agent="MyApp")
@@ -591,11 +595,11 @@ def route(groupId):
     db.session.commit()
 
     return jsonify(meeting.serialize())
-
-
 # <iframe class="iframe" src="https://maps.google.com/?ll=latitude,longitude&z=14&t=m&output=embed" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 
+
+# obtener TODAS las rutas de un grupo
 @api.route('/routes/<int:groupId>', methods=['GET'])
 def group_routes(groupId):
     
@@ -609,6 +613,19 @@ def group_routes(groupId):
         all_routes += [{"id":route.id , "address":route.address , "date":route.date , "latitude": route.latitude , "longitude": route.longitude , "info":route.aditional_info}]
    
     return jsonify(all_routes), 200
-
-
 # <iframe class="iframe" src="https://maps.google.com/?ll=latitude,longitude&z=14&t=m&output=embed" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+
+
+# borrar ruta
+@api.route("/delete_meet/<int:meetingId>" , methods=['DELETE'])
+@jwt_required()
+def delete_meet(meetingId):
+    userEmail = get_jwt_identity()
+    user = User.query.filter_by(email=userEmail).first()
+    meet_to_delete = Meeting.query.get(meetingId)
+
+    db.session.delete(meet_to_delete)
+    db.session.commit()
+
+    return jsonify({"msg": "ruta eliminada"}), 200
