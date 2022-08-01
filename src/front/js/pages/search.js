@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { Formik, Field, Form } from "formik";
+import { Navigate } from "react-router-dom";
 import "../../styles/search.css";
 import searchMan from "../../img/searchman.png";
-import searchSpinner from "../../img/YlWC.gif";
-
 import { Context } from "../store/appContext";
 import { SearchResult } from "../component/SearchResult.jsx";
 
@@ -22,10 +19,7 @@ export const Search = () => {
 
   //     set search query to empty string
   const [q, setQ] = useState("");
-  // const [minS, setMinS] = useState(undefined);
-  // const [maxS, setMaxS] = useState(undefined);
-  // const [minD, setMinD] = useState(undefined);
-  // const [maxD, setMaxD] = useState(undefined);
+
   const [searchType, setSearchType] = useState("user");
 
   //     set  group search parameters
@@ -56,7 +50,7 @@ export const Search = () => {
   }
 
   // console.log(items);
-  return (
+  return localStorage.getItem("auth") == "true" ? (
     <>
       <div className="container-fluid text-center orange-searchman-background">
         <img src={searchMan} alt="" className="search-header-img" />
@@ -108,10 +102,11 @@ export const Search = () => {
                 htmlFor="searchUser"
                 style={
                   searchType === "user"
-                    ? { color: "#FA6400", background: "#F2F2F2" }
+                    ? { color: "#FA6400", background: "#F2F2F2", width: "8rem" }
                     : {
                         color: "rgba(0,0,0,.6)",
                         background: "#565E64",
+                        width: "8rem",
                       }
                 }
               >
@@ -131,10 +126,11 @@ export const Search = () => {
                 htmlFor="searchGroup"
                 style={
                   searchType != "user"
-                    ? { color: "#FA6400", background: "#F2F2F2" }
+                    ? { color: "#FA6400", background: "#F2F2F2", width: "8rem" }
                     : {
                         color: "rgba(0,0,0,.6)",
                         background: "#565E64",
+                        width: "8rem",
                       }
                 }
               >
@@ -194,7 +190,7 @@ export const Search = () => {
                       <div></div>
                       <div></div>
                     </div>
-                    <p className="text-center mb-5 text-muted">
+                    <p className="text-center mb-5 text-muted w-100">
                       Use the bar above to search <br />
                       Your results will be shown here!
                     </p>
@@ -219,6 +215,10 @@ export const Search = () => {
           </div>
         </div>
       </div>
+    </>
+  ) : (
+    <>
+      <Navigate to="/login" />
     </>
   );
 };
