@@ -354,6 +354,7 @@ def group_edit(groupId):
     user = User.query.filter_by(email=userEmail).first()
     group = Group.query.get(groupId)
 
+
     # Ver con Rosinni como hacer que solo se pueda editar el grupo si el user ESTÁ en el grupo
     # if userEmail in group:
 
