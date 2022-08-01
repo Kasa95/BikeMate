@@ -2,9 +2,6 @@ import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { Link } from "react-router-dom";
-import features1 from "../../img/features1.jpg";
-import features2 from "../../img/features2.jpg";
-import features3 from "../../img/features3.jpg";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -12,7 +9,11 @@ export const Home = () => {
   return (
     <>
       <div className="container my-5" id="main-hero">
-        <div className="row">
+        <img
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659379297/Curve_Line_1_g14dck.svg"
+          className="homeback"
+        />
+        <div className="row pt-4">
           <div className="col-1"></div>
           <div className="col-5">
             <h1>
@@ -41,20 +42,25 @@ export const Home = () => {
           <div className="col-1"></div>
         </div>
       </div>
-      <div className="text-center">
-        <div
-          className="overflow-hidden"
-          //   style={{ maxHeight: 30 * vh }}
-        >
-          <div className="container px-5">
-            <img
-              src="https://i.ibb.co/9rLGWRn/bm1.png"
-              className="img-fluid border rounded-3 shadow-lg mb-0"
-              alt="Example image"
-              width="956"
-              height="537"
-              loading="lazy"
-            />
+      <div className="text-center container-fluid home-orange-background">
+        <img
+          src="https://i.ibb.co/9rLGWRn/bm1.png"
+          className="home-1st-picture"
+          alt="Example image"
+          width="956"
+          height="537"
+          loading="lazy"
+        />
+        <div className="row text-start">
+          <div className="col-2"></div>
+          <div className="col-5">
+            <h2>
+              <b>For cyclists of any level.</b>
+            </h2>
+            <h3>
+              BikeMate aims to help cyclists of all levels connect with nearby
+              people who are also looking for biking mates.
+            </h3>
           </div>
         </div>
       </div>

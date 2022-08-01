@@ -20,7 +20,38 @@ h1 {
     color: #fa6400;
 }
 
-#main-hero {}
+#main-hero {
+    padding-bottom: 10rem;
+}
+
+.homeback {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 15%;
+    z-index: -1;
+}
+
+#main-hero h1 {
+    font-size: 2.95rem;
+}
+
+.home-1st-picture {
+    border-radius: 1.25rem;
+    margin-bottom: -1.5rem;
+    border: 1px solid #dee2e6;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    transform: translateY(-130px);
+    justify-self: center;
+}
+
+.home-orange-background {
+    background-color: #ffcdac;
+}
 
 .btn-orange {
     border-color: #fa6400;
@@ -124,7 +155,7 @@ h1 {
     background-color: #4a71e8;
     border-color: #4a71e8;
     display: inline-block;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 2;
     text-align: center;
     text-decoration: none;
@@ -134,7 +165,7 @@ h1 {
     -moz-user-select: none;
     user-select: none;
     padding: 0.375rem 0.75rem;
-    font-size: 1rem;
+    font-size: 1.15rem;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
