@@ -14,18 +14,18 @@ export const Marketing = ({ name, id, distance, speed, city, routetype }) => {
   //   }
   // }
 
-  const groups_belong =
-    store.mygroupsInfo &&
-    store.mygroupsInfo.map((i, index) => {
-      return (
-        <li key={index}>
-          {store.mygroupsInfo[index].name}{" "}
-          <Link to={"/ViewComments/" + (index + 1)}>
-            <button className="dashboard_page_btn">GO!</button>
-          </Link>{" "}
-        </li>
-      );
-    });
+  const groups_belong = store.mygroupsInfo
+    ? store.mygroupsInfo.map((i, index) => {
+        return (
+          <li key={index}>
+            {store.mygroupsInfo[index].name}{" "}
+            <Link to={"/ViewComments/" + (index + 1)}>
+              <button className="dashboard_page_btn">GO!</button>
+            </Link>{" "}
+          </li>
+        );
+      })
+    : "";
 
   return (
     <>

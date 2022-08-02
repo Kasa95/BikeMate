@@ -15,8 +15,19 @@ export const ViewComments = () => {
   return (
     <>
       <div className="row">
-        <div className="col-4">
-          <DetailsGroup />
+        <div className="col-4 mt-3">
+          {store.groupInfo.map((item, index) => (
+            <div className="mb-3" key={index}>
+              <DetailsGroup
+                name={item.name}
+                city={item.city}
+                speed={item.speed}
+                distance={item.distance}
+                users_quantity={item.users_quantity}
+                id={item.id}
+              />
+            </div>
+          ))}
           <RouteTracking />
         </div>
         <div className="col-8">
