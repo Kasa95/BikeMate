@@ -5,3 +5,55 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+.features-img {
+    width: 4rem;
+    height: 4rem;
+    margin: 1.5rem 0.5rem;
+}
+
+.width-75 {
+    width: 80%;
+    margin: auto;
+}
+
+.width-30 {
+    width: 30%;
+    flex: 0 0 auto;
+}
+
+.width-30 h3 {
+    font-weight: bold;
+}
+
+.home-orange-background {
+    background-color: #ffb07c;
+}
+
+div::after {}
+
+.orange-background-half {
+    width: 100%;
+    height: 320px;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    -webkit-clip-path: polygon(100% 0, 0 0, 100% 100%);
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    background: #ffb07c;
+}
+
+.fotoperico {
+    max-height: 55rem;
+    width: auto;
+    border-radius: 5rem;
+}
+
+.bigquote {
+    font-size: 1.85rem;
+    font-weight: 700;
+    margin-right: 0.8rem;
+}
+
+.smallquote {
+    color: rgb(73, 73, 73);
+}
