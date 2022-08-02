@@ -213,7 +213,7 @@ def dashboard_info():
     dash_info = []
 
     for x in info_groups:
-        dash_info += [{"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance , "routetype": x.routetype , "id": x.id}]
+        dash_info += [{"users_quantity":len(x.users),"name":x.name , "city":x.city , "speed":x.speed , "distance": x.distance , "routetype": x.routetype , "id": x.id}]
    
     return jsonify(dash_info), 200
 
