@@ -5,6 +5,35 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+#main-hero {
+    padding-bottom: 10rem;
+}
+
+.homeback {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    opacity: 15%;
+    z-index: -1;
+}
+
+#main-hero h1 {
+    font-size: 2.95rem;
+}
+
+.home-1st-picture {
+    border-radius: 1.25rem;
+    margin-bottom: -1.5rem;
+    border: 1px solid #dee2e6;
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    transform: translateY(-130px);
+    justify-self: center;
+}
+
 .features-img {
     width: 4rem;
     height: 4rem;
@@ -29,8 +58,6 @@
     background-color: #ffb07c;
 }
 
-div::after {}
-
 .orange-background-half {
     width: 100%;
     height: 320px;
@@ -43,9 +70,9 @@ div::after {}
 }
 
 .fotoperico {
-    max-height: 55rem;
+    max-height: 35rem;
     width: auto;
-    border-radius: 5rem;
+    border-radius: 4rem;
 }
 
 .bigquote {
@@ -56,4 +83,115 @@ div::after {}
 
 .smallquote {
     color: rgb(73, 73, 73);
+}
+
+.faqs-container {
+    padding-top: 4rem;
+    width: 50%;
+    margin: auto;
+}
+
+.accordion-item {
+    background-color: transparent;
+    border: 1px solid rgba(255, 102, 0, 0.288);
+}
+
+.accordion-button {
+    background-color: transparent;
+    font-weight: 500;
+}
+
+.accordion-button:not(.collapsed) {
+    color: inherit;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: none;
+    outline: 0;
+    box-shadow: 0 0 0 0.25remrgba (13, 110, 253, 0.25);
+}
+
+.accordion-body {
+    color: rgb(90, 90, 90);
+}
+
+.contact-us-container {
+    padding: 5rem 0;
+    width: 70%;
+    margin: auto;
+}
+
+.contact-us {
+    background: #ffe259;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #ffb07c, #ffc374);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #ffb07c, #ffc374);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    min-width: 25rem;
+    min-height: 32rem;
+    max-height: 35rem;
+    border-radius: 2rem;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 25%);
+    margin-top: 4rem;
+}
+
+.p-8 {
+    padding: 5rem 5rem 1rem 5rem !important;
+}
+
+.p-8 h1 {
+    font-weight: 600;
+}
+
+.p-8 h2 {
+    font-size: 1.5rem;
+    padding-top: 1rem;
+}
+
+.social-buttons {
+    margin-right: 1rem;
+}
+
+.social-buttons a {
+    background-color: #4a71e8;
+    border-radius: 1rem;
+    margin: 1rem;
+    width: 15%;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.social-buttons a:hover {
+    background-color: #4164ce;
+    transition: background-color 0.15s ease-in-out;
+}
+
+.social-buttons img {
+    max-width: 40%;
+    height: auto;
+    filter: invert(96%) sepia(7%) saturate(125%) hue-rotate(171deg) brightness(94%) contrast(91%);
+}
+
+.contact-us p a {
+    color: black;
+    font-weight: bold;
+}
+
+.contact-us-photo {
+    transform: translateY(-9rem);
+    border-radius: 3rem;
+    height: 560px;
+    width: auto;
+    margin-left: 4rem;
 }

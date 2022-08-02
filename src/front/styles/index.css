@@ -20,35 +20,6 @@ h1 {
     color: #fa6400;
 }
 
-#main-hero {
-    padding-bottom: 10rem;
-}
-
-.homeback {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: auto;
-    opacity: 15%;
-    z-index: -1;
-}
-
-#main-hero h1 {
-    font-size: 2.95rem;
-}
-
-.home-1st-picture {
-    border-radius: 1.25rem;
-    margin-bottom: -1.5rem;
-    border: 1px solid #dee2e6;
-    max-width: 100%;
-    height: auto;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
-    transform: translateY(-130px);
-    justify-self: center;
-}
-
 .btn-orange {
     border-color: #fa6400;
     color: #fa6400;

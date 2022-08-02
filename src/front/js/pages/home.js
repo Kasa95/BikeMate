@@ -44,7 +44,7 @@ export const Home = () => {
       </div>
       <div className="text-center container-fluid home-orange-background">
         <img
-          src="https://i.ibb.co/9rLGWRn/bm1.png"
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659470243/mainexample_edfha8.jpg"
           className="home-1st-picture"
           alt="Example image"
           width="956"
@@ -104,7 +104,7 @@ export const Home = () => {
       </div>
       <div className="">
         <div className="orange-background-half"></div>
-        <div className="row pt-5">
+        <div className="row py-5">
           <div className="col-1"></div>
           <div className="col-6 d-flex flex-column justify-content-end">
             <p className="bigquote">
@@ -119,14 +119,138 @@ export const Home = () => {
             </p>
           </div>
           <img
-            src="https://res.cloudinary.com/bikem8/image/upload/c_limit,e_improve,h_485,w_657/v1659448642/115843668_10158525436264805_5791788039133576246_n_knpq4a.jpg"
+            src="https://res.cloudinary.com/bikem8/image/upload/v1659469732/115843668_10158525436264805_5791788039133576246_n_knpq4a.jpg"
             alt=""
             className="fotoperico"
           />
         </div>
       </div>
-      <div>Preguntas frecuentes</div>
-      <div>Contactanos</div>
+      <div className="faqs-container">
+        <h2 className="text-center pb-4">
+          <b>Frequently asked questions</b>
+        </h2>
+        <div
+          className="accordion accordion-flush w-75 m-auto"
+          id="accordionFlushExample"
+        >
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="flush-headingOne">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+                aria-expanded="false"
+                aria-controls="flush-collapseOne"
+              >
+                How much does it cost?
+              </button>
+            </h2>
+            <div
+              id="flush-collapseOne"
+              className="accordion-collapse collapse"
+              aria-labelledby="flush-headingOne"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                All the base content is completely free! We may release some
+                special features in the future that could cost some money, but
+                for the time being the app is free of cost.
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="flush-headingTwo">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo"
+                aria-expanded="false"
+                aria-controls="flush-collapseTwo"
+              >
+                Who can use the app?
+              </button>
+            </h2>
+            <div
+              id="flush-collapseTwo"
+              className="accordion-collapse collapse"
+              aria-labelledby="flush-headingTwo"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                Any users over the age of 14 can register and join groups.
+              </div>
+            </div>
+          </div>
+          <div className="accordion-item">
+            <h2 className="accordion-header" id="flush-headingThree">
+              <button
+                className="accordion-button collapsed"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree"
+                aria-expanded="false"
+                aria-controls="flush-collapseThree"
+              >
+                How can I contact other users?
+              </button>
+            </h2>
+            <div
+              id="flush-collapseThree"
+              className="accordion-collapse collapse"
+              aria-labelledby="flush-headingThree"
+              data-bs-parent="#accordionFlushExample"
+            >
+              <div className="accordion-body">
+                Everyone registered with BikeMate can join any of the groups in
+                their area and post comments for all members to see. Believe us,
+                it's really simple! <Link to="/register">Register now</Link> and
+                discover how easy it is to use.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="contact-us-container">
+        <div className="contact-us">
+          <div className="container p-8 d-flex">
+            <div className="w-50">
+              <h1>
+                Interested?
+                <br />
+                Wanna know more?
+              </h1>
+              <h2>
+                Feel free to follow us on any of our social networks and send us
+                a DM there, we'll try to respond as fast as possible!
+              </h2>
+              <div className="social-buttons d-flex justify-content-around py-2">
+                <a href="https://facebook.com">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1077/1077041.png" />
+                </a>
+                <a href="https://twitter.com">
+                  <img src="https://cdn-icons-png.flaticon.com/512/2111/2111819.png" />
+                </a>
+                <a href="https://linkedin.com">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1946/1946531.png" />
+                </a>
+              </div>
+              <p className="pt-3">
+                You can also email us at{" "}
+                <a href="mailto:hello@bikemate.com">hello@bikemate.com</a>
+              </p>
+            </div>
+            <div className="w-50 text-center">
+              <img
+                src="https://res.cloudinary.com/bikem8/image/upload/v1659469452/tamas-tuzes-katai-rEn-AdBr3Ig-unsplash_kinnd5.jpg"
+                alt=""
+                className="contact-us-photo"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
