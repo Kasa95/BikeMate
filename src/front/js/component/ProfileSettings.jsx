@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const ProfileSettings = () => {
+  const [uploadImages, setUploadImages] = useState("");
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -17,14 +18,73 @@ export const ProfileSettings = () => {
           {/* <!-- left column --> */}
           <div className="col-md-3">
             <div className="text-center">
-              <img
-                src="//placehold.it/100"
-                className="avatar img-circle"
-                alt="avatar"
-              />
-              <h6>Upload a different photo...</h6>
-
-              <input type="file" className="form-control" />
+              <div>
+                <img
+                  src={store.user.photo}
+                  className="img border-2 border border-warning rounded-3"
+                  alt="..."
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="btn-primary fw-bold"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  data-bs-whatever="@mdo"
+                  data-backdrop="false"
+                >
+                  Editar Foto
+                </button>
+                <div
+                  className="modal fade modal-dialog-scrollable"
+                  id="exampleModal"
+                  tabIndex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                  data-backdrop="false"
+                >
+                  <div className="modal-dialog modal-dialog-scrollable">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                          Editar foto de perfil
+                        </h5>
+                        <button
+                          type="button"
+                          className="btn-close btnHeader"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <form>
+                          <div className="mb-3">
+                            <input
+                              className="form-control input-foto"
+                              type="file"
+                              id="formFile"
+                              onChange={(e) =>
+                                setUploadImages(e.target.files[0])
+                              }
+                            />
+                          </div>
+                        </form>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn-primary fw-bold"
+                          data-bs-dismiss="modal"
+                          onClick={(e) => actions.pictureProfile(uploadImages)}
+                        >
+                          Cargar archivo
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -137,6 +197,7 @@ export const ProfileSettings = () => {
                     onClick={() => {
                       actions.userUpdate(user);
                       console.log(user);
+                      actions.pictureprofile;
                     }}
                   >
                     Save Changes
