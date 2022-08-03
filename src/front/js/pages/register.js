@@ -80,6 +80,7 @@ export const Register = () => {
                         name="name"
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        autoComplete="name"
                       />
                     </div>
                     <div className="form-outline mb-4 col-6">
@@ -106,6 +107,7 @@ export const Register = () => {
                         name="city"
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        autoComplete="address-level2"
                       />
                     </div>
                   </div>
@@ -134,6 +136,7 @@ export const Register = () => {
                         type="email"
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        autoComplete="email"
                       />
                     </div>
                     <div className="form-outline mb-4 col-6">
@@ -161,6 +164,7 @@ export const Register = () => {
                           type="password"
                           onBlur={handleBlur}
                           onChange={handleChange}
+                          autoComplete="new-password"
                         />
                       </div>
                     </div>
