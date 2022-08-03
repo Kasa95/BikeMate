@@ -20,6 +20,7 @@ class User(db.Model):
     speed = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
     distance = db.Column(db.Integer, nullable=True) #Podemos dejar velocidad media como nula en usuarios por si no saben dato
     photo = db.Column(db.String(250), unique=False, nullable=True)
+    cover = db.Column(db.String(250), unique=False, nullable=True)
     comments = db.relationship('Comment', backref='user', lazy=True)
     groups = db.relationship('Group', secondary=user_groups, lazy='subquery',
         backref=db.backref('users', lazy=True))
@@ -54,6 +55,7 @@ class Group(db.Model):
     speed = db.Column(db.Integer, nullable=False) 
     distance = db.Column(db.Integer, nullable=False) #Aqui distancia y velocidad no deberian poder dejarse en blanco porque la idea es que el usuario busque grupos del nivel que quiera
     photo = db.Column(db.String(250), unique=False, nullable=True)
+    cover = db.Column(db.String(250), unique=False, nullable=True)
     comments = db.relationship('Comment', backref='group', lazy=True)
     meetings = db.relationship('Meeting', backref='group', lazy=True)
     
