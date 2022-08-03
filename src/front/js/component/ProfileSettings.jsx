@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 
 export const ProfileSettings = () => {
   const [uploadImages, setUploadImages] = useState("");
+  const [uploadImages1, setUploadImages1] = useState("");
   const { store, actions } = useContext(Context);
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -18,27 +19,17 @@ export const ProfileSettings = () => {
           {/* <!-- left column --> */}
           <div className="col-md-3">
             <div className="text-center">
+              {/* aqui comienza la foto de perfil */}
+
               <div>
                 <img
-                  src={store.profile.photo}
+                  src={store.user.photo}
                   style={{
                     width: "10rem",
                     height: "10rem",
                     objectFit: "cover",
                   }}
-                  className="img border-2 border border-primary rounded-3"
-                  alt="..."
-                />
-              </div>
-              <div>
-                <img
-                  src={store.profile.photo}
-                  style={{
-                    width: "10rem",
-                    height: "10rem",
-                    objectFit: "cover",
-                  }}
-                  className="img border-2 border border-primary rounded-3"
+                  className="img border-2 border border-warning rounded-3"
                   alt="..."
                 />
               </div>
@@ -51,7 +42,7 @@ export const ProfileSettings = () => {
                   data-bs-whatever="@mdo"
                   data-backdrop="false"
                 >
-                  Editar Foto
+                  Edit Profile Img
                 </button>
                 <div
                   className="modal fade modal-dialog-scrollable"
@@ -65,7 +56,7 @@ export const ProfileSettings = () => {
                     <div className="modal-content">
                       <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">
-                          Editar foto de perfil
+                          Profile Img
                         </h5>
                         <button
                           type="button"
@@ -95,7 +86,82 @@ export const ProfileSettings = () => {
                           data-bs-dismiss="modal"
                           onClick={(e) => actions.pictureProfile(uploadImages)}
                         >
-                          Cargar archivo
+                          Upload Image
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Aqui esta la parte de la foto de cover */}
+
+              <div>
+                <img
+                  src={store.user.cover}
+                  style={{
+                    width: "10rem",
+                    height: "10rem",
+                    objectFit: "cover",
+                  }}
+                  className="img border-2 border border-warning rounded-3"
+                  alt="..."
+                />
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="btn-primary fw-bold"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal2"
+                  data-bs-whatever="@mdo"
+                  data-backdrop="false"
+                >
+                  Edit Cover Img
+                </button>
+                <div
+                  className="modal fade modal-dialog-scrollable"
+                  id="exampleModal2"
+                  tabIndex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                  data-backdrop="false"
+                >
+                  <div className="modal-dialog modal-dialog-scrollable">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">
+                          Cover Image
+                        </h5>
+                        <button
+                          type="button"
+                          className="btn-close btnHeader"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <form>
+                          <div className="mb-3">
+                            <input
+                              className="form-control input-foto"
+                              type="file"
+                              id="formFile"
+                              onChange={(e) =>
+                                setUploadImages1(e.target.files[0])
+                              }
+                            />
+                          </div>
+                        </form>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn-primary fw-bold"
+                          data-bs-dismiss="modal"
+                          onClick={(e) => actions.pictureCover(uploadImages1)}
+                        >
+                          Upload Img
                         </button>
                       </div>
                     </div>

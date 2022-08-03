@@ -289,6 +289,8 @@ def edit_user():
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
+    cover = request.json.get("cover", None)
+
     # password = request.json.get("password", None)
 
     # aqui encriptamos la contraseña
@@ -327,6 +329,8 @@ def edit_user():
     #     user.password = hashed
     if photo:
         user.photo = photo
+    if cover:
+        user.cover = cover
 
     db.session.commit()
 
