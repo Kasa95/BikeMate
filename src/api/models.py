@@ -42,7 +42,8 @@ class User(db.Model):
             "distance": self.distance,
             "bikemodel": self.bikemodel,
             "routetype": self.routetype,
-            "photo": self.photo
+            "photo": self.photo,
+            "cover": self.cover
             # do not serialize the password, its a security breach
         }
 
@@ -71,7 +72,8 @@ class Group(db.Model):
             "speed": self.speed,
             "distance": self.distance,
             "routetype": self.routetype,
-            "photo": self.photo
+            "photo": self.photo,
+            "cover": self.cover
             # do not serialize the password, its a security breach
         }
 
