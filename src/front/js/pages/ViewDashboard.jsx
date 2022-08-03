@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import { Dashboard } from "../component/Dashboard.jsx";
@@ -8,6 +8,10 @@ import "../../styles/cards.css";
 
 export const ViewDashboard = () => {
   const { store, actions } = useContext(Context);
+  useEffect(() => {
+    actions.groupInfo();
+    actions.mygroupsInfo();
+  }, []);
 
   return (
     <>

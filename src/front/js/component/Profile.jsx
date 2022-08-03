@@ -9,46 +9,34 @@ export const Profile = (props) => {
   }, []);
 
   return (
-    <>
-      {" "}
-      {store.profile.city == 0 ? (
-        <>
-          <div className="dashboard_page_card dashboard_profile">
-            <div className="dashboard_page_text_content">
-              <h2 className="title">
-                About me:<br></br>
-                <br></br>
-                {store.profile.name}
-              </h2>
-              <p className="copy">UPDATE YOUR PROFILE FOR YOUR BIKEMATES</p>
-              <Link to={"/ViewProfileSettings/"}>
-                <button className="dashboard_page_btn">
-                  Edit your profile
-                </button>
-              </Link>
-            </div>
-          </div>
-        </>
-      ) : (
-        <div className="dashboard_page_card dashboard_profile">
-          <div className="dashboard_page_text_content">
-            <h2 className="title">
-              About me:<br></br>
-              <br></br>
-              {store.profile.name}
-            </h2>
-            <p className="copy">City: {store.profile.city}</p>
-            <p className="copy">
-              Average distance: {store.profile.distance} km
-            </p>
-            <p className="copy">Average speed: {store.profile.speed} km/h</p>
-            <p className="copy">Route type: {store.profile.routetype} </p>
-            <Link to={"/ViewProfileSettings/"}>
-              <button className="dashboard_page_btn">Edit your profile</button>
-            </Link>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="dashboard_profile shadow-sm">
+      <img
+        className="profile-cover"
+        src="https://res.cloudinary.com/bikem8/image/upload/c_scale,w_668/v1659546812/photo-1616963248328-6b7bea589840_siwuq4.avif"
+      />
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/2019_Tour_of_Austria_%E2%80%93_3rd_stage_20190608_%2814%29.jpg/220px-2019_Tour_of_Austria_%E2%80%93_3rd_stage_20190608_%2814%29.jpg"
+        className="profile-image"
+      />
+      <h2>{store.profile.name}</h2>
+      <h3 className="border-bottom">{store.profile.city}</h3>
+      <div className="mt-4 h-100 d-flex flex-column justify-content-around">
+        <p>
+          Average Speed: <span>{store.profile.speed}</span> km/h
+        </p>
+        <p>
+          Average Distance: <span>{store.profile.distance}</span> km
+        </p>
+        <p>
+          Route types: <span>{store.profile.routetype}</span>
+        </p>
+        <p>
+          Current bike: <span>{store.profile.bikemodel}</span>
+        </p>
+        <a href="/ViewProfileSettings" className="edit-profile-btn mb-3">
+          Edit Profile
+        </a>
+      </div>
+    </div>
   );
 };
