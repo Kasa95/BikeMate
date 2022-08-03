@@ -361,7 +361,12 @@ const getState = ({
                             }
                         );
 
-                        console.log(data);
+                        const data2 = await response2.json();
+                        setStore({
+                            user: data2,
+                        });
+                        console.log(data2);
+                        getActions().userInfo();
                     }
                 } catch (error) {
                     console.log("message", error);

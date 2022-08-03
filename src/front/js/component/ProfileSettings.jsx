@@ -20,7 +20,12 @@ export const ProfileSettings = () => {
             <div className="text-center">
               <div>
                 <img
-                  src={store.user.photo}
+                  src={store.profile.photo}
+                  style={{
+                    width: "10rem",
+                    height: "10rem",
+                    objectFit: "cover",
+                  }}
                   className="img border-2 border border-warning rounded-3"
                   alt="..."
                 />
@@ -197,7 +202,6 @@ export const ProfileSettings = () => {
                     onClick={() => {
                       actions.userUpdate(user);
                       console.log(user);
-                      actions.pictureprofile;
                     }}
                   >
                     Save Changes
