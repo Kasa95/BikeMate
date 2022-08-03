@@ -13,7 +13,7 @@ export const Profile = (props) => {
       {" "}
       {store.profile.city == 0 ? (
         <>
-          <div className="dashboard_page_card">
+          <div className="dashboard_page_card dashboard_profile">
             <div className="dashboard_page_text_content">
               <h2 className="title">
                 About me:<br></br>
@@ -30,7 +30,7 @@ export const Profile = (props) => {
           </div>
         </>
       ) : (
-        <div className="dashboard_page_card">
+        <div className="dashboard_page_card dashboard_profile">
           <div className="dashboard_page_text_content">
             <h2 className="title">
               About me:<br></br>

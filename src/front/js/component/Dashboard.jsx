@@ -9,7 +9,7 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
   }, []);
   return (
     <>
-      <div className="dashboard_page_card me-3">
+      <div className="dashboard_page_card">
         <div className="dashboard_page_text_content">
           <h2 className="title">{name}</h2>
           <p className="copy">City: {city}</p>
