@@ -289,6 +289,7 @@ def edit_user():
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
+    cover = request.json.get("cover", None)
     # password = request.json.get("password", None)
 
     # aqui encriptamos la contraseña
@@ -305,7 +306,6 @@ def edit_user():
 
     if not user :
         return jsonify("msg: Email incorrecto"), 404
-
 
     if name:    
         user.name = name
@@ -327,6 +327,8 @@ def edit_user():
     #     user.password = hashed
     if photo:
         user.photo = photo
+    if cover:
+        user.cover = cover
 
     db.session.commit()
 
@@ -348,7 +350,7 @@ def group_edit(groupId):
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
-
+    cover = request.json.get("cover", None)
 
     userEmail = get_jwt_identity()
     user = User.query.filter_by(email=userEmail).first()
@@ -361,8 +363,6 @@ def group_edit(groupId):
     # si no pertenece, no puede editar
     if not Group.query.filter(Group.users.any(id=userid)).first():
         return jsonify({"msg":"el user no pertenece al grupo, no puede editarlo"}), 404
-   
-
 
     if name:    
         group.name = name
@@ -376,6 +376,8 @@ def group_edit(groupId):
         group.distance = distance
     if photo:
         group.photo = photo
+    if cover:
+        group.cover = cover
 
     db.session.commit()
 

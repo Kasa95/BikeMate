@@ -45,8 +45,8 @@ jwt = JWTManager(app) # Y esto
 mail_settings={
     'MAIL_SERVER':'smtp.mailtrap.io',
     'MAIL_PORT' : 2525,
-    'MAIL_USERNAME' : '9c12102bb0e40d',
-    'MAIL_PASSWORD' : 'dea4b4ab177f6d',
+    'MAIL_USERNAME' : os.getenv("MAILTRAP_USER"),
+    'MAIL_PASSWORD' : os.getenv("MAILTRAP_PASS"),
     'MAIL_USE_TLS' : True,
     'MAIL_USE_SSL': False
 }
@@ -56,7 +56,7 @@ mail_settings={
 #     'MAIL_SERVER':'smtp.gmail.com',
 #     'MAIL_PORT' : 587,
 #     'MAIL_USERNAME' : 'bikemateapp@gmail.com',
-#     'MAIL_PASSWORD' : 'udlpdskhzoqjiqwk',
+#     'MAIL_PASSWORD' : 'hay que obtenerla',
 #     'MAIL_USE_TLS' : True,
 # }
 
