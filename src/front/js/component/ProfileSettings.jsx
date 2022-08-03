@@ -26,7 +26,19 @@ export const ProfileSettings = () => {
                     height: "10rem",
                     objectFit: "cover",
                   }}
-                  className="img border-2 border border-warning rounded-3"
+                  className="img border-2 border border-primary rounded-3"
+                  alt="..."
+                />
+              </div>
+              <div>
+                <img
+                  src={store.profile.photo}
+                  style={{
+                    width: "10rem",
+                    height: "10rem",
+                    objectFit: "cover",
+                  }}
+                  className="img border-2 border border-primary rounded-3"
                   alt="..."
                 />
               </div>
