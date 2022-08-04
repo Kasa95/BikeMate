@@ -289,6 +289,8 @@ def edit_user():
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
+    cover = request.json.get("cover", None)
+
     # password = request.json.get("password", None)
 
     # aqui encriptamos la contraseña
@@ -327,13 +329,15 @@ def edit_user():
     #     user.password = hashed
     if photo:
         user.photo = photo
+    if cover:
+        user.cover = cover
 
     db.session.commit()
 
     return jsonify(user.serialize()), 200
 
 
-#editar grupo
+#editar grupo. Solo un usuario que pertenezca al grupo puede editar
 @api.route('/group_edit/<int:groupId>', methods=['PUT'])
 @jwt_required()
 def group_edit(groupId):
@@ -354,9 +358,15 @@ def group_edit(groupId):
     user = User.query.filter_by(email=userEmail).first()
     group = Group.query.get(groupId)
 
+    # print (group)
 
-    # Ver con Rosinni como hacer que solo se pueda editar el grupo si el user ESTÁ en el grupo
-    # if userEmail in group:
+    userid = user.id
+    # aqui comprobamos si el usuario pertenece al grupo
+    # si no pertenece, no puede editar
+    if not Group.query.filter(Group.users.any(id=userid)).first():
+        return jsonify({"msg":"el user no pertenece al grupo, no puede editarlo"}), 404
+   
+
 
     if name:    
         group.name = name
@@ -375,9 +385,6 @@ def group_edit(groupId):
 
     return jsonify(group.serialize()), 200
     
-    # else por si el usuario no esta en el grupo y no puede editar
-    # else:
-    #     return jsonify("msg: User not in group"), 400
 
 
 # endpoint unirse a grupo
