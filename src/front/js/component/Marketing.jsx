@@ -26,7 +26,7 @@ export const Marketing = ({ name, id, distance, speed, city, routetype }) => {
             <img
               src="https://res.cloudinary.com/bikem8/image/upload/v1659551302/david-dvoracek-vE_qxEQggj0-unsplash_ydbqiv.jpg"
               alt=""
-              class="mygroups-cover"
+              className="mygroups-cover"
             />
             <div className="h-100 w-100 d-flex flex-column justify-content-around align-items-center">
               {groups_belong}
@@ -39,7 +39,7 @@ export const Marketing = ({ name, id, distance, speed, city, routetype }) => {
             <img
               src="https://res.cloudinary.com/bikem8/image/upload/v1659551302/david-dvoracek-vE_qxEQggj0-unsplash_ydbqiv.jpg"
               alt=""
-              class="mygroups-cover"
+              className="mygroups-cover"
             />
             <div className="h-100 d-flex flex-column justify-content-center align-items-center">
               <h2 className="">You do not belong to any groups</h2>
