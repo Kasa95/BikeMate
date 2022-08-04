@@ -256,7 +256,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           .then((response) => response.json())
           .then((data) => {
             setStore({
-              profile: data,
+              user: data,
             });
             // localStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
@@ -327,6 +327,98 @@ const getState = ({ getStore, getActions, setStore }) => {
             // localStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
           });
+      },
+
+      //Fetch POST para subir foto de perfil con Cloudinary
+
+      pictureProfile: async (uploadImages) => {
+        const cloud_name = "inelan"; //"pluggedin";
+        const preset = "oeytztqo"; //"icnpftra";
+        const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
+        const formData = new FormData();
+        formData.append("file", uploadImages);
+        formData.append("upload_preset", `${preset}`);
+
+        try {
+          const response = await fetch(url_claudinari, {
+            method: "POST",
+            body: formData,
+          });
+          if (response.ok) {
+            const store = getStore();
+            const data = await response.json();
+            const token = localStorage.getItem("token");
+            const response2 = await fetch(
+              process.env.BACKEND_URL + "/api/user/edit",
+              {
+                method: "PUT",
+                body: JSON.stringify({
+                  photo: data.url,
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + token,
+                },
+              }
+            );
+
+            const data2 = await response2.json();
+            // setStore({
+            //   user: data2,
+            // });
+
+            getActions().userInfo();
+          }
+        } catch (error) {
+          console.log("message", error);
+        }
+      },
+
+      //Fetch POST para subir foto de Cover con Cloudinary
+
+      pictureCover: async (uploadImages) => {
+        const cloud_name = "inelan"; //"pluggedin";
+        const preset = "oeytztqo"; //"icnpftra";
+        const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
+        const formData = new FormData();
+        formData.append("file", uploadImages);
+        formData.append("upload_preset", `${preset}`);
+
+        try {
+          const response = await fetch(url_claudinari, {
+            method: "POST",
+            body: formData,
+          });
+          if (response.ok) {
+            const store = getStore();
+            const data = await response.json();
+            const token = localStorage.getItem("token");
+            const response2 = await fetch(
+              process.env.BACKEND_URL + "/api/user/edit",
+              {
+                method: "PUT",
+                body: JSON.stringify({
+                  cover: data.url,
+                }),
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + token,
+                },
+              }
+            );
+
+            const data2 = await response2.json();
+            // setStore({
+            //   user: data2,
+            // });
+            console.log(data2);
+            getActions().userInfo();
+          }
+        } catch (error) {
+          console.log("message", error);
+        }
       },
 
       joinGroup: async (groupid) => {
