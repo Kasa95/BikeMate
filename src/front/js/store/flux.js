@@ -22,26 +22,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         },
       ],
       userList: null,
-      groupInfo: [
-        {
-          name: "null",
-          city: "null",
-          speed: "null",
-          distance: "null",
-          id: "null",
-          routetype: "null",
-        },
-      ],
-      mygroupsInfo: [
-        {
-          name: "null",
-          city: "null",
-          speed: "null",
-          distance: "null",
-          id: "null",
-          routetype: "null",
-        },
-      ],
+      groupInfo: [],
+      mygroupsInfo: [],
       profile: {},
       user: {},
       comment: [],

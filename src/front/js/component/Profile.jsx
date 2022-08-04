@@ -8,47 +8,47 @@ export const Profile = (props) => {
     actions.userInfo();
   }, []);
 
+  const userphoto = store.user.photo;
+  const coverphoto = store.user.cover;
+
   return (
-    <>
-      {" "}
-      {store.profile.city == 0 ? (
-        <>
-          <div className="dashboard_page_card">
-            <div className="dashboard_page_text_content">
-              <h2 className="title">
-                About me:<br></br>
-                <br></br>
-                {store.profile.name}
-              </h2>
-              <p className="copy">UPDATE YOUR PROFILE FOR YOUR BIKEMATES</p>
-              <Link to={"/ViewProfileSettings/"}>
-                <button className="dashboard_page_btn">
-                  Edit your profile
-                </button>
-              </Link>
-            </div>
-          </div>
-        </>
+    <div className="dashboard_profile shadow-sm">
+      {coverphoto != null ? (
+        <img src={coverphoto} className="profile-cover" />
       ) : (
-        <div className="dashboard_page_card">
-          <div className="dashboard_page_text_content">
-            <h2 className="title">
-              About me:<br></br>
-              <br></br>
-              {store.profile.name}
-            </h2>
-            <p className="copy">City: {store.profile.city}</p>
-            <p className="copy">
-              Average distance: {store.profile.distance} km
-            </p>
-            <p className="copy">Average speed: {store.profile.speed} km/h</p>
-            <p className="copy">Route type: {store.profile.routetype} </p>
-            <Link to={"/ViewProfileSettings/"}>
-              <button className="dashboard_page_btn">Edit your profile</button>
-            </Link>
-          </div>
-        </div>
+        <img
+          src="https://res.cloudinary.com/bikem8/image/upload/c_scale,w_668/v1659546812/photo-1616963248328-6b7bea589840_siwuq4.avif"
+          className="profile-cover"
+        />
       )}
-    </>
+      {userphoto != null ? (
+        <img src={userphoto} className="profile-image" />
+      ) : (
+        <img
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659604933/nullprofile_dk2zrr.jpg"
+          className="profile-image"
+        />
+      )}
+
+      <h2>{store.user.name}</h2>
+      <h3 className="border-bottom">{store.user.city}</h3>
+      <div className="mt-4 h-100 d-flex flex-column justify-content-around">
+        <p>
+          Average Speed: <span>{store.user.speed}</span> km/h
+        </p>
+        <p>
+          Average Distance: <span>{store.user.distance}</span> km
+        </p>
+        <p>
+          Route types: <span>{store.user.routetype}</span>
+        </p>
+        <p>
+          Current bike: <span>{store.user.bikemodel}</span>
+        </p>
+        <a href="/ViewProfileSettings" className="edit-profile-btn mb-3">
+          Edit Profile
+        </a>
+      </div>
+    </div>
   );
 };
