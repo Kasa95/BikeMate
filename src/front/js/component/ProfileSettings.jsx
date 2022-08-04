@@ -182,7 +182,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.profile.name}
+                    defaultValue={store.user.name}
                     onChange={(e) => {
                       setUser({ ...user, name: e.target.value });
                     }}
@@ -196,7 +196,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="e-mail"
-                    defaultValue={store.profile.email}
+                    defaultValue={store.user.email}
                   />
                 </div>
               </div>
@@ -207,7 +207,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.profile.speed}
+                    defaultValue={store.user.speed}
                     onChange={(e) => {
                       setUser({ ...user, speed: e.target.value });
                     }}
@@ -221,7 +221,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.profile.city}
+                    defaultValue={store.user.city}
                     onChange={(e) => {
                       setUser({ ...user, city: e.target.value });
                     }}
@@ -235,7 +235,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.profile.bikeModel}
+                    defaultValue={store.user.bikeModel}
                     onChange={(e) => {
                       setUser({ ...user, bikemodel: e.target.value });
                     }}
@@ -249,7 +249,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.profile.routetype}
+                    defaultValue={store.user.routetype}
                     onChange={(e) => {
                       setUser({ ...user, routetype: e.target.value });
                     }}
@@ -263,7 +263,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.profile.distance}
+                    defaultValue={store.user.distance}
                     onChange={(e) => {
                       setUser({ ...user, distance: e.target.value });
                     }}
