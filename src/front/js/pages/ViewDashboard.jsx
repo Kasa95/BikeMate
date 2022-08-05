@@ -9,7 +9,7 @@ import "../../styles/cards.css";
 export const ViewDashboard = () => {
   const { store, actions } = useContext(Context);
   useEffect(() => {
-    actions.groupInfo();
+    actions.groupsInfo();
     actions.mygroupsInfo();
   }, []);
 
@@ -23,7 +23,7 @@ export const ViewDashboard = () => {
           </div>
           <div className="col-6 col-xxl-8 mt-3">
             <p className="dash-cards-titles">Recommended groups</p>
-            {store.groupInfo.length == 0 ? (
+            {store.groupsInfo.length == 0 ? (
               <div className="dashboard_page_card">
                 <div
                   className="dashboard_page_text_content"
@@ -39,7 +39,7 @@ export const ViewDashboard = () => {
               </div>
             ) : (
               <div className="row">
-                {store.groupInfo.map((item, index) => (
+                {store.groupsInfo.map((item, index) => (
                   <div className="col-6 col-xxl-4" key={index}>
                     <Dashboard
                       name={item.name}

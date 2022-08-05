@@ -11,7 +11,7 @@ export const Search = () => {
 
   useEffect(() => {
     actions.getUserList();
-    actions.groupInfo();
+    actions.groupsInfo();
     actions.mygroupsInfo();
   }, []);
 
@@ -179,7 +179,7 @@ export const Search = () => {
               </>
             ) : (
               <>
-                {q.length >= 1 && searchGroup(store.groupInfo).length == 0 ? (
+                {q.length >= 1 && searchGroup(store.groupsInfo).length == 0 ? (
                   <p className="text-center"> No results for your query! </p>
                 ) : (
                   <> </>
@@ -197,7 +197,7 @@ export const Search = () => {
                   </>
                 ) : (
                   <>
-                    {searchGroup(store.groupInfo).map((item, index) => (
+                    {searchGroup(store.groupsInfo).map((item, index) => (
                       <SearchResult
                         key={index}
                         theName={item.name}

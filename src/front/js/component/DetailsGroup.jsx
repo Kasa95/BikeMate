@@ -12,9 +12,7 @@ export const DetailsGroup = ({
   users_quantity,
 }) => {
   const { store, actions } = useContext(Context);
-  useEffect(() => {
-    actions.groupInfo();
-  }, []);
+
   return (
     <>
       <div className="dashboard_page_card me-3">
