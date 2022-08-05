@@ -16,7 +16,7 @@ export const ViewComments = () => {
     <>
       <div className="row">
         <div className="col-4 mt-3">
-          {store.groupInfo.map((item, index) => (
+          {store.groupsInfo.map((item, index) => (
             <div className="mb-3" key={index}>
               <DetailsGroup
                 name={item.name}

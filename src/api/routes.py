@@ -352,6 +352,7 @@ def group_edit(groupId):
     speed = request.json.get("speed", None)
     distance = request.json.get("distance", None)
     photo = request.json.get("photo", None)
+    cover = request.json.get("cover", None)
 
 
     userEmail = get_jwt_identity()
@@ -380,6 +381,8 @@ def group_edit(groupId):
         group.distance = distance
     if photo:
         group.photo = photo
+    if cover:
+        group.cover = cover
 
     db.session.commit()
 

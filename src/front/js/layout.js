@@ -13,6 +13,7 @@ import { ViewDashboard } from "./pages/ViewDashboard.jsx";
 import { NewGroup } from "./pages/NewGroup.jsx";
 import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
 import { ViewProfileSettings } from "./pages/ViewProfileSettings.jsx";
+import { ViewGroupSettings } from "./pages/ViewGroupSettings.jsx";
 import { ViewComments } from "./pages/ViewComments.jsx";
 import injectContext from "./store/appContext";
 
@@ -48,6 +49,10 @@ const Layout = () => {
             <Route
               element={<ViewProfileSettings />}
               path="/ViewProfileSettings/"
+            />
+            <Route
+              element={<ViewGroupSettings />}
+              path="/ViewGroupSettings/:group_id"
             />
             <Route
               element={<ViewDetailDashboard />}

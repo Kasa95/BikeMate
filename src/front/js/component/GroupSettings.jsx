@@ -2,18 +2,23 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const ProfileSettings = () => {
-  const [uploadImages, setUploadImages] = useState("");
-  const [uploadImages1, setUploadImages1] = useState("");
+export const GroupSettings = ({
+  name,
+  id,
+  distance,
+  speed,
+  city,
+  routetype,
+}) => {
+  const [uploadImages2, setUploadImages2] = useState("");
+  //   const [uploadImages1, setUploadImages1] = useState("");
   const { store, actions } = useContext(Context);
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    actions.userInfo();
-  }, []);
+  const [group, setGroup] = useState({});
+
   return (
     <>
       <div className="container">
-        <h1>Edit Profile</h1>
+        <h1>Edit Group</h1>
         <hr />
         <div className="row">
           {/* <!-- left column --> */}
@@ -23,7 +28,7 @@ export const ProfileSettings = () => {
 
               <div>
                 <img
-                  src={store.user.photo}
+                  src={store.currentGroup.photo}
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -42,7 +47,7 @@ export const ProfileSettings = () => {
                   data-bs-whatever="@mdo"
                   data-backdrop="false"
                 >
-                  Edit Profile Img
+                  Edit Group Img
                 </button>
                 <div
                   className="modal fade modal-dialog-scrollable"
@@ -56,7 +61,7 @@ export const ProfileSettings = () => {
                     <div className="modal-content">
                       <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">
-                          Profile Img
+                          Group Img
                         </h5>
                         <button
                           type="button"
@@ -73,7 +78,7 @@ export const ProfileSettings = () => {
                               type="file"
                               id="formFile"
                               onChange={(e) =>
-                                setUploadImages(e.target.files[0])
+                                setUploadImages2(e.target.files[0])
                               }
                             />
                           </div>
@@ -84,9 +89,11 @@ export const ProfileSettings = () => {
                           type="button"
                           className="btn-primary fw-bold"
                           data-bs-dismiss="modal"
-                          onClick={(e) => actions.pictureProfile(uploadImages)}
+                          onClick={(e) =>
+                            actions.pictureGroup(uploadImages2, id)
+                          }
                         >
-                          Upload Image
+                          Upload Img
                         </button>
                       </div>
                     </div>
@@ -131,7 +138,7 @@ export const ProfileSettings = () => {
                     <div className="modal-content">
                       <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">
-                          Cover Image
+                          Cover Img
                         </h5>
                         <button
                           type="button"
@@ -173,85 +180,32 @@ export const ProfileSettings = () => {
 
           {/* <!-- edit form column --> */}
           <div className="col-md-9 personal-info">
-            <h3>Personal info</h3>
+            <h3>Group info</h3>
 
             <form className="form-horizontal" role="form">
               <div className="form-group">
-                <label className="col-lg-3 control-label">UserName:</label>
+                <label className="col-lg-3 control-label">Group Name:</label>
                 <div className="col-lg-8">
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.user.name}
+                    defaultValue={name}
                     onChange={(e) => {
-                      setUser({ ...user, name: e.target.value });
+                      setGroup({ ...group, name: e.target.value });
                     }}
                   />
                 </div>
               </div>
 
               <div className="form-group">
-                <label className="col-lg-3 control-label">Email:</label>
-                <div className="col-lg-8">
-                  <input
-                    className="form-control"
-                    type="e-mail"
-                    defaultValue={store.user.email}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-3 control-label">Speed:</label>
+                <label className="col-md-3 control-label">Group Speed:</label>
                 <div className="col-md-8">
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.user.speed}
+                    defaultValue={speed + "km/h"}
                     onChange={(e) => {
-                      setUser({ ...user, speed: e.target.value });
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-3 control-label">City:</label>
-                <div className="col-md-8">
-                  <input
-                    className="form-control"
-                    type="text"
-                    defaultValue={store.user.city}
-                    onChange={(e) => {
-                      setUser({ ...user, city: e.target.value });
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-3 control-label">Bikemodel:</label>
-                <div className="col-md-8">
-                  <input
-                    className="form-control"
-                    type="text"
-                    defaultValue={store.user.bikeModel}
-                    onChange={(e) => {
-                      setUser({ ...user, bikemodel: e.target.value });
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-3 control-label">RouteType:</label>
-                <div className="col-md-8">
-                  <input
-                    className="form-control"
-                    type="text"
-                    defaultValue={store.user.routetype}
-                    onChange={(e) => {
-                      setUser({ ...user, routetype: e.target.value });
+                      setGroup({ ...group, speed: e.target.value });
                     }}
                   />
                 </div>
@@ -263,9 +217,37 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.user.distance}
+                    defaultValue={distance}
                     onChange={(e) => {
-                      setUser({ ...user, distance: e.target.value });
+                      setGroup({ ...group, distance: e.target.value });
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="col-md-3 control-label">Route Type:</label>
+                <div className="col-md-8">
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={routetype}
+                    onChange={(e) => {
+                      setGroup({ ...group, routetype: e.target.value });
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="col-md-3 control-label">City:</label>
+                <div className="col-md-8">
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={city}
+                    onChange={(e) => {
+                      setGroup({ ...group, city: e.target.value });
                     }}
                   />
                 </div>
@@ -278,8 +260,8 @@ export const ProfileSettings = () => {
                     type="button"
                     className="btn btn-primary"
                     onClick={() => {
-                      actions.userUpdate(user);
-                      console.log(user);
+                      actions.groupUpdate(group, id);
+                      console.log(group);
                     }}
                   >
                     Save Changes
