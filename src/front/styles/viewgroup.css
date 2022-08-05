@@ -1,0 +1,67 @@
+.top-div-background {
+    background-color: #fdb465;
+    color: #f6f6f6;
+}
+
+.groupinfo {
+    height: 20rem;
+    box-shadow: none;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    text-align: center;
+    color: rgb(46, 46, 46);
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    background: #eff1f7;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #ffffff, #eaecf3);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #ffffff, #eaecf3);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.group-cover {
+    height: auto;
+    width: 100%;
+    max-height: 30%;
+    object-fit: cover;
+    filter: brightness(50%);
+    transition: filter 0.3s ease-in-out;
+}
+
+.group-cover:hover {
+    filter: brightness(75%);
+    transition: filter 0.3s ease-in-out;
+}
+
+.group-image {
+    max-height: 25%;
+    max-width: 25%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    outline: thick solid #ffffff;
+    transform: translateY(-3rem);
+}
+
+.groupinfo h2 {
+    text-align: center;
+    margin-top: -2rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.groupinfo h3 {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.groupinfo p {
+    font-size: 0.75rem;
+}

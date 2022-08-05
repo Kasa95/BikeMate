@@ -16,13 +16,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       auth: false,
       userDetails: {},
-      groupDetails: [
-        {
-          name: "luis",
-        },
-      ],
       userList: null,
-      groupInfo: [],
+      currentGroup: {},
       mygroupsInfo: [],
       profile: {},
       user: {},
@@ -427,6 +422,29 @@ const getState = ({ getStore, getActions, setStore }) => {
             return true;
           } else {
             alert("Not able to join group");
+          }
+        } catch (error) {
+          console.log("There is an error with the server", error);
+        }
+      },
+      getOneGroupInfo: async (groupid) => {
+        try {
+          const getGroupInfo = {
+            method: "GET",
+          };
+          const response = await fetch(
+            // process.env.BACKEND_URL + `api/group/${groupid}`,
+            process.env.BACKEND_URL + `/api/group/${groupid}`,
+            getGroupInfo
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            setStore({
+              currentGroup: data,
+            });
+          } else {
+            alert("Can't load group info");
           }
         } catch (error) {
           console.log("There is an error with the server", error);
