@@ -11,7 +11,7 @@ export const GroupSettings = ({
   routetype,
 }) => {
   const [uploadImages2, setUploadImages2] = useState("");
-  //   const [uploadImages1, setUploadImages1] = useState("");
+  const [uploadImages3, setUploadImages3] = useState("");
   const { store, actions } = useContext(Context);
   const [group, setGroup] = useState({});
 
@@ -43,7 +43,7 @@ export const GroupSettings = ({
                   type="button"
                   className="btn-primary fw-bold"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
+                  data-bs-target="#exampleModal3"
                   data-bs-whatever="@mdo"
                   data-backdrop="false"
                 >
@@ -51,7 +51,7 @@ export const GroupSettings = ({
                 </button>
                 <div
                   className="modal fade modal-dialog-scrollable"
-                  id="exampleModal"
+                  id="exampleModal3"
                   tabIndex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
@@ -105,7 +105,7 @@ export const GroupSettings = ({
 
               <div>
                 <img
-                  src={store.user.cover}
+                  src={store.currentGroup.cover}
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -120,7 +120,7 @@ export const GroupSettings = ({
                   type="button"
                   className="btn-primary fw-bold"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal2"
+                  data-bs-target="#exampleModal4"
                   data-bs-whatever="@mdo"
                   data-backdrop="false"
                 >
@@ -128,7 +128,7 @@ export const GroupSettings = ({
                 </button>
                 <div
                   className="modal fade modal-dialog-scrollable"
-                  id="exampleModal2"
+                  id="exampleModal4"
                   tabIndex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
@@ -155,7 +155,7 @@ export const GroupSettings = ({
                               type="file"
                               id="formFile"
                               onChange={(e) =>
-                                setUploadImages1(e.target.files[0])
+                                setUploadImages3(e.target.files[0])
                               }
                             />
                           </div>
@@ -166,7 +166,7 @@ export const GroupSettings = ({
                           type="button"
                           className="btn-primary fw-bold"
                           data-bs-dismiss="modal"
-                          onClick={(e) => actions.pictureCover(uploadImages1)}
+                          onClick={(e) => actions.pictureCover(uploadImages3)}
                         >
                           Upload Img
                         </button>
