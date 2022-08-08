@@ -23,7 +23,7 @@ export const ViewComments = () => {
     <>
       <div className="container">
         <div className="row pt-3">
-          <div className="col-4 mt-3">
+          <div className="col-3 mt-3">
             <div className="mb-3">
               <DetailsGroup
                 name={currentgroup.name}
@@ -36,12 +36,14 @@ export const ViewComments = () => {
                 // groupphoto={currentgroup.picture}
               />
             </div>
-            <RouteTracking />
           </div>
-          <div className="col-8">
+          <div className="col-6">
             <div className="row">
               <Commentsection group_id={groupid} />
             </div>
+          </div>
+          <div className="col-3 mt-3">
+            <RouteTracking />
           </div>
         </div>
       </div>

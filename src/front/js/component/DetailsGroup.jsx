@@ -19,7 +19,7 @@ export const DetailsGroup = ({
           <img src={coverphoto} className="profile-cover" />
         ) : ( */}
         <img
-          src="https://res.cloudinary.com/bikem8/image/upload/c_scale,w_668/v1659546812/photo-1616963248328-6b7bea589840_siwuq4.avif"
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659949125/martin-magnemyr-nGt71kRwUOw-unsplash_pvkaed.jpg"
           className="group-cover"
         />
         {/* )} */}
@@ -27,14 +27,14 @@ export const DetailsGroup = ({
           <img src={userphoto} className="profile-image" />
         ) : ( */}
         <img
-          src="https://res.cloudinary.com/bikem8/image/upload/v1659604933/nullprofile_dk2zrr.jpg"
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659949072/groupodefault_tv5fmg.jpg"
           className="group-image"
         />
         {/* )} */}
 
         <h2>{name}</h2>
         <h3 className="border-bottom">{city}</h3>
-        <div className="row w-100 pt-2">
+        <div className="row w-100 pt-3">
           <p className="col-6">
             Average Speed <br />
             {speed} km/h
