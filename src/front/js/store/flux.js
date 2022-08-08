@@ -23,6 +23,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       profile: {},
       user: {},
       comment: [],
+      groupRoutes: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -517,6 +518,65 @@ const getState = ({ getStore, getActions, setStore }) => {
             });
           } else {
             alert("Can't load group info");
+          }
+        } catch (error) {
+          console.log("There is an error with the server", error);
+        }
+      },
+
+      // crear ruta
+      createNewRoute: async (groupid, values) => {
+        try {
+          const accessToken = localStorage.getItem("token");
+          const createRoute = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + accessToken,
+            },
+            body: JSON.stringify({
+              address: values.location,
+              info: values.info,
+              date: values.dateTime,
+            }),
+          };
+          const response = await fetch(
+            process.env.BACKEND_URL + `/api/new_route/${groupid}`,
+            createRoute
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            return data;
+          } else {
+            alert("Location can't be found");
+          }
+        } catch (error) {
+          console.log("There is an error with the server", error);
+        }
+      },
+
+      // traer rutas de grupo
+      getGroupRoutes: async (groupid) => {
+        try {
+          const getRoutes = {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          };
+          const response = await fetch(
+            process.env.BACKEND_URL + `/api/routes/${groupid}`,
+            getRoutes
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            setStore({
+              groupRoutes: data,
+            });
+          } else {
+            log("No routes in this group");
           }
         } catch (error) {
           console.log("There is an error with the server", error);

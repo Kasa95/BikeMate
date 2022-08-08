@@ -69,7 +69,6 @@
 }
 
 .map-box {
-    height: 20rem;
     box-shadow: none;
     position: relative;
     overflow: hidden;
@@ -87,4 +86,41 @@
     /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to top, #ffffff, #eaecf3);
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.map-box h2 {
+    font-size: 1.75rem;
+    padding: 0.35rem 0;
+    margin-bottom: 0;
+}
+
+.show-map-form {
+    transition: display 0.2s ease-in-out;
+}
+
+.no-show-form {
+    display: none;
+    transition: display 0.2s ease-in-out;
+}
+
+.display-newroute {
+    position: absolute;
+    z-index: 2;
+    left: 25%;
+    width: 50%;
+    /* height: 80%; */
+    animation: fadeIn 0.5s;
+    overflow-y: auto;
+}
+
+.pop-up-route {
+    width: 40rem;
+    /* height: 58rem; */
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border-radius: 20px;
+    padding: 30px 30px 70px;
+    box-shadow: 0px 10px 15px -3px rgb(0 0 0 / 10%);
 }

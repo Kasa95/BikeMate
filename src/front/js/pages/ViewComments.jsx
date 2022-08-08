@@ -43,7 +43,7 @@ export const ViewComments = () => {
             </div>
           </div>
           <div className="col-3 mt-3">
-            <RouteTracking />
+            <RouteTracking groupid={groupid} />
           </div>
         </div>
       </div>
