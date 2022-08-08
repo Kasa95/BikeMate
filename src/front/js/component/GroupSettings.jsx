@@ -43,7 +43,7 @@ export const GroupSettings = ({
                   type="button"
                   className="btn-primary fw-bold"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal3"
+                  data-bs-target="#exampleModal"
                   data-bs-whatever="@mdo"
                   data-backdrop="false"
                 >
@@ -51,7 +51,7 @@ export const GroupSettings = ({
                 </button>
                 <div
                   className="modal fade modal-dialog-scrollable"
-                  id="exampleModal3"
+                  id="exampleModal"
                   tabIndex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
@@ -120,7 +120,7 @@ export const GroupSettings = ({
                   type="button"
                   className="btn-primary fw-bold"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal4"
+                  data-bs-target="#exampleModal2"
                   data-bs-whatever="@mdo"
                   data-backdrop="false"
                 >
@@ -128,7 +128,7 @@ export const GroupSettings = ({
                 </button>
                 <div
                   className="modal fade modal-dialog-scrollable"
-                  id="exampleModal4"
+                  id="exampleModal2"
                   tabIndex="-1"
                   aria-labelledby="exampleModalLabel"
                   aria-hidden="true"
@@ -166,7 +166,9 @@ export const GroupSettings = ({
                           type="button"
                           className="btn-primary fw-bold"
                           data-bs-dismiss="modal"
-                          onClick={(e) => actions.pictureCover(uploadImages3)}
+                          onClick={(e) =>
+                            actions.pictureGroupCover(uploadImages3, id)
+                          }
                         >
                           Upload Img
                         </button>

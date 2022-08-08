@@ -467,6 +467,49 @@ const getState = ({
                 }
             },
 
+            //Fetch POST para subir foto de COVER DE GRUPO con Cloudinary
+
+            pictureGroupCover: async (uploadImages, groupid) => {
+                const cloud_name = "inelan"; //"pluggedin";
+                const preset = "oeytztqo"; //"icnpftra";
+                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
+
+                const formData = new FormData();
+                formData.append("file", uploadImages);
+                formData.append("upload_preset", `${preset}`);
+                console.log(groupid);
+                try {
+                    const response = await fetch(url_claudinari, {
+                        method: "POST",
+                        body: formData,
+                    });
+                    if (response.ok) {
+                        const store = getStore();
+                        const data = await response.json();
+                        const token = localStorage.getItem("token");
+                        const response2 = await fetch(
+                            process.env.BACKEND_URL + `/api/group_edit/${groupid}`, {
+                                method: "PUT",
+                                body: JSON.stringify({
+                                    cover: data.url,
+                                }),
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    Authorization: "Bearer " + token,
+                                },
+                            }
+                        );
+
+                        const data2 = await response2.json();
+                        setStore({
+                            currentGroup: data2,
+                        });
+                    }
+                } catch (error) {
+                    console.log("message", error);
+                }
+            },
+
             // unirse a un grupo
             joinGroup: async (groupid) => {
                 try {
