@@ -4,7 +4,6 @@ import { Context } from "../store/appContext";
 
 export const DetailsGroup = ({
   name,
-  id,
   distance,
   speed,
   city,
@@ -15,43 +14,47 @@ export const DetailsGroup = ({
 
   return (
     <>
-      <div className="dashboard_page_card me-3">
-        <div className="dashboard_page_text_content">
-          <h2 className="title">{name}</h2>
-          <p className="copy">Members:{users_quantity}</p>
-          <p className="copy">City: {city}</p>
-          <p className="copy">Average distance: {distance} km</p>
-          <p className="copy">Average speed: {speed} km/h</p>
-          {/* <p className="copy">Route type: {routetype} </p> */}
+      <div className="groupinfo shadow-sm">
+        {/* {coverphoto != null ? (
+          <img src={coverphoto} className="profile-cover" />
+        ) : ( */}
+        <img
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659949125/martin-magnemyr-nGt71kRwUOw-unsplash_pvkaed.jpg"
+          className="group-cover"
+        />
+        {/* )} */}
+        {/* {userphoto != null ? (
+          <img src={userphoto} className="profile-image" />
+        ) : ( */}
+        <img
+          src="https://res.cloudinary.com/bikem8/image/upload/v1659949072/groupodefault_tv5fmg.jpg"
+          className="group-image"
+        />
+        {/* )} */}
+
+        <h2>{name}</h2>
+        <h3 className="border-bottom">{city}</h3>
+        <div className="row w-100 pt-3">
+          <p className="col-6">
+            Average Speed <br />
+            {speed} km/h
+          </p>
+          <p className="col-6">
+            Average Distance <br />
+            {distance} km
+          </p>
+        </div>
+        <div className="row w-100">
+          <p className="col-6">
+            Route types <br />
+            {routetype}
+          </p>
+          <p className="col-6">
+            Members <br />
+            {users_quantity}
+          </p>
         </div>
       </div>
     </>
   );
 };
-
-// import React, { useContext, useEffect } from "react";
-// import { Link } from "react-router-dom";
-// import { Context } from "../store/appContext";
-
-// export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
-//   const { store, actions } = useContext(Context);
-//   useEffect(() => {
-//     actions.groupInfo();
-//   }, []);
-//   return (
-//     <>
-//       <div className="dashboard_page_card me-3">
-//         <div className="dashboard_page_text_content">
-//           <h2 className="title">{name}</h2>
-//           <p className="copy">City: {city}</p>
-//           <p className="copy">Average distance: {distance} km</p>
-//           <p className="copy">Average speed: {speed} km/h</p>
-//           {/* <p className="copy">Route type: {routetype} </p> */}
-//           <Link to={"/ViewComments/" + id}>
-//             <button className="dashboard_page_btn">Unirse</button>
-//           </Link>
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
