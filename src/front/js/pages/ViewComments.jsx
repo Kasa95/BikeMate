@@ -17,7 +17,7 @@ export const ViewComments = () => {
   }, []);
 
   const currentgroup = store.currentGroup;
-  console.log(currentgroup);
+  // console.log(currentgroup);
 
   return (
     <>

@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: {},
       comment: [],
       groupRoutes: [],
+      nextRoute: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -614,8 +615,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.ok) {
             const data = await response.json();
+            const allRoutes = data;
+            const firstRoute = data.shift();
+            let firstRouteArray = [];
+            firstRouteArray.push(firstRoute);
             setStore({
-              groupRoutes: data,
+              nextRoute: firstRouteArray,
+              groupRoutes: allRoutes,
             });
           } else {
             log("No routes in this group");

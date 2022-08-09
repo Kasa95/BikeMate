@@ -29,7 +29,7 @@ export const AddNewRoute = ({ groupid }) => {
       const response = await actions.createNewRoute(group_id, values);
       setLat(response.latitude);
       setLong(response.longitude);
-      console.log(lat, long);
+      actions.getGroupRoutes(group_id);
     },
   });
 
@@ -38,7 +38,7 @@ export const AddNewRoute = ({ groupid }) => {
       id="staticBackdrop"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
