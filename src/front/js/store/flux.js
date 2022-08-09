@@ -337,16 +337,12 @@ const getState = ({
             //Fetch POST para subir foto de perfil con Cloudinary
 
             pictureProfile: async (uploadImages) => {
-                const cloud_name = "inelan"; //"pluggedin";
-                const preset = "oeytztqo"; //"icnpftra";
-                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
-
                 const formData = new FormData();
                 formData.append("file", uploadImages);
-                formData.append("upload_preset", `${preset}`);
+                formData.append("upload_preset", process.env.CLOUDINARY_PRESET);
 
                 try {
-                    const response = await fetch(url_claudinari, {
+                    const response = await fetch(process.env.CLOUDINARY_URL, {
                         method: "POST",
                         body: formData,
                     });
@@ -382,16 +378,12 @@ const getState = ({
             //Fetch POST para subir foto de Cover de Perfil con Cloudinary
 
             pictureCover: async (uploadImages) => {
-                const cloud_name = "inelan"; //"pluggedin";
-                const preset = "oeytztqo"; //"icnpftra";
-                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
-
                 const formData = new FormData();
                 formData.append("file", uploadImages);
-                formData.append("upload_preset", `${preset}`);
+                formData.append("upload_preset", process.env.CLOUDINARY_PRESET);
 
                 try {
-                    const response = await fetch(url_claudinari, {
+                    const response = await fetch(process.env.CLOUDINARY_URL, {
                         method: "POST",
                         body: formData,
                     });
@@ -427,16 +419,12 @@ const getState = ({
             //Fetch POST para subir foto de GRUPO con Cloudinary
 
             pictureGroup: async (uploadImages, groupid) => {
-                const cloud_name = "inelan"; //"pluggedin";
-                const preset = "oeytztqo"; //"icnpftra";
-                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
-
                 const formData = new FormData();
                 formData.append("file", uploadImages);
-                formData.append("upload_preset", `${preset}`);
+                formData.append("upload_preset", process.env.CLOUDINARY_PRESET);
                 console.log(groupid);
                 try {
-                    const response = await fetch(url_claudinari, {
+                    const response = await fetch(process.env.CLOUDINARY_URL, {
                         method: "POST",
                         body: formData,
                     });
@@ -470,16 +458,12 @@ const getState = ({
             //Fetch POST para subir foto de COVER DE GRUPO con Cloudinary
 
             pictureGroupCover: async (uploadImages, groupid) => {
-                const cloud_name = "inelan"; //"pluggedin";
-                const preset = "oeytztqo"; //"icnpftra";
-                const url_claudinari = `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`;
-
                 const formData = new FormData();
                 formData.append("file", uploadImages);
-                formData.append("upload_preset", `${preset}`);
+                formData.append("upload_preset", process.env.CLOUDINARY_PRESET);
                 console.log(groupid);
                 try {
-                    const response = await fetch(url_claudinari, {
+                    const response = await fetch(process.env.CLOUDINARY_URL, {
                         method: "POST",
                         body: formData,
                     });
