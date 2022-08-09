@@ -15,7 +15,7 @@ export const NewGroupSuccess = ({ groupId }) => {
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div className="container-fluid display-newgroupsuccess d-flex justify-content-center">
+      <div className="container-fluid display-newroute d-flex justify-content-center">
         <div className="cookiesContent" id="cookiesPopup">
           <img
             src="https://cdn-icons-png.flaticon.com/512/5716/5716716.png"

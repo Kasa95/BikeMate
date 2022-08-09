@@ -17,7 +17,7 @@ const Commentsection = ({ group_id }) => {
       replies: [],
     };
   });
-  console.log(store.profile);
+  // console.log(store.profile);
   const customNoComment = () => (
     <div className="no-com">Sheessh! Zero Comments posted here!</div>
   );
@@ -43,7 +43,7 @@ const Commentsection = ({ group_id }) => {
         customNoComment={() => customNoComment()}
         onDeleteAction={(data) => console.log(data)}
         currentData={(data) => {
-          console.log("curent data", data);
+          // console.log("curent data", data);
         }}
         // onEditAction={() => actions.addComment(1, store.comment[0].text)}
       />

@@ -17,7 +17,7 @@ export const ViewComments = () => {
   }, []);
 
   const currentgroup = store.currentGroup;
-  console.log(currentgroup);
+  // console.log(currentgroup);
 
   return (
     <>
@@ -32,6 +32,7 @@ export const ViewComments = () => {
                 distance={currentgroup.distance}
                 users_quantity={currentgroup.users_quantity}
                 routetype={currentgroup.routetype}
+                groupid={currentgroup.id}
                 // coverphoto={currentgroup.cover}
                 // groupphoto={currentgroup.picture}
               />
@@ -43,7 +44,7 @@ export const ViewComments = () => {
             </div>
           </div>
           <div className="col-3 mt-3">
-            <RouteTracking />
+            <RouteTracking groupid={groupid} />
           </div>
         </div>
       </div>

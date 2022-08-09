@@ -19,9 +19,19 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
           </p>
 
           {/* <p className="copy">Route type: {routetype} </p> */}
-          <Link to={"/ViewComments/" + id}>
-            <button className="dashboard_page_btn">Visitar</button>
-          </Link>
+          <div>
+            <Link to={"/ViewComments/" + id}>
+              <button className="dashboard_page_btn">Visit</button>
+            </Link>
+            <a
+              className="dashboard_page_btn"
+              onClick={() => {
+                actions.joinGroup(id);
+              }}
+            >
+              Join!
+            </a>
+          </div>
         </div>
       </div>
     </>
