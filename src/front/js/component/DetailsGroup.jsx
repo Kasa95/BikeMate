@@ -9,8 +9,10 @@ export const DetailsGroup = ({
   city,
   routetype,
   users_quantity,
+  groupid,
 }) => {
   const { store, actions } = useContext(Context);
+  console.log(groupid);
 
   return (
     <>
@@ -53,6 +55,12 @@ export const DetailsGroup = ({
             Members <br />
             {users_quantity}
           </p>
+          <Link
+            to={"/ViewGroupSettings/" + groupid}
+            className="edit-profile-btn mb-3"
+          >
+            Edit Group
+          </Link>
         </div>
       </div>
     </>
