@@ -26,8 +26,7 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
             <a
               className="dashboard_page_btn"
               onClick={() => {
-                actions.joinGroup(groupId);
-                setAlreadyJoined(true);
+                actions.joinGroup(id);
               }}
             >
               Join!
