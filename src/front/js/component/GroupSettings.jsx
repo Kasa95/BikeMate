@@ -11,7 +11,7 @@ export const GroupSettings = ({
   routetype,
 }) => {
   const [uploadImages2, setUploadImages2] = useState("");
-  //   const [uploadImages1, setUploadImages1] = useState("");
+  const [uploadImages3, setUploadImages3] = useState("");
   const { store, actions } = useContext(Context);
   const [group, setGroup] = useState({});
 
@@ -105,7 +105,7 @@ export const GroupSettings = ({
 
               <div>
                 <img
-                  src={store.user.cover}
+                  src={store.currentGroup.cover}
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -155,7 +155,7 @@ export const GroupSettings = ({
                               type="file"
                               id="formFile"
                               onChange={(e) =>
-                                setUploadImages1(e.target.files[0])
+                                setUploadImages3(e.target.files[0])
                               }
                             />
                           </div>
@@ -166,7 +166,9 @@ export const GroupSettings = ({
                           type="button"
                           className="btn-primary fw-bold"
                           data-bs-dismiss="modal"
-                          onClick={(e) => actions.pictureCover(uploadImages1)}
+                          onClick={(e) =>
+                            actions.pictureGroupCover(uploadImages3, id)
+                          }
                         >
                           Upload Img
                         </button>
