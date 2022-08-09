@@ -205,7 +205,7 @@ export const GroupSettings = ({
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={speed + "km/h"}
+                    defaultValue={speed}
                     onChange={(e) => {
                       setGroup({ ...group, speed: e.target.value });
                     }}

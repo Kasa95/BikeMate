@@ -9,6 +9,7 @@ export const DetailsGroup = ({
   city,
   routetype,
   users_quantity,
+  id,
 }) => {
   const { store, actions } = useContext(Context);
 
@@ -53,6 +54,9 @@ export const DetailsGroup = ({
             Members <br />
             {users_quantity}
           </p>
+          <Link to={"/ViewGroupSettings/" + id}>
+            <button className="dashboard_page_btn">Edit Group</button>
+          </Link>
         </div>
       </div>
     </>

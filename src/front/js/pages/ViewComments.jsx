@@ -32,6 +32,7 @@ export const ViewComments = () => {
                 distance={currentgroup.distance}
                 users_quantity={currentgroup.users_quantity}
                 routetype={currentgroup.routetype}
+                id={currentgroup.id}
                 // coverphoto={currentgroup.cover}
                 // groupphoto={currentgroup.picture}
               />

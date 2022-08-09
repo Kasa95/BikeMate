@@ -25,7 +25,7 @@ export const ViewGroupSettings = () => {
           speed={currentgroup.speed}
           distance={currentgroup.distance}
           routetype={currentgroup.routetype}
-          id={currentgroup.id}
+          id={group_id}
         />
       </div>
     </>
