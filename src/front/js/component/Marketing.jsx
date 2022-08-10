@@ -12,7 +12,7 @@ export const Marketing = ({ name, id, distance, speed, city, routetype }) => {
             <b>{store.mygroupsInfo[index].name}</b>
             <br /> {store.mygroupsInfo[index].city}
             <br />
-            <Link to={"/ViewComments/" + (index + 1)}>GO!</Link>
+            <Link to={"/group/" + (index + 1)}>GO!</Link>
           </div>
         );
       })

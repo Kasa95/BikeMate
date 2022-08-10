@@ -6,7 +6,7 @@ export const NewUserSuccess = (userName) => {
   console.log(userName);
   useEffect(() => {
     setTimeout(() => {
-      navigate("/ViewDashboard");
+      navigate("/dashboard");
     }, 3000);
   }, []);
   return (

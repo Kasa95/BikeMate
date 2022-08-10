@@ -15,7 +15,7 @@ export const Navbar = () => {
           <div className="row">
             <div className="text-start col-6">
               <Link
-                to="/ViewDashboard"
+                to="/dashboard"
                 className="text-decoration-none text-light display-5"
               >
                 <img
@@ -30,11 +30,8 @@ export const Navbar = () => {
             </div>
             <ul className="nav col-4 justify-content-end align-items-center mt-2">
               <li>
-                <Link
-                  to="/ViewDashboard"
-                  className="nav-link px-2 text-secondary"
-                >
-                  Dashboard
+                <Link to="/dashboard" className="nav-link px-2 text-secondary">
+                  Home
                 </Link>
               </li>
               <li>
@@ -68,7 +65,7 @@ export const Navbar = () => {
                   aria-labelledby="dropdownMenuButton1"
                 >
                   <li>
-                    <Link to="/ViewProfileSettings" className="dropdown-item">
+                    <Link to="/edit_profile" className="dropdown-item">
                       My Profile
                     </Link>
                   </li>

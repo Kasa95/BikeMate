@@ -33,7 +33,7 @@ export const SearchResult = ({
         ) : (
           <h5
             className="search-result-title"
-            onClick={() => navigate(`/ViewComments/${groupId}`)}
+            onClick={() => navigate(`/group/${groupId}`)}
             style={{ cursor: "pointer" }}
           >
             <b>{theName}</b>
@@ -91,7 +91,7 @@ export const SearchResult = ({
           >
             <a
               className="visitgroup"
-              onClick={() => navigate(`/ViewComments/${groupId}`)}
+              onClick={() => navigate(`/group/${groupId}`)}
             >
               Visit group
             </a>

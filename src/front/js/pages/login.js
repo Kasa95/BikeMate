@@ -24,7 +24,7 @@ export const Login = () => {
               )}
               {store.auth === true ? (
                 <>
-                  <Navigate to="/ViewDashboard" />
+                  <Navigate to="/dashboard" />
                 </>
               ) : (
                 <Formik

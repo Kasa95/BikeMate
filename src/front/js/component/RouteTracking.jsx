@@ -16,14 +16,16 @@ export const RouteTracking = ({ groupid }) => {
 
   const [showForm, setShowForm] = useState(false);
 
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
   const handleShow = () => {
     setShowForm(showForm === true ? false : true);
+    setLat(0);
+    setLong(0);
   };
 
   // empieza form
   const group_id = groupid;
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
 
   const {
     values,
@@ -33,6 +35,7 @@ export const RouteTracking = ({ groupid }) => {
     handleSubmit,
     touched,
     isSubmitting,
+    resetForm,
   } = useFormik({
     initialValues: {
       dateTime: "",
@@ -45,6 +48,7 @@ export const RouteTracking = ({ groupid }) => {
       setLat(response.latitude);
       setLong(response.longitude);
       actions.getGroupRoutes(group_id);
+      resetForm({ values: "" });
     },
   });
 
@@ -185,54 +189,67 @@ export const RouteTracking = ({ groupid }) => {
         ""
       )}
       <div className="map-box shadow-sm">
-        <h2>Next meeting:</h2>
-        {store.nextRoute.map((item) => (
-          <p>
-            <b>{item.date}</b>
-            <br />
-            {item.address}
-            <br />
-            Additional info: {item.info}
-            <div className="p-3 border-bottom" style={{ width: "100%" }}>
-              <iframe
-                style={{ borderRadius: "1rem" }}
-                width="100%"
-                height="200"
-                frameBorder="0"
-                scrolling="no"
-                marginHeight="0"
-                marginWidth="0"
-                src={`https://maps.google.com/?q=
+        <h2>Next meeting:</h2>{" "}
+        {store.nextRoute[0] === undefined ? (
+          <p className="px-3">
+            There are no meetings for this group. Why don't you create your own?
+          </p>
+        ) : (
+          <>
+            {store.nextRoute.map((item) => (
+              <p>
+                <b>{item.date}</b>
+                <br />
+                {item.address}
+                <br />
+                Additional info: {item.info}
+                <div className="p-3 border-bottom" style={{ width: "100%" }}>
+                  <iframe
+                    style={{ borderRadius: "1rem" }}
+                    width="100%"
+                    height="200"
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight="0"
+                    marginWidth="0"
+                    src={`https://maps.google.com/?q=
               ${item.latitude}
               ,
               ${item.longitude}
               &z=14&t=m&output=embed`}
-              ></iframe>
-            </div>
-          </p>
-        ))}
-
-        <button className="add-meeting-btn" onClick={handleShow}>
+                  ></iframe>
+                </div>
+              </p>
+            ))}
+          </>
+        )}
+        <button className="add-meeting-btn mb-4" onClick={handleShow}>
           NEW MEETING
         </button>
-        <h2>Future meetings:</h2>
-        {store.groupRoutes.map((item, index) => (
-          <p className="py-2 px-1" key={index}>
-            <b>{item.date}</b>
-            <br />
-            {item.address}{" "}
-            <a
-              href={
-                "https://maps.google.com/?q=" +
-                item.latitude +
-                "," +
-                item.longitude
-              }
-            >
-              (Open in Google Maps)
-            </a>
-          </p>
-        ))}
+        {store.groupRoutes.length == 0 ? (
+          ""
+        ) : (
+          <>
+            <h2>Future meetings:</h2>
+            {store.groupRoutes.map((item, index) => (
+              <p className="py-2 px-1" key={index}>
+                <b>{item.date}</b>
+                <br />
+                {item.address}{" "}
+                <a
+                  href={
+                    "https://maps.google.com/?q=" +
+                    item.latitude +
+                    "," +
+                    item.longitude
+                  }
+                >
+                  (Open in Google Maps)
+                </a>
+              </p>
+            ))}
+          </>
+        )}
       </div>
     </>
   );

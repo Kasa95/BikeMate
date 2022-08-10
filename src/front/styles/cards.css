@@ -168,6 +168,7 @@
     color: white;
     background-color: black;
     border: none;
+    text-decoration: none;
 }
 
 .dashboard_page_btn:hover {
@@ -412,4 +413,25 @@
     width: 100%;
     padding: 0.5rem;
     margin: 1rem 0;
+}
+
+.dashboard_page_btn:hover {
+    color: white;
+}
+
+.dashboard_page_btn_disabled:hover {
+    color: rgb(156, 156, 156);
+}
+
+.dashboard_page_btn_disabled {
+    cursor: auto;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+    letter-spacing: 0.025rem;
+    text-transform: uppercase;
+    color: rgb(156, 156, 156);
+    background-color: black;
+    border: none;
+    text-decoration: none;
 }

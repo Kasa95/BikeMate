@@ -13,7 +13,7 @@ export const ProfileSettings = () => {
   return (
     <>
       <div className="container">
-        <h1>Edit Profile</h1>
+        <h1 className="pt-3">Edit Profile</h1>
         <hr />
         <div className="row">
           {/* <!-- left column --> */}
@@ -21,12 +21,12 @@ export const ProfileSettings = () => {
             <div className="text-center">
               {/* aqui comienza la foto de perfil */}
 
-              <div>
+              <div className="py-2">
                 <img
                   src={
                     store.user.photo
                       ? store.user.photo
-                      : "https://res.cloudinary.com/bikem8/image/upload/c_scale,w_668/v1659546812/photo-1616963248328-6b7bea589840_siwuq4.avif"
+                      : "https://res.cloudinary.com/bikem8/image/upload/v1659604933/nullprofile_dk2zrr.jpg"
                   }
                   style={{
                     width: "10rem",
@@ -37,10 +37,10 @@ export const ProfileSettings = () => {
                   alt="..."
                 />
               </div>
-              <div>
+              <div className="py-2">
                 <button
                   type="button"
-                  className="btn-primary fw-bold"
+                  className="btn-primary p-1 rounded"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   data-bs-whatever="@mdo"
@@ -100,12 +100,12 @@ export const ProfileSettings = () => {
 
               {/* Aqui esta la parte de la foto de cover */}
 
-              <div>
+              <div className="py-2">
                 <img
                   src={
                     store.user.cover
                       ? store.user.cover
-                      : "https://res.cloudinary.com/bikem8/image/upload/v1659604933/nullprofile_dk2zrr.jpg"
+                      : "https://res.cloudinary.com/bikem8/image/upload/c_scale,w_668/v1659546812/photo-1616963248328-6b7bea589840_siwuq4.avif"
                   }
                   style={{
                     width: "10rem",
@@ -116,10 +116,10 @@ export const ProfileSettings = () => {
                   alt="..."
                 />
               </div>
-              <div>
+              <div className="py-2">
                 <button
                   type="button"
-                  className="btn-primary fw-bold"
+                  className="btn-primary p-1 rounded"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal2"
                   data-bs-whatever="@mdo"
@@ -282,7 +282,7 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-md-3 control-label"></label>
                 <div className="col-md-8">
-                  <Link to={"/ViewDashboard"}>
+                  <Link to={"/dashboard"}>
                     <button
                       type="button"
                       className="btn btn-primary"
@@ -295,7 +295,7 @@ export const ProfileSettings = () => {
                     </button>
                   </Link>
                   <span></span>
-                  <Link to={"/ViewDashboard"}>
+                  <Link to={"/dashboard"}>
                     <input
                       type="reset"
                       className="btn btn-default"
@@ -308,7 +308,6 @@ export const ProfileSettings = () => {
           </div>
         </div>
       </div>
-      <hr />
     </>
   );
 };
