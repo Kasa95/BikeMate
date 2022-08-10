@@ -23,7 +23,11 @@ export const ProfileSettings = () => {
 
               <div>
                 <img
-                  src={store.user.photo}
+                  src={
+                    store.user.photo
+                      ? store.user.photo
+                      : "https://res.cloudinary.com/bikem8/image/upload/c_scale,w_668/v1659546812/photo-1616963248328-6b7bea589840_siwuq4.avif"
+                  }
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -98,7 +102,11 @@ export const ProfileSettings = () => {
 
               <div>
                 <img
-                  src={store.user.cover}
+                  src={
+                    store.user.cover
+                      ? store.user.cover
+                      : "https://res.cloudinary.com/bikem8/image/upload/v1659604933/nullprofile_dk2zrr.jpg"
+                  }
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -274,22 +282,26 @@ export const ProfileSettings = () => {
               <div className="form-group">
                 <label className="col-md-3 control-label"></label>
                 <div className="col-md-8">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                      actions.userUpdate(user);
-                      console.log(user);
-                    }}
-                  >
-                    Save Changes
-                  </button>
+                  <Link to={"/ViewDashboard"}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        actions.userUpdate(user);
+                        console.log(user);
+                      }}
+                    >
+                      Save Changes
+                    </button>
+                  </Link>
                   <span></span>
-                  <input
-                    type="reset"
-                    className="btn btn-default"
-                    value="Cancel"
-                  />
+                  <Link to={"/ViewDashboard"}>
+                    <input
+                      type="reset"
+                      className="btn btn-default"
+                      value="Cancel"
+                    />
+                  </Link>
                 </div>
               </div>
             </form>
