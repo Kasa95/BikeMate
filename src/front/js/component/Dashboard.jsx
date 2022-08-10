@@ -23,14 +23,18 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
             <Link to={"/ViewComments/" + id}>
               <button className="dashboard_page_btn">Visit</button>
             </Link>
-            <a
-              className="dashboard_page_btn"
-              onClick={() => {
-                actions.joinGroup(id);
-              }}
-            >
-              Join!
-            </a>
+            {store.mygroupsInfo.includes(id) ? (
+              ""
+            ) : (
+              <a
+                className="dashboard_page_btn"
+                onClick={() => {
+                  actions.joinGroup(id);
+                }}
+              >
+                Join!
+              </a>
+            )}
           </div>
         </div>
       </div>

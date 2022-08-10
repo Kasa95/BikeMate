@@ -16,14 +16,16 @@ export const RouteTracking = ({ groupid }) => {
 
   const [showForm, setShowForm] = useState(false);
 
+  const [lat, setLat] = useState(0);
+  const [long, setLong] = useState(0);
   const handleShow = () => {
     setShowForm(showForm === true ? false : true);
+    setLat(0);
+    setLong(0);
   };
 
   // empieza form
   const group_id = groupid;
-  const [lat, setLat] = useState(0);
-  const [long, setLong] = useState(0);
 
   const {
     values,
@@ -33,6 +35,7 @@ export const RouteTracking = ({ groupid }) => {
     handleSubmit,
     touched,
     isSubmitting,
+    resetForm,
   } = useFormik({
     initialValues: {
       dateTime: "",
@@ -45,6 +48,7 @@ export const RouteTracking = ({ groupid }) => {
       setLat(response.latitude);
       setLong(response.longitude);
       actions.getGroupRoutes(group_id);
+      resetForm({ values: "" });
     },
   });
 
@@ -186,8 +190,8 @@ export const RouteTracking = ({ groupid }) => {
       )}
       <div className="map-box shadow-sm">
         <h2>Next meeting:</h2>{" "}
-        {store.nextRoute.length == 1 ? (
-          <p>
+        {store.nextRoute[0] === undefined ? (
+          <p className="px-3">
             There are no meetings for this group. Why don't you create your own?
           </p>
         ) : (
