@@ -38,7 +38,7 @@ export const ViewDashboard = () => {
                 </div>
               </div>
             ) : (
-              <div className="row">
+              <div className="row d-flex justify-content-evenly">
                 {store.groupsInfo.map((item, index) => (
                   <div className="col-6 col-xxl-4" key={index}>
                     <Dashboard

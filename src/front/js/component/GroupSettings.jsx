@@ -200,12 +200,14 @@ export const GroupSettings = ({
               </div>
 
               <div className="form-group">
-                <label className="col-md-3 control-label">Group Speed:</label>
+                <label className="col-md-3 control-label">
+                  Group Speed Km/h:
+                </label>
                 <div className="col-md-8">
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={speed + "km/h"}
+                    defaultValue={speed}
                     onChange={(e) => {
                       setGroup({ ...group, speed: e.target.value });
                     }}
@@ -214,7 +216,9 @@ export const GroupSettings = ({
               </div>
 
               <div className="form-group">
-                <label className="col-md-3 control-label">Distance:</label>
+                <label className="col-md-3 control-label">
+                  Distance in Km:
+                </label>
                 <div className="col-md-8">
                   <input
                     className="form-control"
@@ -258,22 +262,26 @@ export const GroupSettings = ({
               <div className="form-group">
                 <label className="col-md-3 control-label"></label>
                 <div className="col-md-8">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => {
-                      actions.groupUpdate(group, id);
-                      console.log(group);
-                    }}
-                  >
-                    Save Changes
-                  </button>
+                  <Link to={"/ViewDashboard"}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        actions.groupUpdate(group, id);
+                        console.log(group);
+                      }}
+                    >
+                      Save Changes
+                    </button>
+                  </Link>
                   <span></span>
-                  <input
-                    type="reset"
-                    className="btn btn-default"
-                    value="Cancel"
-                  />
+                  <Link to={"/ViewDashboard"}>
+                    <input
+                      type="reset"
+                      className="btn btn-default"
+                      value="Cancel"
+                    />
+                  </Link>
                 </div>
               </div>
             </form>
