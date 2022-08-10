@@ -210,7 +210,7 @@ export const ProfileSettings = () => {
               </div>
 
               <div className="form-group">
-                <label className="col-md-3 control-label">Speed:</label>
+                <label className="col-md-3 control-label">Speed Km/h:</label>
                 <div className="col-md-8">
                   <input
                     className="form-control"
@@ -218,6 +218,22 @@ export const ProfileSettings = () => {
                     defaultValue={store.user.speed}
                     onChange={(e) => {
                       setUser({ ...user, speed: e.target.value });
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="col-md-3 control-label">
+                  Distance in Km:
+                </label>
+                <div className="col-md-8">
+                  <input
+                    className="form-control"
+                    type="text"
+                    defaultValue={store.user.distance}
+                    onChange={(e) => {
+                      setUser({ ...user, distance: e.target.value });
                     }}
                   />
                 </div>
@@ -243,7 +259,7 @@ export const ProfileSettings = () => {
                   <input
                     className="form-control"
                     type="text"
-                    defaultValue={store.user.bikeModel}
+                    defaultValue={store.user.bikemodel}
                     onChange={(e) => {
                       setUser({ ...user, bikemodel: e.target.value });
                     }}
@@ -252,7 +268,7 @@ export const ProfileSettings = () => {
               </div>
 
               <div className="form-group">
-                <label className="col-md-3 control-label">RouteType:</label>
+                <label className="col-md-3 control-label">Route Type:</label>
                 <div className="col-md-8">
                   <input
                     className="form-control"
@@ -260,20 +276,6 @@ export const ProfileSettings = () => {
                     defaultValue={store.user.routetype}
                     onChange={(e) => {
                       setUser({ ...user, routetype: e.target.value });
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label className="col-md-3 control-label">Distance:</label>
-                <div className="col-md-8">
-                  <input
-                    className="form-control"
-                    type="text"
-                    defaultValue={store.user.distance}
-                    onChange={(e) => {
-                      setUser({ ...user, distance: e.target.value });
                     }}
                   />
                 </div>
