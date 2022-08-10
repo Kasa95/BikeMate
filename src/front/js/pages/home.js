@@ -28,7 +28,7 @@ export const Home = () => {
             <Link
               to={
                 localStorage.getItem("auth") === "true"
-                  ? "/ViewDashboard"
+                  ? "/dashboard"
                   : "/register"
               }
               type="button"
@@ -44,7 +44,7 @@ export const Home = () => {
       </div>
       <div className="text-center container-fluid home-orange-background">
         <img
-          src="https://res.cloudinary.com/bikem8/image/upload/v1659470243/mainexample_edfha8.jpg"
+          src="https://res.cloudinary.com/bikem8/image/upload/v1660156725/main_hero1_q3pbm9.webp"
           className="home-1st-picture"
           alt="Example image"
           width="956"

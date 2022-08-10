@@ -12,7 +12,7 @@ export const Footer = () => {
         <ul className="nav col-md-4 justify-content-end">
           <li className="nav-item">
             {store.auth === true || localStorage.getItem("auth") === "true" ? (
-              <Link to="/ViewDashboard" className="nav-link px-2 text-muted">
+              <Link to="/dashboard" className="nav-link px-2 text-muted">
                 Dashboard
               </Link>
             ) : (

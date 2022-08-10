@@ -25,13 +25,13 @@ export const NewGroupSuccess = ({ groupId }) => {
           <div className="d-flex justify-content-evenly">
             <button
               className="viewgroup"
-              onClick={() => navigate(`/ViewComments/${groupId}`)}
+              onClick={() => navigate(`/group/${groupId}`)}
             >
               View Group
             </button>
             <button
               className="backtodash"
-              onClick={() => navigate("/ViewDashboard")}
+              onClick={() => navigate("/dashboard")}
             >
               Back to Dashboard
             </button>

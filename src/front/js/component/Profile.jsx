@@ -45,7 +45,7 @@ export const Profile = (props) => {
         <p>
           Current bike: <span>{store.user.bikemodel}</span>
         </p>
-        <a href="/ViewProfileSettings" className="edit-profile-btn mb-3">
+        <a href="/edit_profile" className="edit-profile-btn mb-3">
           Edit Profile
         </a>
       </div>

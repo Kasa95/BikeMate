@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Dashboard } from "../component/Dashboard.jsx";
 import { Profile } from "../component/Profile.jsx";
 import { Marketing } from "../component/Marketing.jsx";
@@ -13,7 +13,7 @@ export const ViewDashboard = () => {
     actions.mygroupsInfo();
   }, []);
 
-  return (
+  return localStorage.getItem("auth") == "true" ? (
     <>
       <div className="container-fluid">
         <div className="row px-5">
@@ -60,6 +60,10 @@ export const ViewDashboard = () => {
           </div>
         </div>
       </div>
+    </>
+  ) : (
+    <>
+      <Navigate to="/login" />
     </>
   );
 };

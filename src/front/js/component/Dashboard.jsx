@@ -20,7 +20,7 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
 
           {/* <p className="copy">Route type: {routetype} </p> */}
           <div>
-            <Link to={"/ViewComments/" + id}>
+            <Link to={"/group/" + id}>
               <button className="dashboard_page_btn">Visit</button>
             </Link>
             {store.mygroupsInfo.filter((e) => e.group_id === id).length > 0 ? (

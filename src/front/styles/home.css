@@ -67,6 +67,7 @@
     -webkit-clip-path: polygon(100% 0, 0 0, 100% 100%);
     clip-path: polygon(100% 0, 0 0, 100% 100%);
     background: #ffb07c;
+    margin-top: -1px;
 }
 
 .fotoperico {

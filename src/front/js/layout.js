@@ -11,7 +11,6 @@ import { Terms } from "./pages/terms";
 import { Search } from "./pages/search";
 import { ViewDashboard } from "./pages/ViewDashboard.jsx";
 import { NewGroup } from "./pages/NewGroup.jsx";
-import { ViewDetailDashboard } from "./pages/ViewDetailDashboard.jsx";
 import { ViewProfileSettings } from "./pages/ViewProfileSettings.jsx";
 import { ViewGroupSettings } from "./pages/ViewGroupSettings.jsx";
 import { ViewComments } from "./pages/ViewComments.jsx";
@@ -40,23 +39,12 @@ const Layout = () => {
             <Route element={<Search />} path="/search" />
             <Route element={<NewGroup />} path="/new-group" />
             <Route element={<Single />} path="/single/:theid" />
-            <Route element={<ViewDashboard />} path="/ViewDashboard/" />
-            <Route
-              element={<ViewComments />}
-              exact
-              path="/ViewComments/:group_id"
-            />
-            <Route
-              element={<ViewProfileSettings />}
-              path="/ViewProfileSettings/"
-            />
+            <Route element={<ViewDashboard />} path="/dashboard/" />
+            <Route element={<ViewComments />} exact path="/group/:group_id" />
+            <Route element={<ViewProfileSettings />} path="/edit_profile/" />
             <Route
               element={<ViewGroupSettings />}
-              path="/ViewGroupSettings/:group_id"
-            />
-            <Route
-              element={<ViewDetailDashboard />}
-              path="/ViewDetailDashboard/"
+              path="/edit_group/:group_id"
             />
             <Route element={<h1> Not found! </h1>} />
           </Routes>{" "}

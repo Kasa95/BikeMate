@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { DetailsGroup } from "../component/DetailsGroup.jsx";
 import { RouteTracking } from "../component/RouteTracking.jsx";
 import Commentsection from "../component/Comentsection.jsx";
@@ -19,7 +19,7 @@ export const ViewComments = () => {
   const currentgroup = store.currentGroup;
   // console.log(currentgroup);
 
-  return (
+  return localStorage.getItem("auth") == "true" ? (
     <>
       <div className="container">
         <div className="row pt-3">
@@ -48,6 +48,10 @@ export const ViewComments = () => {
           </div>
         </div>
       </div>
+    </>
+  ) : (
+    <>
+      <Navigate to="/login" />
     </>
   );
 };

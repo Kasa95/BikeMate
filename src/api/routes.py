@@ -241,7 +241,7 @@ def group_dinamic(groupId):
 
     users_quantity = len(current_group.users)
     group_comments = current_group.comments
-    group_info = {"name":current_group.name , "city":current_group.city , "id":current_group.id, "speed":current_group.speed , "distance":current_group.distance, "routetype":current_group.routetype ,"users_quantity":users_quantity}
+    group_info = {"name":current_group.name , "city":current_group.city , "id":current_group.id, "speed":current_group.speed , "distance":current_group.distance, "routetype":current_group.routetype ,"users_quantity":users_quantity, "photo":current_group.photo, "cover":current_group.cover}
    
     return jsonify(group_info), 200
 

@@ -168,6 +168,7 @@
     color: white;
     background-color: black;
     border: none;
+    text-decoration: none;
 }
 
 .dashboard_page_btn:hover {
@@ -432,4 +433,5 @@
     color: rgb(156, 156, 156);
     background-color: black;
     border: none;
+    text-decoration: none;
 }

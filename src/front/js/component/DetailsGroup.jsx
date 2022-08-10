@@ -21,7 +21,11 @@ export const DetailsGroup = ({
           <img src={coverphoto} className="profile-cover" />
         ) : ( */}
         <img
-          src="https://res.cloudinary.com/bikem8/image/upload/v1659949125/martin-magnemyr-nGt71kRwUOw-unsplash_pvkaed.jpg"
+          src={
+            store.currentGroup.cover
+              ? store.currentGroup.cover
+              : "https://res.cloudinary.com/bikem8/image/upload/v1659949125/martin-magnemyr-nGt71kRwUOw-unsplash_pvkaed.jpg"
+          }
           className="group-cover"
         />
         {/* )} */}
@@ -29,7 +33,11 @@ export const DetailsGroup = ({
           <img src={userphoto} className="profile-image" />
         ) : ( */}
         <img
-          src="https://res.cloudinary.com/bikem8/image/upload/v1659949072/groupodefault_tv5fmg.jpg"
+          src={
+            store.currentGroup.photo
+              ? store.currentGroup.photo
+              : "https://res.cloudinary.com/bikem8/image/upload/v1659949072/groupodefault_tv5fmg.jpg"
+          }
           className="group-image"
         />
         {/* )} */}
@@ -55,10 +63,7 @@ export const DetailsGroup = ({
             Members <br />
             {users_quantity}
           </p>
-          <Link
-            to={"/ViewGroupSettings/" + groupid}
-            className="edit-profile-btn mb-3"
-          >
+          <Link to={"/edit_group/" + groupid} className="edit-profile-btn mb-3">
             Edit Group
           </Link>
         </div>

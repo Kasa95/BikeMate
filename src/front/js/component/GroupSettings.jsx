@@ -18,7 +18,7 @@ export const GroupSettings = ({
   return (
     <>
       <div className="container">
-        <h1>Edit Group</h1>
+        <h1 className="pt-3">Edit Group</h1>
         <hr />
         <div className="row">
           {/* <!-- left column --> */}
@@ -26,9 +26,13 @@ export const GroupSettings = ({
             <div className="text-center">
               {/* aqui comienza la foto de perfil */}
 
-              <div>
+              <div className="py-2">
                 <img
-                  src={store.currentGroup.photo}
+                  src={
+                    store.currentGroup.photo
+                      ? store.currentGroup.photo
+                      : "https://res.cloudinary.com/bikem8/image/upload/v1659949072/groupodefault_tv5fmg.jpg"
+                  }
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -38,10 +42,10 @@ export const GroupSettings = ({
                   alt="..."
                 />
               </div>
-              <div>
+              <div className="py-2">
                 <button
                   type="button"
-                  className="btn-primary fw-bold"
+                  className="btn-primary p-1 rounded"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   data-bs-whatever="@mdo"
@@ -103,9 +107,13 @@ export const GroupSettings = ({
 
               {/* Aqui esta la parte de la foto de cover */}
 
-              <div>
+              <div className="py-2">
                 <img
-                  src={store.currentGroup.cover}
+                  src={
+                    store.currentGroup.cover
+                      ? store.currentGroup.cover
+                      : "https://res.cloudinary.com/bikem8/image/upload/v1659949125/martin-magnemyr-nGt71kRwUOw-unsplash_pvkaed.jpg"
+                  }
                   style={{
                     width: "10rem",
                     height: "10rem",
@@ -115,10 +123,10 @@ export const GroupSettings = ({
                   alt="..."
                 />
               </div>
-              <div>
+              <div className="py-2">
                 <button
                   type="button"
-                  className="btn-primary fw-bold"
+                  className="btn-primary p-1 rounded"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal2"
                   data-bs-whatever="@mdo"
@@ -262,7 +270,7 @@ export const GroupSettings = ({
               <div className="form-group">
                 <label className="col-md-3 control-label"></label>
                 <div className="col-md-8">
-                  <Link to={"/ViewDashboard"}>
+                  <Link to={"/dashboard"}>
                     <button
                       type="button"
                       className="btn btn-primary"
@@ -275,7 +283,7 @@ export const GroupSettings = ({
                     </button>
                   </Link>
                   <span></span>
-                  <Link to={"/ViewDashboard"}>
+                  <Link to={"/group/" + id}>
                     <input
                       type="reset"
                       className="btn btn-default"
@@ -288,7 +296,6 @@ export const GroupSettings = ({
           </div>
         </div>
       </div>
-      <hr />
     </>
   );
 };
