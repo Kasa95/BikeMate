@@ -23,8 +23,8 @@ export const Dashboard = ({ name, id, distance, speed, city, routetype }) => {
             <Link to={"/ViewComments/" + id}>
               <button className="dashboard_page_btn">Visit</button>
             </Link>
-            {store.mygroupsInfo.includes(id) ? (
-              ""
+            {store.mygroupsInfo.filter((e) => e.group_id === id).length > 0 ? (
+              <a className="dashboard_page_btn_disabled">Joined</a>
             ) : (
               <a
                 className="dashboard_page_btn"

@@ -226,19 +226,19 @@ export const Home = () => {
                 a DM there, we'll try to respond as fast as possible!
               </h2>
               <div className="social-buttons d-flex justify-content-around py-2">
-                <a href="https://facebook.com">
+                <a href="https://www.facebook.com/BikeMateApp/">
                   <img src="https://cdn-icons-png.flaticon.com/512/1077/1077041.png" />
                 </a>
-                <a href="https://twitter.com">
+                <a href="https://twitter.com/Bikemateapp">
                   <img src="https://cdn-icons-png.flaticon.com/512/2111/2111819.png" />
                 </a>
-                <a href="https://linkedin.com">
-                  <img src="https://cdn-icons-png.flaticon.com/512/1946/1946531.png" />
+                <a href="https://www.instagram.com/bikemateapp/">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1077/1077042.png" />
                 </a>
               </div>
               <p className="pt-3">
                 You can also email us at{" "}
-                <a href="mailto:hello@bikemate.com">hello@bikemate.com</a>
+                <a href="mailto:bikemateapp@gmail.com">bikemateapp@gmail.com</a>
               </p>
             </div>
             <div className="w-50 text-center">

@@ -34,7 +34,7 @@ export const Navbar = () => {
                   to="/ViewDashboard"
                   className="nav-link px-2 text-secondary"
                 >
-                  Dashboard
+                  Home
                 </Link>
               </li>
               <li>
