@@ -185,54 +185,67 @@ export const RouteTracking = ({ groupid }) => {
         ""
       )}
       <div className="map-box shadow-sm">
-        <h2>Next meeting:</h2>
-        {store.nextRoute.map((item) => (
+        <h2>Next meeting:</h2>{" "}
+        {store.nextRoute.length == 1 ? (
           <p>
-            <b>{item.date}</b>
-            <br />
-            {item.address}
-            <br />
-            Additional info: {item.info}
-            <div className="p-3 border-bottom" style={{ width: "100%" }}>
-              <iframe
-                style={{ borderRadius: "1rem" }}
-                width="100%"
-                height="200"
-                frameBorder="0"
-                scrolling="no"
-                marginHeight="0"
-                marginWidth="0"
-                src={`https://maps.google.com/?q=
+            There are no meetings for this group. Why don't you create your own?
+          </p>
+        ) : (
+          <>
+            {store.nextRoute.map((item) => (
+              <p>
+                <b>{item.date}</b>
+                <br />
+                {item.address}
+                <br />
+                Additional info: {item.info}
+                <div className="p-3 border-bottom" style={{ width: "100%" }}>
+                  <iframe
+                    style={{ borderRadius: "1rem" }}
+                    width="100%"
+                    height="200"
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight="0"
+                    marginWidth="0"
+                    src={`https://maps.google.com/?q=
               ${item.latitude}
               ,
               ${item.longitude}
               &z=14&t=m&output=embed`}
-              ></iframe>
-            </div>
-          </p>
-        ))}
-
-        <button className="add-meeting-btn" onClick={handleShow}>
+                  ></iframe>
+                </div>
+              </p>
+            ))}
+          </>
+        )}
+        <button className="add-meeting-btn mb-4" onClick={handleShow}>
           NEW MEETING
         </button>
-        <h2>Future meetings:</h2>
-        {store.groupRoutes.map((item, index) => (
-          <p className="py-2 px-1" key={index}>
-            <b>{item.date}</b>
-            <br />
-            {item.address}{" "}
-            <a
-              href={
-                "https://maps.google.com/?q=" +
-                item.latitude +
-                "," +
-                item.longitude
-              }
-            >
-              (Open in Google Maps)
-            </a>
-          </p>
-        ))}
+        {store.groupRoutes.length == 0 ? (
+          ""
+        ) : (
+          <>
+            <h2>Future meetings:</h2>
+            {store.groupRoutes.map((item, index) => (
+              <p className="py-2 px-1" key={index}>
+                <b>{item.date}</b>
+                <br />
+                {item.address}{" "}
+                <a
+                  href={
+                    "https://maps.google.com/?q=" +
+                    item.latitude +
+                    "," +
+                    item.longitude
+                  }
+                >
+                  (Open in Google Maps)
+                </a>
+              </p>
+            ))}
+          </>
+        )}
       </div>
     </>
   );
