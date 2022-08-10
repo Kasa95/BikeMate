@@ -19,7 +19,7 @@ export const ViewComments = () => {
   const currentgroup = store.currentGroup;
   // console.log(currentgroup);
 
-  return localStorage.getItem("auth") == "true" ? (
+  return sessionStorage.getItem("auth") == "true" ? (
     <>
       <div className="container">
         <div className="row pt-3">

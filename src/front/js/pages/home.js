@@ -27,14 +27,14 @@ export const Home = () => {
             </h3>
             <Link
               to={
-                localStorage.getItem("auth") === "true"
+                sessionStorage.getItem("auth") === "true"
                   ? "/dashboard"
                   : "/register"
               }
               type="button"
               className="btn btn-violet btn-lg px-4 me-sm-3 my-3 w-75"
             >
-              {localStorage.getItem("auth") === "true"
+              {sessionStorage.getItem("auth") === "true"
                 ? "GO TO DASHBOARD"
                 : "GET STARTED"}
             </Link>

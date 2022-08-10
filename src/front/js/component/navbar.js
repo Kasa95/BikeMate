@@ -10,7 +10,7 @@ export const Navbar = () => {
 
   return (
     <nav className="p-3 bg-white text-white sticky-top shadow-sm">
-      {store.auth === true || localStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
+      {store.auth === true || sessionStorage.getItem("auth") === "true" ? ( // aquí la barra de navegación cuando estamos logueados
         <div className="container">
           <div className="row">
             <div className="text-start col-6">
@@ -54,10 +54,10 @@ export const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  {localStorage.getItem("name") === null ? (
+                  {sessionStorage.getItem("name") === null ? (
                     "User"
                   ) : (
-                    <>{localStorage.getItem("name")}</>
+                    <>{sessionStorage.getItem("name")}</>
                   )}
                 </button>
                 <ul

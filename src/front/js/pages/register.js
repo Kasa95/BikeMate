@@ -36,7 +36,7 @@ export const Register = () => {
 
   return (
     <>
-      {newUserSuccess.length > 15 || localStorage.getItem("auth") === "true" ? (
+      {newUserSuccess.length > 15 || sessionStorage.getItem("auth") === "true" ? (
         <NewUserSuccess userName={values.name} />
       ) : (
         ""
@@ -45,7 +45,7 @@ export const Register = () => {
         <div
           className={
             newUserSuccess.length > 15 ||
-            localStorage.getItem("auth") === "true"
+            sessionStorage.getItem("auth") === "true"
               ? "totally-transparent-form"
               : "row d-flex justify-content-center align-items-center h-100"
           }

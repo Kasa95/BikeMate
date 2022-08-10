@@ -8,7 +8,7 @@ import "../../styles/commentbox.css";
 export const ViewDetailDashboard = () => {
   const { store, actions } = useContext(Context);
 
-  return localStorage.getItem("auth") == "true" ? (
+  return sessionStorage.getItem("auth") == "true" ? (
     <div className="mt-5">
       <DetailDashboard />
     </div>

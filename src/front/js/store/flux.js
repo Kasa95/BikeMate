@@ -50,11 +50,11 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await response.json();
           if (response.ok) {
-            localStorage.setItem("token", data.access_token);
-            localStorage.setItem("name", data.name);
-            localStorage.setItem("city", data.city);
-            localStorage.setItem("speed", data.speed);
-            localStorage.setItem("auth", true);
+            sessionStorage.setItem("token", data.access_token);
+            sessionStorage.setItem("name", data.name);
+            sessionStorage.setItem("city", data.city);
+            sessionStorage.setItem("speed", data.speed);
+            sessionStorage.setItem("auth", true);
             setStore({
               auth: true,
             });
@@ -68,9 +68,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout: () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("auth");
-        localStorage.removeItem("name");
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("auth");
+        sessionStorage.removeItem("name");
         setStore({
           auth: false,
         });
@@ -147,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               groupsInfo: data,
             });
-            // localStorage.setItem("groupName", data.name);
+            // sessionStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
           });
       },
@@ -155,7 +155,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       //Fetch PUT para actualizar datos de un grupo
 
       groupUpdate: (group, groupid) => {
-        const accesToken = localStorage.getItem("token");
+        const accesToken = sessionStorage.getItem("token");
         console.log(accesToken);
         fetch(process.env.BACKEND_URL + `/api/group_edit/${groupid}`, {
           method: "PUT",
@@ -176,7 +176,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       //Fetch para traer info grupos a los que pertenezco
       mygroupsInfo: () => {
-        const accesToken = localStorage.getItem("token");
+        const accesToken = sessionStorage.getItem("token");
         fetch(process.env.BACKEND_URL + "/api/get_usergroups", {
           method: "GET",
           headers: {
@@ -189,7 +189,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               mygroupsInfo: data,
             });
-            // localStorage.setItem("groupName", data.name);
+            // sessionStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
           });
       },
@@ -201,7 +201,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               userList: data,
             });
-            // localStorage.setItem("groupName", data.name);
+            // sessionStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
           });
       },
@@ -230,9 +230,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           const data = await response.json();
           if (response.ok) {
-            localStorage.setItem("token", data.access_token);
-            localStorage.setItem("auth", true);
-            localStorage.setItem("name", values.name);
+            sessionStorage.setItem("token", data.access_token);
+            sessionStorage.setItem("auth", true);
+            sessionStorage.setItem("name", values.name);
             setStore({
               auth: true,
             });
@@ -246,7 +246,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       userInfo: () => {
-        const accesToken = localStorage.getItem("token");
+        const accesToken = sessionStorage.getItem("token");
         console.log(accesToken);
         fetch(process.env.BACKEND_URL + "/api/profile", {
           method: "GET",
@@ -260,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               user: data,
             });
-            // localStorage.setItem("groupName", data.name);
+            // sessionStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
           });
       },
@@ -268,7 +268,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       //Fetch PUT para actualizar datos de perfil
 
       userUpdate: (user) => {
-        const accesToken = localStorage.getItem("token");
+        const accesToken = sessionStorage.getItem("token");
         console.log(accesToken);
         fetch(process.env.BACKEND_URL + "/api/user/edit", {
           method: "PUT",
@@ -292,7 +292,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       addComment: (group_id, data) => {
         const { text } = data;
-        const accesToken = localStorage.getItem("token");
+        const accesToken = sessionStorage.getItem("token");
 
         fetch(process.env.BACKEND_URL + "/api/comment/" + group_id, {
           method: "POST",
@@ -313,7 +313,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       //Fetch GET para traer comentarios
 
       getComment: (id) => {
-        //const accesToken = localStorage.getItem("token");
+        //const accesToken = sessionStorage.getItem("token");
         //console.log(accesToken);
         fetch(process.env.BACKEND_URL + "/api/get_comment/" + id, {
           method: "GET",
@@ -326,7 +326,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({
               comment: data,
             });
-            // localStorage.setItem("groupName", data.name);
+            // sessionStorage.setItem("groupName", data.name);
             // .catch((err) => console.error(err));
           });
       },
@@ -350,7 +350,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             const store = getStore();
             const data = await response.json();
-            const token = localStorage.getItem("token");
+            const token = sessionStorage.getItem("token");
             const response2 = await fetch(
               process.env.BACKEND_URL + "/api/user/edit",
               {
@@ -396,7 +396,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             const store = getStore();
             const data = await response.json();
-            const token = localStorage.getItem("token");
+            const token = sessionStorage.getItem("token");
             const response2 = await fetch(
               process.env.BACKEND_URL + "/api/user/edit",
               {
@@ -442,7 +442,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             const store = getStore();
             const data = await response.json();
-            const token = localStorage.getItem("token");
+            const token = sessionStorage.getItem("token");
             const response2 = await fetch(
               process.env.BACKEND_URL + `/api/group_edit/${groupid}`,
               {
@@ -486,7 +486,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (response.ok) {
             const store = getStore();
             const data = await response.json();
-            const token = localStorage.getItem("token");
+            const token = sessionStorage.getItem("token");
             const response2 = await fetch(
               process.env.BACKEND_URL + `/api/group_edit/${groupid}`,
               {
@@ -514,7 +514,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // unirse a un grupo
       joinGroup: async (groupid) => {
         try {
-          const accessToken = localStorage.getItem("token");
+          const accessToken = sessionStorage.getItem("token");
           const joinGroup = {
             method: "POST",
             headers: {
@@ -570,7 +570,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       // crear ruta
       createNewRoute: async (groupid, values) => {
         try {
-          const accessToken = localStorage.getItem("token");
+          const accessToken = sessionStorage.getItem("token");
           const createRoute = {
             method: "POST",
             headers: {
