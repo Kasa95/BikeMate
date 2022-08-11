@@ -13,7 +13,7 @@ export const ViewDashboard = () => {
     actions.mygroupsInfo();
   }, []);
 
-  return localStorage.getItem("auth") == "true" ? (
+  return sessionStorage.getItem("auth") == "true" ? (
     <>
       <div className="container-fluid">
         <div className="row px-5">

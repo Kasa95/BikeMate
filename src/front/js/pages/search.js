@@ -50,7 +50,7 @@ export const Search = () => {
   }
 
   // console.log(items);
-  return localStorage.getItem("auth") == "true" ? (
+  return sessionStorage.getItem("auth") == "true" ? (
     <>
       <div className="container-fluid text-center orange-searchman-background">
         <img src={searchMan} alt="" className="search-header-img" />

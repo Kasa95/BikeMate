@@ -26,7 +26,7 @@ export const NewGroup = () => {
       },
     });
 
-  return localStorage.getItem("auth") == "true" ? (
+  return sessionStorage.getItem("auth") == "true" ? (
     <>
       {" "}
       {newGroupId >= 1 ? <NewGroupSuccess groupId={newGroupId} /> : ""}

@@ -8,14 +8,13 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 import json
 import bcrypt
 from bcrypt import hashpw
-import datetime
 from sqlalchemy import Column, DateTime, ForeignKey
-import datetime
 from flask_mail import Mail, Message
 import random
 import string
 from geopy.geocoders import Nominatim
-
+# import datetime
+from datetime import datetime, timedelta
 
 # instalar:
 # pipenv install py-bcrypt
@@ -85,7 +84,10 @@ def create_user():
             "msg": "usuario creado"
         }
         # return jsonify(response_body), 200
-    access_token = create_access_token(identity=body["email"], expires_delta=datetime.timedelta(minutes=60))
+
+    # al token le falta : expires_delta=datetime.timedelta(minutes=60)
+    # pero daba conflicto con el datetime.datetime
+    access_token = create_access_token(identity=body["email"])
     return jsonify(access_token=access_token), 200   
 
    
@@ -136,7 +138,8 @@ def login():
     # if user and user.password != password:
     #     return jsonify ("datos incorrectos"), 401    
     
-    access_token = create_access_token(identity=email , expires_delta=datetime.timedelta(minutes=60))
+
+    access_token = create_access_token(identity=email)
     info_user = {"email":user.email ,"id":user.id ,"name":user.name , "city":user.city , "speed":user.speed , "distance":user.distance, "bikemodel": user.bikemodel , "routetype": user.routetype ,"access_token":access_token}
     # return jsonify(access_token=access_token)   
     return jsonify(info_user)   
@@ -622,8 +625,12 @@ def group_routes(groupId):
 
     for route in routes:
         all_routes += [{"id":route.id , "address":route.address , "date":route.date , "latitude": route.latitude , "longitude": route.longitude , "info":route.aditional_info}]
+
+         # con esto ordenamos las rutas que servimos por fecha
+    sorted_routes = sorted(all_routes,key=lambda x: datetime.strftime(x['date'], '%m/%d/%y %H:%M'))
+
+    return jsonify(sorted_routes), 200  
    
-    return jsonify(all_routes), 200
 # <iframe class="iframe" src="https://maps.google.com/?ll=latitude,longitude&z=14&t=m&output=embed" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 

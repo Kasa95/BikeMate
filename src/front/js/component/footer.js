@@ -11,7 +11,7 @@ export const Footer = () => {
         <p className="col-md-4 mb-0 text-muted"> ©2022 BikeMate </p>
         <ul className="nav col-md-4 justify-content-end">
           <li className="nav-item">
-            {store.auth === true || localStorage.getItem("auth") === "true" ? (
+            {store.auth === true || sessionStorage.getItem("auth") === "true" ? (
               <Link to="/dashboard" className="nav-link px-2 text-muted">
                 Dashboard
               </Link>
