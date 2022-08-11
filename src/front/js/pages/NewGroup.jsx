@@ -27,7 +27,7 @@ export const NewGroup = () => {
     });
 
   return sessionStorage.getItem("auth") == "true" ? (
-    <>
+    <div style={{ minHeight: "77.6vh" }}>
       {" "}
       {newGroupId >= 1 ? <NewGroupSuccess groupId={newGroupId} /> : ""}
       <div className="container-fluid text-center orange-searchman-background">
@@ -266,7 +266,7 @@ export const NewGroup = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <>
       <Navigate to="/login" />

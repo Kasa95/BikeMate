@@ -15,7 +15,7 @@ export const ViewDashboard = () => {
 
   return sessionStorage.getItem("auth") == "true" ? (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid" style={{ minHeight: "77.6vh" }}>
         <div className="row px-5">
           <div className="col-3 col-xxl-2 mt-3">
             <p className="dash-cards-titles">Your profile</p>

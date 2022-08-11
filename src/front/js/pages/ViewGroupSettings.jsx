@@ -15,19 +15,18 @@ export const ViewGroupSettings = () => {
   }, []);
 
   const currentgroup = store.currentGroup;
-
-  return (
-    <>
-      <div className="">
-        <GroupSettings
-          name={currentgroup.name}
-          city={currentgroup.city}
-          speed={currentgroup.speed}
-          distance={currentgroup.distance}
-          routetype={currentgroup.routetype}
-          id={currentgroup.id}
-        />
-      </div>
-    </>
+  return sessionStorage.getItem("auth") == "true" ? (
+    <div style={{ minHeight: "77.6vh" }}>
+      <GroupSettings
+        name={currentgroup.name}
+        city={currentgroup.city}
+        speed={currentgroup.speed}
+        distance={currentgroup.distance}
+        routetype={currentgroup.routetype}
+        id={currentgroup.id}
+      />
+    </div>
+  ) : (
+    <Navigate to="/login" />
   );
 };

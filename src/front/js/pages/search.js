@@ -51,7 +51,7 @@ export const Search = () => {
 
   // console.log(items);
   return sessionStorage.getItem("auth") == "true" ? (
-    <>
+    <div style={{ minHeight: "77.6vh" }}>
       <div className="container-fluid text-center orange-searchman-background">
         <img src={searchMan} alt="" className="search-header-img" />
         <div className="centered">
@@ -215,7 +215,7 @@ export const Search = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   ) : (
     <>
       <Navigate to="/login" />

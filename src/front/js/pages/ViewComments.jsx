@@ -20,35 +20,33 @@ export const ViewComments = () => {
   // console.log(currentgroup);
 
   return sessionStorage.getItem("auth") == "true" ? (
-    <>
-      <div className="container">
-        <div className="row pt-3">
-          <div className="col-3 mt-3">
-            <div className="mb-3">
-              <DetailsGroup
-                name={currentgroup.name}
-                city={currentgroup.city}
-                speed={currentgroup.speed}
-                distance={currentgroup.distance}
-                users_quantity={currentgroup.users_quantity}
-                routetype={currentgroup.routetype}
-                groupid={currentgroup.id}
-                // coverphoto={currentgroup.cover}
-                // groupphoto={currentgroup.picture}
-              />
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="row">
-              <Commentsection group_id={groupid} />
-            </div>
-          </div>
-          <div className="col-3 mt-3">
-            <RouteTracking groupid={groupid} />
+    <div className="container" style={{ minHeight: "77.6vh" }}>
+      <div className="row pt-3">
+        <div className="col-3 mt-3">
+          <div className="mb-3">
+            <DetailsGroup
+              name={currentgroup.name}
+              city={currentgroup.city}
+              speed={currentgroup.speed}
+              distance={currentgroup.distance}
+              users_quantity={currentgroup.users_quantity}
+              routetype={currentgroup.routetype}
+              groupid={currentgroup.id}
+              // coverphoto={currentgroup.cover}
+              // groupphoto={currentgroup.picture}
+            />
           </div>
         </div>
+        <div className="col-6">
+          <div className="row">
+            <Commentsection group_id={groupid} />
+          </div>
+        </div>
+        <div className="col-3 mt-3">
+          <RouteTracking groupid={groupid} />
+        </div>
       </div>
-    </>
+    </div>
   ) : (
     <>
       <Navigate to="/login" />
