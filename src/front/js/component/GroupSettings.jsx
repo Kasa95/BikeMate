@@ -270,7 +270,7 @@ export const GroupSettings = ({
               <div className="form-group">
                 <label className="col-md-3 control-label"></label>
                 <div className="col-md-8">
-                  <Link to={"/dashboard"}>
+                  <Link to={"/group/" + id}>
                     <button
                       type="button"
                       className="btn btn-primary"
